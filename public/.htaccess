@@ -1,0 +1,1731 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+#        Options -MultiViews
+    </IfModule>
+
+
+<ifModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+</ifModule>
+
+<IfModule mod_gzip.c>
+	mod_gzip_on         Yes
+	mod_gzip_dechunk    Yes
+	mod_gzip_item_include file		\.(html?|txt|css|js|php|pl)$
+	mod_gzip_item_include mime		^text\.*
+	mod_gzip_item_include mime		^application/x-javascript.*
+	mod_gzip_item_exclude mime		^image\.*
+	mod_gzip_item_exclude rspheader	^Content-Encoding:.*gzip.*
+</IfModule>
+
+<ifModule mod_headers.c>
+	#кэшировать html и htm файлы на один день
+	<FilesMatch "\.(html|htm)$">
+		Header set Cache-Control "max-age=43200"
+	</FilesMatch>
+	#кэшировать css, javascript и текстовые файлы на одну неделю
+	<FilesMatch "\.(js|css|txt)$">
+		Header set Cache-Control "max-age=604800"
+	</FilesMatch>
+	#кэшировать флэш и изображения на месяц
+	<FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png)$">
+		Header set Cache-Control "max-age=2592000"
+	</FilesMatch>
+	#отключить кэширование
+	<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+		Header unset Cache-Control
+	</FilesMatch>
+</IfModule>
+
+<ifModule mod_expires.c>
+	ExpiresActive On
+	#по умолчанию кеш в 5 секунд
+	ExpiresDefault "access plus 5 seconds"
+	#кэшировать флэш и изображения на месяц
+	ExpiresByType image/x-icon "access plus 2592000 seconds"
+	ExpiresByType image/jpeg "access plus 2592000 seconds"
+	ExpiresByType image/png "access plus 2592000 seconds"
+	ExpiresByType image/gif "access plus 2592000 seconds"
+	ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+	#кэшировать css, javascript и текстовые файлы на одну неделю
+	ExpiresByType text/css "access plus 604800 seconds"
+	ExpiresByType text/javascript "access plus 604800 seconds"
+	ExpiresByType application/javascript "access plus 604800 seconds"
+	ExpiresByType application/x-javascript "access plus 604800 seconds"
+	#кэшировать html и htm файлы на один день
+	ExpiresByType text/html "access plus 43200 seconds"
+	#кэшировать xml файлы на десять минут
+	ExpiresByType application/xhtml+xml "access plus 600 seconds"
+</ifModule>
+
+
+    RewriteEngine On
+
+    # Removes index.php from ExpressionEngine URLs
+    RewriteBase /
+	
+Redirect 301 /b2 https://blog.staleks.com/
+Redirect 301 /new2.txt https://blog.staleks.com/
+Redirect 301 /article/ https://blog.staleks.com/
+Redirect 301 /blog/news https://blog.staleks.com/category/news/
+Redirect 301 /blog/events https://blog.staleks.com/category/events/
+Redirect 301 /blog/trends https://blog.staleks.com/category/trends/
+Redirect 301 /blog/staleks-star https://blog.staleks.com/category/staleks-star/
+Redirect 301 /blog/advice https://blog.staleks.com/category/advice/
+Redirect 301 /blog https://blog.staleks.com/
+
+
+Redirect 301 /ua/article/ https://blog.staleks.com/uk/
+Redirect 301 /ua/blog/news https://blog.staleks.com/uk/category/news/
+Redirect 301 /ua/blog/events https://blog.staleks.com/uk/category/events/
+Redirect 301 /ua/blog/trends https://blog.staleks.com/uk/category/trends/
+Redirect 301 /ua/blog/staleks-star https://blog.staleks.com/uk/category/staleks-star/
+Redirect 301 /ua/blog/advice https://blog.staleks.com/category/uk/advice/
+Redirect 301 /ua/blog https://blog.staleks.com/uk/
+
+Redirect 301 /en/article/ https://blog.staleks.com/en/
+Redirect 301 /en/blog/news https://blog.staleks.com/en/category/news/
+Redirect 301 /en/blog/events https://blog.staleks.com/en/category/events/
+Redirect 301 /en/blog/trends https://blog.staleks.com/en/category/trends/
+Redirect 301 /en/blog/staleks-star https://blog.staleks.com/en/category/staleks-star/
+Redirect 301 /en/blog/advice https://blog.staleks.com/category/en/advice/
+Redirect 301 /en/blog https://blog.staleks.com/en/
+
+Redirect 301 /es/article/ https://blog.staleks.com/en/
+Redirect 301 /es/blog/news https://blog.staleks.com/en/category/news/
+Redirect 301 /es/blog/events https://blog.staleks.com/en/category/events/
+Redirect 301 /es/blog/trends https://blog.staleks.com/en/category/trends/
+Redirect 301 /es/blog/staleks-star https://blog.staleks.com/en/category/staleks-star/
+Redirect 301 /es/blog/advice https://blog.staleks.com/category/en/advice/
+Redirect 301 /es/blog https://blog.staleks.com/en/	
+
+Redirect 301 /pt/article/ https://blog.staleks.com/en/
+Redirect 301 /pt/blog/news https://blog.staleks.com/en/category/news/
+Redirect 301 /pt/blog/events https://blog.staleks.com/en/category/events/
+Redirect 301 /pt/blog/trends https://blog.staleks.com/en/category/trends/
+Redirect 301 /pt/blog/staleks-star https://blog.staleks.com/en/category/staleks-star/
+Redirect 301 /pt/blog/advice https://blog.staleks.com/category/en/advice/
+Redirect 301 /pt/blog https://blog.staleks.com/en/	
+	
+	
+#10
+
+ 
+Redirect 301 /pt/education https://staleks.com/en/education 
+Redirect 301 /es/education https://staleks.com/en/education
+Redirect 301 /pt/school https://staleks.com/en/school
+Redirect 301 /es/school https://staleks.com/en/school
+
+Redirect 301 /es/product-pro/fartuk-staleks-pro https://staleks.com/en/product-pro/fartuk-staleks-pro
+Redirect 301 /es/faq https://staleks.com/en/faq
+
+RewriteRule ^(.*)/pt/product-pro/nabor(.*)$ $1/en/product-pro/nabor$2 [R=301,L]
+RewriteRule ^(.*)/es/product-pro/chehol(.*)$ $1/en/product-pro/chehol$2 [R=301,L]
+RewriteRule ^(.*)/es/product-pro/nabor(.*)$ $1/en/product-pro/nabor$2 [R=301,L]
+RewriteRule ^(.*)/es/product/chehol(.*)$ $1/en/product/chehol$2 [R=301,L]
+RewriteRule ^(.*)/es/product-pro/pilka(.*)$ $1/en/product-pro/pilka$2 [R=301,L]
+
+# 9
+
+
+
+
+# 8 
+
+Redirect 301 /ua/maintenance/украина/киев https://staleks.com/maintenance/ukraine/kiev
+Redirect 301 /pilochka-steklyannaya-dlya-nogtei-v-plastikovom-futlyare-135mm-1 https://staleks.com/catalog/category/pilki-beauty-care
+Redirect 301 /en/blog/articles-and-reviews https://staleks.com/en/blog
+Redirect 301 /ua/maintenance/росія/калінінград https://staleks.com/ua/maintenance
+Redirect 301 /maintenance/rossiya/saratov https://staleks.com/maintenance/russia/saratov
+
+
+# 7
+
+Redirect 301 /ua/product/chehol-travel-bez-napolneniya-cs-03 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/chohol-dlya-profesiynih-kusachok-shkiryaniy-na-knopci https://staleks.com/ua/catalog
+Redirect 301 /ua/product/knipser-dlya-nogtey-beauty-care-10-kbc-10 https://staleks.com/ua/product/knipser-dlya-nogtey-malyy-beauty-care-10
+Redirect 301 /ua/product/knipser-dlya-nogtey-beauty-care-10-kbc-10 https://staleks.com/ua/product/knipser-dlya-nogtey-malyy-beauty-care-10
+Redirect 301 /ua/product/knipser-dlya-nogtey-beauty-care-11-kbc-11 https://staleks.com/ua/product/knipser-dlya-nogtey-bolshoy-beauty-care-11
+Redirect 301 /ua/product/knipser-dlya-nogtey-beauty-care-11-kbc-11 https://staleks.com/ua/product/knipser-dlya-nogtey-bolshoy-beauty-care-11
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-10-nc-10-11 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-11-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-10-nc-10-11 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-11-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-10-nc-10-14 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-14-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-10-nc-10-14 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-14-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-11-nc-11-3 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-11-3-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-11-nc-11-3 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-11-3-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-11-nc-11-5 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-11-5-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-11-nc-11-5 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-11-5-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-nc-10-6 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-6-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-nc-10-6 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-6-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-nc-10-8 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-classic-nc-10-8 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /ua/product/kusachki-dlya-kozhi-nc-11-7 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-11-7-mm
+Redirect 301 /ua/product/kusachki-dlya-shkiri https://staleks.com/ua/catalog
+Redirect 301 /ua/product/kusachki-manikyurni-leningrad-profesiyni-mali https://staleks.com/ua/catalog
+Redirect 301 /ua/product/kusachki-miniatyurni-zausenichni https://staleks.com/ua/catalog
+Redirect 301 /ua/product/kusachki-professionalnye- https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product/kyuretka-dvostoronnya-pivsfera https://staleks.com/ua/catalog
+Redirect 301 /ua/product/lopatka-manikyurna- https://staleks.com/ua/catalog
+Redirect 301 /ua/product/lopatka-manikyurna-0 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/lopatka-manikyurna-ploska https://staleks.com/ua/catalog
+Redirect 301 /ua/product/lopatka-manikyurnaya-beauty-care-10-pbc-10-2 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-2
+Redirect 301 /ua/product/lopatka-manikyurnaya-beauty-care-10-pbc-10-2 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-2
+Redirect 301 /ua/product/lopatka-manikyurnaya-beauty-care-10-pbc-10-3 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-3
+Redirect 301 /ua/product/lopatka-manikyurnaya-beauty-care-10-pbc-10-3 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-3
+Redirect 301 /ua/product/lopatka-manikyurnaya-ploskaya-classic-10-ps-10-1 https://staleks.com/ua/product/lopatka-manikyurnaya-ploskaya-classic-10-type-1
+Redirect 301 /ua/product/lopatka-manikyurnaya-ploskaya-classic-10-ps-10-1 https://staleks.com/ua/product/lopatka-manikyurnaya-ploskaya-classic-10-type-1
+Redirect 301 /ua/product/lopatka-manikyurnayaz-beauty-care-pbc-10-1 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-1
+Redirect 301 /ua/product/lopatka-manikyurnayaz-beauty-care-pbc-10-1 https://staleks.com/ua/product/lopatka-manikyurnaya-beauty-care-10-type-1
+Redirect 301 /ua/product/lotok-z-krishkoyu-z-nerzhaviyuchoyi-stali-dlya-frez https://staleks.com/ua/product-pro/lotok-s-kryshkoy-dlya-burov-i-frez-expert-20-type-1
+Redirect 301 /ua/product/lozhka-uno-19 https://staleks.com/ua/catalog-pro/category/lozhki-kosmetologicheskie
+Redirect 301 /ua/product/matovi-dityachi-nozhici- https://staleks.com/ua/catalog
+Redirect 301 /ua/product/mikronozhnici-profesiyni https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product/nabir-nm-02-gamanec-5-predmetiv https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-dityachi https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-dlya-nigtiv https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-dovgi-vuzki https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-kusachki https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-manikyurni-vuzki https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-nigtovi93 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-profesiyni-dlya-kutikuli https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product/nozhici-zavuzheni https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhici-zavuzheni-z-dovgimi-ruchkami https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-classic-20-2-sc-20-2 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-classic-20-type-2-24-mm
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-classic-20-2-sc-20-2 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-classic-20-type-2-24-mm
+Redirect 301 /ua/product/nozhnicy-dlya-nogtey-classic-61-2-sc-61-2 https://staleks.com/ua/product/nozhnicy-dlya-nogtey-classic-61-type-2-24-mm
+Redirect 301 /ua/product/nozhnicy-dlya-nogtey-classic-61-2-sc-61-2 https://staleks.com/ua/product/nozhnicy-dlya-nogtey-classic-61-type-2-24-mm
+Redirect 301 /ua/product/nozhnicy-dlya-nogtey-detskie-classic-30-2-sc-30-2 https://staleks.com/ua/product/nozhnicy-dlya-nogtey-detskie-classic-30-type-2-21-mm
+Redirect 301 /ua/product/nozhnicy-dlya-nogtey-detskie-classic-30-2-sc-30-2 https://staleks.com/ua/product/nozhnicy-dlya-nogtey-detskie-classic-30-type-2-21-mm
+Redirect 301 /ua/product/nozhnicy-universalnye-rozovye-sbc-11-3 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/nozhnicy-universalnye-rozovye-sbc-11-3 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pilka-hrustalnaya https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pilka-hrustalnaya https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-140 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-140-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-140 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-140-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-155 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-155-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-155 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-155-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-90 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-90-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-90 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-90-mm
+Redirect 301 /ua/product/pilka-kolorova-dlya-nigtiv- https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-1 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-1
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-1 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-1
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-2 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-2
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-2 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-2
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-3 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-3
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-3 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-3
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-5 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-5
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-5 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-5
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-20-tbc-20-2 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-20-type-2
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-20-tbc-20-2 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-20-type-2
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-13-tc-13-3 https://staleks.com/ua/product/pincet-dlya-brovey-classic-10-type-3
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-13-tc-13-3 https://staleks.com/ua/product/pincet-dlya-brovey-classic-10-type-3
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-15-tc-15-3 https://staleks.com/ua/product/pincet-dlya-brovey-classic-15-type-3
+Redirect 301 /ua/product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-tc-10-11 https://staleks.com/ua/product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-type-11
+Redirect 301 /ua/product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-tc-10-11 https://staleks.com/ua/product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-type-11
+Redirect 301 /ua/product/pincet-nozhici-dlya-briv-tonki https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pincet-shirokiy-p-06 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pincet-shirokiy-p-0634 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/pincet-shirokiy-tochkoviy-p-09 https://staleks.com/ua/catalog
+Redirect 301 /ua/product/stanok-pedikyurniy https://staleks.com/ua/catalog-pro/category/stanki-dlya-pedikyura-expert
+Redirect 301 /ua/product/terka- https://staleks.com/ua/catalog
+Redirect 301 /ua/product/terka-dlya-stop- https://staleks.com/ua/catalog
+Redirect 301 /ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-3 https://staleks.com/ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-3
+Redirect 301 /ua/product-pro/111kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/ua/product-pro/expert-80-6mm
+Redirect 301 /ua/product-pro/1kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/ua/product-pro/expert-80-6mm
+Redirect 301 /ua/product-pro/23kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/24443kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/324expert-80-9-mm https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/expert-80-9-mm https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/expert-80-9-mm123 https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/expert-80-9-mm456 https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/expert-80-9-mm45654 https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/expert-80mm https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/fdgvfdgfg https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product-pro/fgfdh https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product-pro/gfgrrsxedfzgxcmh https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-expert-80mm https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-ne-20-8 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-8-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-ne-20-8 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-8-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-ne-31-9 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-9-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-ne-31-9 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-9-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-33-ne-33-7 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-33-7-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-52-ne-52-9 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-52-9-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert80 https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80 https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm12 https://staleks.com/ua/product-pro/expert-80-9mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert?categories%5B0%5D=36&page=3
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-34-7 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-34-7-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-71-3 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-3-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-71-3 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-3-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-11-14 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-14-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-11-15 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-15-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-71-5 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-5-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-71-7 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-7-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-71-9 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-9-mm
+Redirect 301 /ua/product-pro/kusachky-professionalnie-dlya-kozhy-expert-80-6-mm https://staleks.com/ua/product-pro/expert-80-6mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-170 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-170-mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-170 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-170-mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-155 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-155-mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-155 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-155-mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-165 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-165-mm
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-165 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-165-mm
+Redirect 301 /ua/product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-3 https://staleks.com/ua/product-pro/lozhka-kosmetologicheskaya-expert-10-type-3
+Redirect 301 /ua/product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-5 https://staleks.com/ua/product-pro/igla-vidalya-izognutaya-expert-10-type-5
+Redirect 301 /ua/product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-1 https://staleks.com/ua/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-1
+Redirect 301 /ua/product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-2 https://staleks.com/ua/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-2
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-20-te-20-3 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-20-type-3
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-20-te-20-4 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-20-type-4
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-20-te-20-6 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-20-type-6
+Redirect 301 /ua/product-pro/pincet-dlya-modelirovaniya-expert-30-te-30-1 https://staleks.com/u/product-pro/pincet-dlya-modelirovaniya-expert-30-type-1
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-3 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-3
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-5 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-5
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-7 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-7
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-1 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-1
+Redirect 301 /ua/product-pro/pincet-universalnyy-dlinnyy-expert-30-te-30-2 https://staleks.com/ua/product-pro/pincet-universalnyy-dlinnyy-expert-30-type-2
+Redirect 301 /ua/product-pro/rpr https://staleks.com/ua/catalog-pro
+Redirect 301 /ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-2 https://staleks.com/ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-2
+Redirect 301 /ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-2 https://staleks.com/ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-2
+Redirect 301 /ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-3 https://staleks.com/ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-3
+Redirect 301 /ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-3 https://staleks.com/ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-3
+Redirect 301 /ua/product-pro/tvizery-expert-91-se-91-1 https://staleks.com/product-pro/tvizery-expert-91-type-1-15-mm
+
+Redirect 301 /ua/sharpener/firmoviy-staleks-shop-service https://staleks.com/ua
+Redirect 301 /ua/workplace/brend-menedzher-harkov https://staleks.com/ua
+Redirect 301 /ua/workplace/kurer-ukraina-kiev https://staleks.com/ua
+Redirect 301 /ua/workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com/ua/article/staleks-na-vystavke-inter-style-2018-minsk-belarus
+Redirect 301 /ua/workplace/staleks-na-vystavke-sharm-profi-samara-rossiya https://staleks.com/ua/article/staleks-na-vystavke-sharm-profi-samara-rossiya
+Redirect 301 /ua/workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com/ua/article/staleks-na-vystavke-zerkalo-mody-lvov-ukraina
+Redirect 301 /ua/workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com/ua/article/staleks-na-vystavke-zerkalo-mody-lvov-ukraina
+Redirect 301 /ua/workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com/ua/article/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya
+Redirect 301 /ua/www.instagram.com/kursy_manikyura_victory_zt https://staleks.com/ua
+Redirect 301 /ua/www.instagram.com/kursy_manikyura_victory_zt/ https://staleks.com/ua
+Redirect 301 /uacatalog https://staleks.com/ua/catalog
+Redirect 301 /uacatalog-pro https://staleks.com/ua/catalog-pro
+Redirect 301 /vitrina-dlya-manikyurnogo-instrumenta- https://staleks.com/
+Redirect 301 /workplace/kurer-ukraina-kiev https://staleks.com/
+Redirect 301 /workplace/operator-1s-ukraina-harkov https://staleks.com/
+Redirect 301 /workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com/article/staleks-na-vystavke-inter-style-2018-minsk-belarus
+Redirect 301 /workplace/staleks-na-vystavke-krasota-na-volge-volgograd-rossiya https://staleks.com/blog/events?page=1
+Redirect 301 /workplace/staleks-na-vystavke-sharm-profi-samara-rossiya https://staleks.com/article/staleks-na-vystavke-sharm-profi-samara-rossiya
+Redirect 301 /workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com/article/staleks-na-vystavke-zerkalo-mody-lvov-ukraina
+Redirect 301 /workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com/article/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya
+Redirect 301 /workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com/article/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya
+Redirect 301 /www.instagram.com/kursy_manikyura_victory_zt https://staleks.com/
+Redirect 301 /www.instagram.com/kursy_manikyura_victory_zt/ https://staleks.com/
+Redirect 301 /zapros-na-sozdanie-klienta https://staleks.com/
+Redirect 301 ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-10-09 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-10-9-mm	
+	
+# 6
+
+Redirect 301 /ua/maintenance/россия/анапа https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/владимир https://staleks.com/ua/maintenance/russia/vladimir
+Redirect 301 /ua/maintenance/россия/волгоград https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/воронеж https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/казань https://staleks.com/ua/maintenance/russia/kazan
+Redirect 301 /ua/maintenance/россия/липецк https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/люберцы https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/новокузнецк https://staleks.com/ua/maintenance/russia/novokuzneck
+Redirect 301 /ua/maintenance/россия/орёл https://staleks.com/ua/maintenance/russia/oryol
+Redirect 301 /ua/maintenance/россия/санкт-петербург https://staleks.com/ua/maintenance/russia/sankt-peterburg
+Redirect 301 /ua/maintenance/россия/саратов https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/симферополь https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/сызрань https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/россия/ульяновск https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/росія/новокузнецьк https://staleks.com/ua/maintenance/russia/novokuzneck
+Redirect 301 /ua/maintenance/росія/владивосток https://staleks.com/ua/maintenance/russia/vladivostok
+Redirect 301 /ua/maintenance/росія/володимир https://staleks.com/ua/maintenance/russia/vladimir
+Redirect 301 /ua/maintenance/росія/новокузнецьк https://staleks.com/ua/maintenance/russia/novokuzneck
+Redirect 301 /ua/maintenance/росія/омськ https://staleks.com/ua/maintenance/russia/omsk
+Redirect 301 /ua/maintenance/росія/орел https://staleks.com/ua/maintenance/russia/oryol
+Redirect 301 /ua/maintenance/росія/санкт-петербург https://staleks.com/ua/maintenance/russia/sankt-peterburg
+Redirect 301 /ua/maintenance/росія/сімферополь https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/росія/ульянівськ https://staleks.com/ua/maintenance/russia/ulyanovsk
+Redirect 301 /ua/maintenance/росія/хабаровськ https://staleks.com/ua/maintenance/russia/habarovsk
+Redirect 301 /ua/maintenance/росія/чебоксари https://staleks.com/ua/maintenance/russia/cheboksary
+Redirect 301 /ua/maintenance/росія/хабаровськ https://staleks.com/ua/maintenance/russia/habarovsk
+Redirect 301 /ua/maintenance/украина/луцк https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/украина/мелитополь https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/украина/харьков https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/украина/мелитополь https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/ukraine/запоріжжя https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/greece/athens https://staleks.com/ua/maintenance
+Redirect 301 /ua/maintenance/kazakhstan/алмата https://staleks.com/ua/maintenance/kazakhstan
+Redirect 301 /ua/maintenance/kazakhstan/астана https://staleks.com/ua/maintenance/kazakhstan
+Redirect 301 /ua/maintenance/kazakhstan/павлодар https://staleks.com/ua/maintenance/kazakhstan
+Redirect 301 /ua/maintenance/moldova/кишинів https://staleks.com/ua/maintenance/moldova
+Redirect 301 /ua/maintenance/moldova/сhisinau https://staleks.com/ua/maintenance/moldova/kishinyov
+
+Redirect 301 /ua/maintenance/rossiya/saratov https://staleks.com/ua/maintenance/russia/saratov
+
+Redirect 301 /ua/maintenance/russia/simferopol https://staleks.com/ua/maintenance/russia
+Redirect 301 /ua/maintenance/ukraina/harkov https://staleks.com/ua/maintenance/ukraine/harkov
+
+Redirect 301 /ua/maintenance/ukraina/krivoy-rog https://staleks.com/ua/maintenance/ukraine/krivoy-rog
+Redirect 301 /ua/maintenance/ukraina/odessa https://staleks.com/ua/maintenance/ukraine/odessa
+Redirect 301 /ua/maintenance/ukraine/poltava https://staleks.com/ua/maintenance/ukraine/poltava
+Redirect 301 /ua/maintenance/ukraine/дніпро https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/київ https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/луцьк https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/львів https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/мелітополь https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/одеса https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/полтава https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/синельниково https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/суми https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/харків https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/хмельницький https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/чернігів https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/івано-франківськ https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/ukraine/kharkiv https://staleks.com/ua/maintenance/ukraine/harkov
+
+Redirect 301 /ua/maintenance/казахстан/астана https://staleks.com/ua/maintenance/kazakhstan/astana
+Redirect 301 /ua/maintenance/казахстан/павлодар https://staleks.com/ua/maintenance/kazakhstan/pavlodar
+Redirect 301 /ua/maintenance/росія/анапа https://staleks.com/ua/maintenance/russia/anapa
+Redirect 301 /ua/maintenance/росія/владивосток https://staleks.com/ua/maintenance/russia/vladivostok
+Redirect 301 /ua/maintenance/росія/володимир https://staleks.com/ua/maintenance/russia/vladimir
+
+Redirect 301 /ua/maintenance/росія/москва https://staleks.com/ua/maintenance/russia/moskva
+Redirect 301 /ua/maintenance/росія/новокузнецьк https://staleks.com/ua/maintenance/russia/novokuzneck
+Redirect 301 /ua/maintenance/росія/новосибірськ https://staleks.com/ua/maintenance/russia/novosibirsk
+Redirect 301 /ua/maintenance/росія/омськ https://staleks.com/ua/maintenance/russia/omsk
+Redirect 301 /ua/maintenance/росія/орел https://staleks.com/ua/maintenance/russia/oryol
+Redirect 301 /ua/maintenance/росія/санкт-петербург https://staleks.com/ua/maintenance/russia/sankt-peterburg
+Redirect 301 /ua/maintenance/росія/саратов https://staleks.com/ua/maintenance/russia/saratov
+Redirect 301 /ua/maintenance/росія/сімферополь https://staleks.com/ua/maintenance/russia
+Redirect 301 /ua/maintenance/росія/ульянівськ https://staleks.com/ua/maintenance/russia/ulyanovsk
+Redirect 301 /ua/maintenance/росія/хабаровськ https://staleks.com/ua/maintenance/russia/habarovsk
+Redirect 301 /ua/maintenance/росія/чебоксари https://staleks.com/ua/maintenance/russia/cheboksary
+Redirect 301 /ua/maintenance/россия/анапа https://staleks.com/ua/maintenance/russia/anapa
+Redirect 301 /ua/maintenance/россия/владимир https://staleks.com/ua/maintenance/russia/vladimir
+Redirect 301 /ua/maintenance/россия/казань https://staleks.com/ua/maintenance/russia/kazan
+Redirect 301 /ua/maintenance/россия/липецк https://staleks.com/ua/maintenance/russia/lipeck
+Redirect 301 /ua/maintenance/россия/люберцы https://staleks.com/ua/maintenance/russia/lyubercy
+Redirect 301 /ua/maintenance/россия/новокузнецк https://staleks.com/ua/maintenance/russia/novokuzneck
+Redirect 301 /ua/maintenance/россия/орёл https://staleks.com/ua/maintenance/russia/oryol
+Redirect 301 /ua/maintenance/россия/саратов https://staleks.com/ua/maintenance/russia/saratov
+Redirect 301 /ua/maintenance/россия/симферополь https://staleks.com/ua/maintenance/russia
+Redirect 301 /ua/maintenance/россия/сызрань https://staleks.com/ua/maintenance/russia/syzran
+Redirect 301 /ua/maintenance/россия/ульяновск https://staleks.com/ua/maintenance/russia/ulyanovsk
+Redirect 301 /ua/maintenance/украина/луцк https://staleks.com/ua/maintenance/ukraine/luck
+Redirect 301 /ua/maintenance/украина/мелитополь https://staleks.com/ua/maintenance/ukraine/melitopol
+Redirect 301 /ua/maintenance/україна/дніпро https://staleks.com/ua/maintenance/ukraine/dnepr
+Redirect 301 /ua/maintenance/україна/запоріжжя https://staleks.com/ua/maintenance/ukraine/zaporozhe
+Redirect 301 /ua/maintenance/україна/івано-франківськ https://staleks.com/ua/maintenance/ukraine/ivano-frankovsk
+
+Redirect 301 /ua/maintenance/україна/луцьк https://staleks.com/ua/maintenance/ukraine/luck
+Redirect 301 /ua/maintenance/україна/львів https://staleks.com/ua/maintenance/ukraine/lvov
+Redirect 301 /ua/maintenance/україна/мелітополь https://staleks.com/ua/maintenance/ukraine/melitopol
+Redirect 301 /ua/maintenance/україна/одеса https://staleks.com/ua/maintenance/ukraine/odessa
+Redirect 301 /ua/maintenance/україна/полтава https://staleks.com/ua/maintenance/ukraine/poltava
+Redirect 301 /ua/maintenance/україна/синельниково https://staleks.com/ua/maintenance/ukraine/sinelnikovo
+Redirect 301 /ua/maintenance/україна/суми https://staleks.com/ua/maintenance/ukraine/lvov
+Redirect 301 /ua/maintenance/україна/харків https://staleks.com/ua/maintenance/ukraine/harkov
+Redirect 301 /ua/maintenance/україна/хмельницький https://staleks.com/ua/maintenance/ukraine/hmelnickiy
+Redirect 301 /ua/product...ogichna-krugla https://staleks.com/ua/catalog	
+	
+#5	
+Redirect 301 /manicure https://staleks.com/catalog/appointment/manicure
+Redirect 301 /manicure/5.html https://staleks.com/catalog
+Redirect 301 /novaya-tochka-prodazh https://staleks.com/
+Redirect 301 /nozhnicy-udlinennye-zauzhennye100 https://staleks.com/catalog
+Redirect 301 /nozhnitsy-dlya-manikyura-nogtevye- https://staleks.com/catalog
+Redirect 301 /nozhnitsy-nogtevye-matovye-1 https://staleks.com/catalog
+Redirect 301 /pilka-dlya-manikyura- https://staleks.com/catalog
+Redirect 301 /pilka-oval-dlya-nogtei-temnaya https://staleks.com/catalog
+Redirect 301 /pilka-segment-dlya-nogtei-temnaya https://staleks.com/catalog
+Redirect 301 /pilochka-slonik https://staleks.com/catalog
+Redirect 301 /pilochka-steklyannaya-dlya-nogtei https://staleks.com/catalog
+Redirect 301 /pilochka-steklyannaya-dlya-nogtei-v-plastikovom-futlyare https://staleks.com/catalog
+Redirect 301 /pincet-dlya-brovey-skoshennyy https://staleks.com/catalog
+Redirect 301 /product...et-dlya-brovei https://staleks.com/catalog
+Redirect 301 /product/chehol-basic-bez-napolneniya-cs-01 https://staleks.com/catalog
+Redirect 301 /product/chehol-family-bez-napolneniya-cs-07-1 https://staleks.com/catalog
+Redirect 301 /product/chehol-teen-bez-napolneniya-cs-04-3 https://staleks.com/catalog
+Redirect 301 /product/chehol-travel-bez-napolneniya-cs-03 https://staleks.com/catalog
+Redirect 301 /product/kusachki-dlya-kozhi-classic-10-8-mm/product-pro/stanok-pedikyurnyy-expert-10-type-1 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /product/kusachki-dlya-kozhi-classic-10-8-mm/product-pro/stanok-pedikyurnyy-expert-10-type-1 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /product/kusachki-dlya-kozhi-classic-10-nc-10-11 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-11-mm
+Redirect 301 /product/kusachki-manikyurnye-zausenichnye https://staleks.com/catalog
+Redirect 301 /product/kusachki-nogtevye https://staleks.com/catalog
+Redirect 301 /product/kusachki-professionalnye-bolshie https://staleks.com/catalog-pro
+Redirect 301 /product/kusachki-professionalnye-malye https://staleks.com/catalog
+Redirect 301 /product/pilka-hrustalnaya-beauty-care-12-fbc-12-140 https://staleks.com/product/pilka-hrustalnaya-beauty-care-12-140-mm
+Redirect 301 /product/pilochka-2 https://staleks.com/catalog
+Redirect 301 /product/terka-dlya-stop-abc-12-1 https://staleks.com/product/terka-dlya-stop-beauty-care-12-type-1
+Redirect 301 /product/terka-dlya-stop-abc-12-3 https://staleks.com/product/terka-dlya-stop-beauty-care-12-type-3
+Redirect 301 /product-pro/111kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/product-pro/expert-80-6mm
+Redirect 301 /product-pro/1kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/product-pro/expert-80-6mm
+Redirect 301 /product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-1 https://staleks.com/product-pro/hehol-dlya-professionalnyh-kusachek-ct-30-1
+Redirect 301 /product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-2 https://staleks.com/product-pro/chehol-dlya-professionalnyh-kusachek
+Redirect 301 /product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-2 https://staleks.com/product-pro/chehol-dlya-professionalnyh-kusachek
+Redirect 301 /product-pro/gfgrrsxedfzgxcmh https://staleks.com/catalog-pro
+Redirect 301 /product-pro/kusachki-dlya-kozhi https://staleks.com/catalog-pro
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-ns-40-3 https://staleks.com/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-smart
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-ne-20-8 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-8-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-ne-21-13 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-13-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-72-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-72-3-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-72-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-72-3-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-5-mm; https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-5-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-7-mm; https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-7-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/product-pro/expert-80-6mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-16 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-16-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-ne-61-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-ne-61-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-ne-61-16 https://staleks.com/product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-16-mm
+Redirect 301 /product-pro/kusachky-professionalnie-dlya-kozhy-expert-80-6-mm https://staleks.com/product-pro/expert-80-6mm
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-155 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-155-mm
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-155 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-155-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya https://staleks.com/catalog-pro
+Redirect 301 /product-pro/lopatka-manikyurnaya https://staleks.com/catalog-pro
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-2
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-2
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-3 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-3
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-3 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-3
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-6 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-6
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-6 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-6
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-1
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-2
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-4 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-4
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-4-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-4
+Redirect 301 /product-pro/lopatka-pedikyurnaya https://staleks.com/catalog-pro
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-20-pe-20-2 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-20-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-20-pe-20-2 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-20-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-1 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-1
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-2 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-3 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-3
+Redirect 301 /product-pro/lotok-iz-nerzh-stali https://staleks.com/product-pro/lotok-dlya-instrumenta-expert-10-type-1
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-1 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-1
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-2 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-2
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-3 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-3
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-5 https://staleks.com/product-pro/igla-vidalya-izognutaya-expert-10-type-5
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-5 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-5
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-1 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-1
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-te-20-4 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-4
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-type-3112 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-3
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-type-3112 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-3
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-11 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-11
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-6 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-6
+Redirect 301 /product-pro/stanok-pedikyurnyy- https://staleks.com/catalog-pro/category/stanki-dlya-pedikyura-expert
+Redirect 301 /product-pro/stanok-pedikyurnyy- https://staleks.com/catalog-pro/category/stanki-dlya-pedikyura-expert
+Redirect 301 /product-pro/stanok-pedikyurnyy-expert-10-re-10-1 https://staleks.com/product-pro/stanok-pedikyurnyy-expert-10-type-1
+Redirect 301 /product-pro/stanok-pedikyurnyy-expert-10-re-10-3 https://staleks.com/product-pro/stanok-pedikyurnyy-expert-10-type-3
+Redirect 301 /product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-3 https://staleks.com/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-3
+Redirect 301 /product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-3 https://staleks.com/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-3
+Redirect 301 /product-pro/test-sh-10-2 https://staleks.com/catalog-pro
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-se-90-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-type-2-15-mm
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-se-90-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-type-2-15-mm
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-se-92-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-type-2-15-mm
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-se-92-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-type-2-15-mm
+Redirect 301 /produktsiya/lopatki https://staleks.com/catalog
+Redirect 301 /review https://staleks.com/
+Redirect 301 /rss.xml https://staleks.com/
+Redirect 301 /ru https://staleks.com/
+Redirect 301 /ru/product/pilochka-steklyannaya-dlya-nogtei-v-plastikovom-futlyare-135mm-1 https://staleks.com/catalog
+Redirect 301 /ru/user/login https://staleks.com/
+
+Redirect 301 /service https://staleks.com/
+Redirect 301 /shlifovalnaya-pilka-dlya-pedikyura-oval https://staleks.com/catalog
+Redirect 301 /shlifovalnaya-pilka-dlya-pedikyura-oval-100180 https://staleks.com/catalog
+Redirect 301 /sites/all/modules/jquery_up https://staleks.com/
+Redirect 301 /sites/all/themes/staleks https://staleks.com/
+Redirect 301 /sites/default/files/staleks_promo/catalogue_of_products_staleks.pdf https://staleks.com/catalog-pro
+Redirect 301 /sites/default/files/staleks_promo/catalogue_staleks_stalekspro_eng_web.pdf https://staleks.com/catalog-pro
+Redirect 301 /sites/default/files/staleks_promo/catalogue_staleks_stalekspro_eng_web_1.pdf https://staleks.com/catalog-pro
+Redirect 301 /sites/default/files/staleks_promo/staleks_price-list_usa_august_2017_1.xlsx https://staleks.com/catalog-pro
+Redirect 301 /sites/default/files/staleks_promo/staleks_price-list_usa_march_2018_.xlsx https://staleks.com/catalog-pro
+Redirect 301 /tyorka- https://staleks.com/
+
+Redirect 301 /ua/article/3mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta https://staleks.com/ua/article/mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta
+Redirect 301 /ua/article/instagram.com/staleks_official https://staleks.com/ua
+Redirect 301 /ua/article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/ua/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /ua/article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/ua/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /ua/article/mir-manikyura-kak-delayut-privychnuyu-proceduru-v-drugih-stranah https://staleks.com/ua/blog
+Redirect 301 /ua/article/staleks.com/StaleksOfficial https://staleks.com/ua
+Redirect 301 /ua/blog/articles-and-reviews https://staleks.com/ua/blog
+Redirect 301 /ua/blog/events-and-exhibitions https://staleks.com/ua/blog
+Redirect 301 /ua/blog/info https://staleks.com/ua/blog
+Redirect 301 /ua/blog/video-training https://staleks.com/ua/blog
+Redirect 301 /ua/blog/video-training https://staleks.com/ua/blog
+Redirect 301 /ua/catalog/classic https://staleks.com/ua/catalog/series/classic
+Redirect 301 /ua/catalog/classic https://staleks.com/ua/catalog/series/classic
+Redirect 301 /ua/catalog/lopatkikopytka https://staleks.com/ua/catalog
+Redirect 301 /ua/di https://staleks.com/ua
+Redirect 301 /ua/form/1574 https://staleks.com/ua	
+	
+# 4	
+	
+Redirect 301 /lotok-metallicheskii-dlya-sterilizatsii-instrumenta https://staleks.com/catalog-pro/category/lotki-dlya-hraneniya-i-dezinfekciiu-expert
+Redirect 301 /maintenance/росія/владивосток https://staleks.com/maintenance/russia/vladivostok
+Redirect 301 /maintenance/росія/володимир https://staleks.com/maintenance/russia/vladimir
+Redirect 301 /maintenance/росія/казань https://staleks.com/maintenance/russia/kazan
+Redirect 301 /maintenance/росія/липецьк https://staleks.com/maintenance/russia/lipeck
+Redirect 301 /maintenance/росія/люберці https://staleks.com/maintenance/russia/lyubercy
+Redirect 301 /maintenance/росія/новокузнецьк https://staleks.com/maintenance/russia/novokuzneck
+Redirect 301 /maintenance/росія/омськ https://staleks.com/maintenance/russia/omsk
+Redirect 301 /maintenance/росія/орел https://staleks.com/maintenance/russia/oryol
+Redirect 301 /maintenance/росія/санктпетербург https://staleks.com/maintenance/russia/sankt-peterburg
+Redirect 301 /maintenance/росія/сизрань https://staleks.com/maintenance/russia/syzran
+
+Redirect 301 /maintenance/росія/сімферополь https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/росія/хабаровськ https://staleks.com/maintenance/russia/habarovsk
+Redirect 301 /maintenance/росія/чебоксари https://staleks.com/maintenance/russia/cheboksary
+Redirect 301 /maintenance/україна/дніпро https://staleks.com/maintenance/ukraine/dnepr
+Redirect 301 /maintenance/україна/мелітополь https://staleks.com/maintenance/ukraine/melitopol
+Redirect 301 /maintenance/україна/одеса https://staleks.com/maintenance/ukraine/odessa
+Redirect 301 /maintenance/україна/полтава https://staleks.com/maintenance/ukraine/poltava
+Redirect 301 /maintenance/україна/синельниково https://staleks.com/maintenance/ukraine/sinelnikovo
+Redirect 301 /maintenance/україна/суми https://staleks.com/maintenance/ukraine/sumy
+Redirect 301 /maintenance/україна/харків https://staleks.com/maintenance/ukraine/harkov
+Redirect 301 /maintenance/україна/чернігів https://staleks.com/maintenance/ukraine/chernigov
+Redirect 301 /maintenance/greece/athens https://staleks.com/maintenance
+Redirect 301 /maintenance/kazakhstan/павлодар https://staleks.com/maintenance/kazakhstan
+Redirect 301 /maintenance/moldova/кишинів https://staleks.com/maintenance/moldova
+Redirect 301 /maintenance/moldova/сhisinau https://staleks.com/maintenance/moldova
+Redirect 301 /maintenance/moldova/сhisinau https://staleks.com/maintenance/moldova
+Redirect 301 /maintenance/rossiya/kaliningrad https://staleks.com/maintenance/russia/kaliningrad
+Redirect 301 /maintenance/russia/анапа https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/владимир https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/волгоград https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/казань https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/липецк https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/люберцы https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/новосибирск https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/орёл https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/саратов https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/симферополь https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/russia/ульяновск https://staleks.com/maintenance/russia
+
+Redirect 301 /maintenance/ukraina/dnepropetrovsk https://staleks.com/maintenance/ukraine/dnepr
+Redirect 301 /maintenance/ukraine/каховка https://staleks.com/maintenance/ukraine
+Redirect 301 /maintenance/ukraine/луцк https://staleks.com/maintenance/ukraine
+Redirect 301 /maintenance/ukraine/ровно https://staleks.com/maintenance/ukraine
+Redirect 301 /maintenance/ukraine/kharkiv https://staleks.com/maintenance/ukraine/harkov
+Redirect 301 /maintenance/ukraine/odesa https://staleks.com/maintenance/ukraine/odessa
+Redirect 301 /maintenance/казахстан/павлодар https://staleks.com/maintenance/kazakhstan/pavlodar
+Redirect 301 /maintenance/молдова/кишинёв https://staleks.com/maintenance/moldova/kishinyov
+Redirect 301 /maintenance/молдова/кишинів https://staleks.com/maintenance/moldova/kishinyov
+Redirect 301 /maintenance/росія/владивосток https://staleks.com/maintenance/russia/vladivostok
+Redirect 301 /maintenance/росія/володимир https://staleks.com/maintenance/russia/vladimir
+Redirect 301 /maintenance/росія/казань https://staleks.com/maintenance/russia/kazan
+Redirect 301 /maintenance/росія/калінінград https://staleks.com/maintenance/russia/kaliningrad
+Redirect 301 /maintenance/росія/липецьк https://staleks.com/maintenance/russia/lipeck
+Redirect 301 /maintenance/росія/люберці https://staleks.com/maintenance/russia/lyubercy
+Redirect 301 /maintenance/росія/новокузнецьк https://staleks.com/maintenance/russia/novokuzneck
+Redirect 301 /maintenance/росія/омськ https://staleks.com/maintenance/russia/omsk
+Redirect 301 /maintenance/росія/орел https://staleks.com/maintenance/russia/oryol
+Redirect 301 /maintenance/росія/санктпетербург https://staleks.com/maintenance/russia/sankt-peterburg
+Redirect 301 /maintenance/росія/саратов https://staleks.com/maintenance/russia/saratov
+Redirect 301 /maintenance/росія/сизрань https://staleks.com/maintenance/russia/syzran
+Redirect 301 /maintenance/росія/сімферополь https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/росія/хабаровськ https://staleks.com/maintenance/russia/habarovsk
+Redirect 301 /maintenance/росія/чебоксари https://staleks.com/maintenance/russia/cheboksary
+Redirect 301 /maintenance/россия/анапа https://staleks.com/maintenance/russia/anapa
+Redirect 301 /maintenance/россия/владимир https://staleks.com/maintenance/russia/vladimir
+Redirect 301 /maintenance/россия/волгоград https://staleks.com/maintenance/russia/volgograd
+Redirect 301 /maintenance/россия/казань https://staleks.com/maintenance/russia/kazan
+Redirect 301 /maintenance/россия/калининград https://staleks.com/maintenance/russia/kaliningrad
+Redirect 301 /maintenance/россия/липецк https://staleks.com/maintenance/russia/lipeck
+Redirect 301 /maintenance/россия/люберцы https://staleks.com/maintenance/russia/lyubercy
+Redirect 301 /maintenance/россия/новосибирск https://staleks.com/maintenance/russia/novosibirsk
+Redirect 301 /maintenance/россия/омск https://staleks.com/maintenance/russia/omsk
+Redirect 301 /maintenance/россия/орёл https://staleks.com/maintenance/russia/oryol
+Redirect 301 /maintenance/россия/саратов https://staleks.com/maintenance/russia/saratov
+Redirect 301 /maintenance/россия/симферополь https://staleks.com/maintenance
+Redirect 301 /maintenance/россия/ульяновск https://staleks.com/maintenance/russia/ulyanovsk
+Redirect 301 /maintenance/россия/хабаровск https://staleks.com/maintenance/russia/habarovsk
+Redirect 301 /maintenance/украина/ивано-франковск https://staleks.com/maintenance/ukraine/ivano-frankovsk
+Redirect 301 /maintenance/украина/каменское https://staleks.com/maintenance/ukraine/kamenskoe
+
+Redirect 301 /maintenance/украина/луцк https://staleks.com/maintenance/ukraine/luck
+Redirect 301 /maintenance/украина/львов https://staleks.com/maintenance/ukraine/lvov
+Redirect 301 /maintenance/украина/одесса https://staleks.com/maintenance/ukraine/odessa
+Redirect 301 /maintenance/украина/хмельницкий https://staleks.com/maintenance/ukraine/hmelnickiy
+Redirect 301 /maintenance/украина/чернигов https://staleks.com/maintenance/ukraine
+Redirect 301 /maintenance/україна/дніпро https://staleks.com/maintenance/ukraine/dnepr
+
+Redirect 301 /maintenance/україна/мелітополь https://staleks.com/maintenance/ukraine/melitopol
+Redirect 301 /maintenance/україна/одеса https://staleks.com/maintenance/ukraine/odessa
+Redirect 301 /maintenance/україна/полтава https://staleks.com/maintenance/ukraine/poltava
+Redirect 301 /maintenance/україна/синельниково https://staleks.com/maintenance/ukraine/sinelnikovo
+Redirect 301 /maintenance/україна/суми https://staleks.com/maintenance/ukraine/sumy
+Redirect 301 /maintenance/україна/харків https://staleks.com/maintenance/ukraine/harkov
+Redirect 301 /maintenance/україна/чернігів https://staleks.com/maintenance/ukraine/chernigov
+	
+# 3
+Redirect 301 /en/maintenance/казахстан/павлодар https://staleks.com/en/maintenance/kazakhstan/pavlodar
+Redirect 301 /en/maintenance/россия/калининград https://staleks.com/en/maintenance/russia/kaliningrad
+Redirect 301 /en/maintenance/россия/новокузнецк https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/россия/калининград https://staleks.com/en/maintenance/russia/kaliningrad
+Redirect 301 /en/maintenance/россия/новокузнецк https://staleks.com/en/maintenance/russia/novokuzneck
+
+Redirect 301 /en/maintenance/russia/владивосток https://staleks.com/en/maintenance/russia/vladivostok
+Redirect 301 /en/maintenance/russia/володимир https://staleks.com/en/maintenance/russia/vladimir
+Redirect 301 /en/maintenance/russia/казань https://staleks.com/en/maintenance/russia/kazan
+Redirect 301 /en/maintenance/russia/калінінград https://staleks.com/en/maintenance/russia/kaliningrad
+Redirect 301 /en/maintenance/russia/липецьк https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/russia/люберці https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/maintenance/russia/новокузнецьк https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/russia/омськ https://staleks.com/en/maintenance/russia/omsk
+Redirect 301 /en/maintenance/russia/орел https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /en/maintenance/russia/санктпетербург https://staleks.com/en/maintenance/russia/sankt-peterburg
+Redirect 301 /en/maintenance/russia/саратов https://staleks.com/en/maintenanc/russia/saratov
+Redirect 301 /en/maintenance/russia/сизрань https://staleks.com/en/maintenance/russia/syzran
+Redirect 301 /en/maintenance/russia/сімферополь https://staleks.com/en/maintenance
+Redirect 301 /en/maintenance/russia/чебоксари https://staleks.com/en/maintenance/russia/cheboksary
+
+Redirect 301 /en/maintenance/greece https://staleks.com/en/maintenance
+
+Redirect 301 /en/maintenance/greece/athens https://staleks.com/en/maintenance
+
+Redirect 301 /en/maintenance/moldova/сhisinau https://staleks.com/en/maintenance/moldova/kishinyov
+Redirect 301 /en/maintenance/rossiya/moskva https://staleks.com/en/maintenance/russia/moskva
+Redirect 301 /en/maintenance/russia/lipetsk https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/russia/moscow https://staleks.com/en/maintenance/russia/moskva
+Redirect 301 /en/maintenance/russia/orel https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /en/maintenance/ukraina https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/ukraina/chernovcy https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/ukraina/harkov https://staleks.com/en/maintenance/ukraine/harkov
+Redirect 301 /en/maintenance/ukraina/krivoy-rog https://staleks.com/en/maintenance/ukraine/krivoy-rog
+
+Redirect 301 /en/maintenance/ukraina/odessa https://staleks.com/en/maintenance/ukraine/odessa
+Redirect 301 /en/maintenance/ukraina/zaporozhe https://staleks.com/en/maintenance/ukraine/zaporozhe
+
+Redirect 301 /en/maintenance/ukraine/chernigiv https://staleks.com/en/maintenance/ukraine/chernigov
+
+Redirect 301 /en/maintenance/ukraine/dnipro https://staleks.com/en/maintenance/ukraine/dnepr
+
+Redirect 301 /en/maintenance/ukraine/ivano-frankivsk https://staleks.com/en/maintenance/ukraine/ivano-frankovsk
+
+Redirect 301 /en/maintenance/ukraine/kakhovka https://staleks.com/en/maintenance/ukraine/kahovka
+Redirect 301 /en/maintenance/ukraine/kamenskoye https://staleks.com/en/maintenance/ukraine/kamenskoe
+
+Redirect 301 /en/maintenance/ukraine/khmelnitsky https://staleks.com/en/maintenance/ukraine/hmelnickiy
+Redirect 301 /en/maintenance/ukraine/kyiv https://staleks.com/en/maintenance/ukraine/kiev
+Redirect 301 /en/maintenance/ukraine/odesa https://staleks.com/en/maintenance/ukraine/odessa
+Redirect 301 /en/maintenance/ukraine/zaporizhia https://staleks.com/en/maintenance/ukraine/zaporozhe
+
+Redirect 301 /en/maintenance/ukraine/zaporozhye https://staleks.com/en/maintenance/ukraine/zaporozhe
+Redirect 301 /en/maintenance/казахстан/алмата https://staleks.com/en/maintenance/kazakhstan/almata
+Redirect 301 /en/maintenance/казахстан/астана https://staleks.com/en/maintenance/kazakhstan/almata
+Redirect 301 /en/maintenance/молдова/кишинів https://staleks.com/en/maintenance/moldova/kishinyov
+
+Redirect 301 /en/maintenance/росія/владивосток https://staleks.com/en/maintenance/russia/vladivostok
+Redirect 301 /en/maintenance/росія/володимир https://staleks.com/en/maintenance/russia/vladimir
+Redirect 301 /en/maintenance/росія/казань https://staleks.com/en/maintenance/russia/kazan
+Redirect 301 /en/maintenance/росія/калінінград https://staleks.com/en/maintenance/russia/kaliningrad
+Redirect 301 /en/maintenance/росія/липецьк https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/росія/люберці https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/maintenance/росія/новокузнецьк https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/росія/омськ https://staleks.com/en/maintenance/russia/omsk
+Redirect 301 /en/maintenance/росія/орел https://staleks.com/en/maintenance/russia/oryol
+
+Redirect 301 /en/maintenance/росія/саратов https://staleks.com/en/maintenance/russia/saratov
+Redirect 301 /en/maintenance/росія/сизрань https://staleks.com/en/maintenance/russia/syzran
+Redirect 301 /en/maintenance/росія/хабаровськ https://staleks.com/en/maintenance/russia/habarovsk
+Redirect 301 /en/maintenance/росія/чебоксари https://staleks.com/en/maintenance/russia/cheboksary
+Redirect 301 /en/maintenance/росія?page=2 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/росія?page=3 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/росія?page=4 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия/анапа https://staleks.com/en/maintenance/russia/anapa
+Redirect 301 /en/maintenance/россия/владимир https://staleks.com/en/maintenance/russia/vladimir
+Redirect 301 /en/maintenance/россия/волгоград https://staleks.com/en/maintenance/russia/volgograd
+Redirect 301 /en/maintenance/россия/казань https://staleks.com/en/maintenance/russia/kazan
+Redirect 301 /en/maintenance/россия/липецк https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/россия/люберцы https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/maintenance/россия/новосибирск https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/россия/орёл https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /en/maintenance/россия/саратов https://staleks.com/en/maintenance/russia/saratov
+Redirect 301 /en/maintenance/россия/симферополь https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия/сызрань https://staleks.com/en/maintenance/russia/syzran
+Redirect 301 /en/maintenance/россия/ульяновск https://staleks.com/en/maintenance/russia/ulyanovsk
+Redirect 301 /en/maintenance/россия?page=2 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия?page=4 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/украина/луцк https://staleks.com/en/maintenance/ukraine/luck
+Redirect 301 /en/maintenance/украина/мелитополь https://staleks.com/en/maintenance/ukraine/melitopol
+Redirect 301 /en/maintenance/украина?page=2 https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/украина?page=3 https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/україна/дніпро https://staleks.com/en/maintenance/ukraine/dnepr
+Redirect 301 /en/maintenance/україна/харків https://staleks.com/en/maintenance/ukraine/harkov
+Redirect 301 /en/maintenance/україна?page=2 https://staleks.com/en/maintenance/ukraine
+
+
+Redirect 301 /en/page/footwear-com https://staleks.com/en
+Redirect 301 /en/page/press-form https://staleks.com/en
+Redirect 301 /en/partner/staleks-ebay-germany https://staleks.com/en
+Redirect 301 /en/partnership https://staleks.com/en
+
+Redirect 301 /en/product/case-hairdressing-scissors https://staleks.com/en/catalog
+Redirect 301 /en/product/chehol-family-bez-napolneniya-cs-07-1 https://staleks.com/en/catalog
+Redirect 301 /en/product/chehol-lady-bez-napolneniya-cs-02 https://staleks.com/en/catalog
+Redirect 301 /en/product/european-manicure-nail-clippers-slim-3-mm https://staleks.com/en/catalog
+Redirect 301 /en/product/european-nail-clippers-5-mm https://staleks.com/en/catalog
+Redirect 301 /en/product/european-professional-manicure-clippers https://staleks.com/en/catalog-pro
+Redirect 301 /en/product/file-crystals-135-mm https://staleks.com/en/catalog
+Redirect 301 /en/product/flat-tip-tweezers https://staleks.com/en/catalog
+Redirect 301 /en/product/foot-file-pink-6080 https://staleks.com/en/catalog
+Redirect 301 /en/product/glass-nail-file-135-mm https://staleks.com/en/catalog
+Redirect 301 /en/product/hand-painted-glass-nail-file-135-mm https://staleks.com/en/catalog
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-10-nc-10-11 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-10-11-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-10-nc-10-14 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-10-14-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-11-nc-11-3 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-11-3-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-11-nc-11-5 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-11-5-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-11-nc-11-8 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-11-8-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-nc-10-6 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-10-6-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-classic-nc-10-8 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /en/product/kusachki-dlya-kozhi-nc-20-7 https://staleks.com/en/product/kusachki-dlya-kozhi-classic-20-7-mm
+Redirect 301 /en/product/leather-case-professional-multi-purpose https://staleks.com/en/catalog
+Redirect 301 /en/product/manicure-nippers-spring https://staleks.com/en/catalog
+Redirect 301 /en/product/manicure-pedicure-set-men https://staleks.com/en/catalog
+Redirect 301 /en/product/manicure-pedicure-set-men-oval-frame https://staleks.com/en/catalog
+Redirect 301 /en/product/manicure-set-narrow-frame https://staleks.com/en/catalog
+Redirect 301 /en/product/manicure-set-universal https://staleks.com/en/catalog
+Redirect 301 /en/product/metal-box-instruments-sterilization https://staleks.com/en/catalog
+Redirect 301 /en/product/monolithic-curette https://staleks.com/en/catalog
+Redirect 301 /en/product/nozhici-dlya-nigtiv https://staleks.com/en/catalog
+Redirect 301 /en/product/nozhnicy-universalnye-rozovye-sbc-11-3 https://staleks.com/en/catalog
+Redirect 301 /en/product/one-side-blackhead-removal-tool https://staleks.com/en/catalog
+Redirect 301 /en/product/pilka-dlya-manikyura- https://staleks.com/en/catalog
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-10-tbc-10-1 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-10-type-1
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-10-tbc-10-2 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-10-type-2
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-10-tbc-10-3 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-10-type-3
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-10-tbc-10-5 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-10-type-5
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-10-tbc-10-6 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-10-type-6
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-20-tbc-20-2 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-20-type-2
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-20-tbc-20-4 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-20-type-4
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-30-tbc-30-1 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-30-type-1
+Redirect 301 /en/product/pincet-dlya-brovey-beauty-care-30-tbc-30-3 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-30-type-3
+Redirect 301 /en/product/pincet-dlya-brovey-tbc-11-1 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-11-type-1
+Redirect 301 /en/product/pincet-dlya-brovey-tbc-11-5 https://staleks.com/en/product/pincet-dlya-brovey-beauty-care-11-type-5
+Redirect 301 /en/product/pincet-dlya-brovey-tbc-40-4 https://staleks.com/en/product
+Redirect 301 /en/product/pocket-nm-03 https://staleks.com/en/catalog
+Redirect 301 /en/product/professional-nail-clippers-0 https://staleks.com/en/catalog-pro
+Redirect 301 /en/product/professional-nail-clippers-leningrad https://staleks.com/en/catalog-pro
+Redirect 301 /en/product/professional-nippers https://staleks.com/en/catalog-pro
+Redirect 301 /en/product/professional-short-nail-clippers-0 https://staleks.com/en/catalog-pro
+Redirect 301 /en/product/round-manicure-pusher-blade https://staleks.com/en/catalog
+Redirect 301 /en/product/round-manicure-pusher-hatchet-0 https://staleks.com/en/catalog
+Redirect 301 /en/product/showcase-manicure-tools-full-assortment https://staleks.com/en/catalog
+Redirect 301 /en/product/small-nail-clippers https://staleks.com/en/catalog
+Redirect 301 /en/product/tweezers-scissor-handle-1 https://staleks.com/en/catalog
+Redirect 301 /en/product/tyorka-dlya-stop-plastikovaya-classic-11-ac-11-1 https://staleks.com/en/product/tyorka-dlya-stop-plastikovaya-classic-11-type-1
+Redirect 301 /en/product/wooden-polishing-feet-rasper-combined https://staleks.com/en/catalog
+Redirect 301 /en/product-pro/111kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/en/product-pro/expert-80-6mm
+Redirect 301 /en/product-pro/1kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/en/product-pro/expert-80-6mm
+Redirect 301 /en/product-pro/23kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/24443kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/324expert-80-9-mm https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-1 https://staleks.com/en/product-pro/hehol-dlya-professionalnyh-kusachek-ct-30-1
+Redirect 301 /en/product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-2 https://staleks.com/en/product-pro/chehol-dlya-professionalnyh-kusachek
+Redirect 301 /en/product-pro/chehol-dlya-professionalnyh-nozhnic-ct-30-3 https://staleks.com/en/product-pro/chehol-dlya-professionalnyh-nozhnic
+Redirect 301 /en/product-pro/expert-80-9-mm https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/expert-80-9-mm123 https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/expert-80-9-mm456 https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/expert-80-9-mm45654 https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/expert-80mm https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/fdgvfdgfg https://staleks.com/en/catalog-pro
+Redirect 301 /en/product-pro/fgfdh https://staleks.com/en/catalog-pro
+Redirect 301 /en/product-pro/gfgrrsxedfzgxcmh https://staleks.com/en/catalog-pro
+Redirect 301 /en/product-pro/kusachki-dlya-kozhi-expert-80mm https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert80 https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80 https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-6-mm https://staleks.com/en/product-pro/expert-80-6mm
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm12 https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm80 https://staleks.com/en/product-pro/expert-80-9mm
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com/en/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhy-expert-80-6-mm https://staleks.com/en/product-pro/expert-80-6mm
+Redirect 301 /en/product-pro/kusachky-professionalnie-dlya-kozhy-expert-80-6-mm https://staleks.com/en/product-pro/expert-80-6mm
+Redirect 301 /en/product-pro/nabor-smennyh-faylov-dlya-terki-pedikyurnoy-dfe-10-180 https://staleks.com/en/product-pro/nabor-smennyh-faylov-dlya-terki-pedikyurnoy-expert-10-180-grit
+Redirect 301 /en/product-pro/pincet-dlya-brovey-expert-20-te-20-3 https://staleks.com/en/product-pro/pincet-dlya-brovey-expert-20-type-3
+Redirect 301 /en/product-pro/pincet-dlya-brovey-expert-20-te-20-4 https://staleks.com/en/product-pro/pincet-dlya-brovey-expert-20-type-4
+Redirect 301 /en/product-pro/pincet-dlya-brovey-expert-20-te-20-6 https://staleks.com/en/product-pro/pincet-dlya-brovey-expert-20-type-6
+Redirect 301 /en/rss.xml https://staleks.com/en
+Redirect 301 /en/stanislav-evtushenko https://staleks.com/en
+Redirect 301 /en/workplace/brend-menedzher-harkov https://staleks.com/en
+Redirect 301 /en/workplace/operator-1s-ukraina-harkov https://staleks.com/en
+Redirect 301 /en/workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com/en/article/staleks-na-vystavke-inter-style-2018-minsk-belarus
+Redirect 301 /en/workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com/en/article/staleks-na-vystavke-inter-style-2018-minsk-belarus
+Redirect 301 /en/workplace/staleks-na-vystavke-krasota-na-volge-volgograd-rossiya https://staleks.com/en/blog/events
+Redirect 301 /en/workplace/staleks-na-vystavke-sharm-profi-samara-rossiya https://staleks.com/en/article/staleks-na-vystavke-sharm-profi-samara-rossiya
+Redirect 301 /en/workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com/en/article/staleks-na-vystavke-zerkalo-mody-lvov-ukraina
+Redirect 301 /en/workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com/en/article/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya
+Redirect 301 /en/workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com/en/article/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya
+Redirect 301 /files/katalog_staleks_2011.pdf https://staleks.com
+Redirect 301 /form/1573 https://staleks.com/
+Redirect 301 /form/1820 https://staleks.com/
+Redirect 301 /get_file?f=katalog_staleks_2011.pdf https://staleks.com
+Redirect 301 /home https://staleks.com/
+Redirect 301 /index.php/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-5-mm https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /index.php/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-3-mm https://staleks.com/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-smart
+Redirect 301 /index.php/ua/blog/video-training https://staleks.com/ua/blog
+Redirect 301 /index.php/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-5-mm https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-50-5-mm
+Redirect 301 /index.php/ua/workplace/kurer-ukraina-kiev https://staleks.com/
+Redirect 301 /kusachki-profess https://staleks.com/catalog-pro
+Redirect 301 /kusachki-professionalnye-bolshie https://staleks.com/catalog-pro
+Redirect 301 /kusachki-professionalnye-ploskie-0 https://staleks.com/catalog-pro
+Redirect 301 /lotok-metallicheskii-dlya-sterilizatsii-instrumenta https://staleks.com/catalog-pro/category/lotki-dlya-hraneniya-i-dezinfekciiu-expert
+# 2
+
+
+Redirect 301 /en/maintenance/greece https://staleks.com/en/maintenance
+
+Redirect 301 /en/maintenance/greece/athens https://staleks.com/en/maintenance
+Redirect 301 /en/maintenance/moldova/сhisinau https://staleks.com/en/maintenance/moldova/kishinyov
+
+Redirect 301 /en/maintenance/rossiya/moskva https://staleks.com/en/maintenance/russia/moskva
+Redirect 301 /en/maintenance/russia/lipetsk https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/russia/moscow https://staleks.com/en/maintenance/russia/moskva
+Redirect 301 /en/maintenance/russia/orel https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /en/maintenance/ukraina https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/ukraina/chernovcy https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/ukraina/harkov https://staleks.com/en/maintenance/ukraine/harkov
+
+Redirect 301 /en/maintenance/ukraina/krivoy-rog https://staleks.com/en/maintenance/ukraine/krivoy-rog
+Redirect 301 /en/maintenance/ukraina/odessa https://staleks.com/en/maintenance/ukraine/odessa
+Redirect 301 /en/maintenance/ukraina/zaporozhe https://staleks.com/en/maintenance/ukraine/zaporozhe
+
+Redirect 301 /en/maintenance/ukraine/chernigiv https://staleks.com/en/maintenance/ukraine/chernigov
+
+Redirect 301 /en/maintenance/ukraine/dnipro https://staleks.com/en/maintenance/ukraine/dnepr
+
+Redirect 301 /en/maintenance/ukraine/ivano-frankivsk https://staleks.com/en/maintenance/ukraine/ivano-frankovsk
+
+Redirect 301 /en/maintenance/ukraine/kakhovka https://staleks.com/en/maintenance/ukraine/kahovka
+
+Redirect 301 /en/maintenance/ukraine/kamenskoye https://staleks.com/en/maintenance/ukraine/kamenskoe
+
+Redirect 301 /en/maintenance/ukraine/khmelnitsky https://staleks.com/en/maintenance/ukraine/hmelnickiy
+
+Redirect 301 /en/maintenance/ukraine/kyiv https://staleks.com/en/maintenance/ukraine/kiev
+Redirect 301 /en/maintenance/ukraine/odesa https://staleks.com/en/maintenance/ukraine/odessa
+Redirect 301 /en/maintenance/ukraine/zaporizhia https://staleks.com/en/maintenance/ukraine/zaporozhe
+
+Redirect 301 /en/maintenance/ukraine/zaporozhye https://staleks.com/en/maintenance/ukraine/zaporozhe
+Redirect 301 /en/maintenance/казахстан/алмата https://staleks.com/en/maintenance/kazakhstan/almata
+Redirect 301 /en/maintenance/казахстан/астана https://staleks.com/en/maintenance/kazakhstan/almata
+Redirect 301 /en/maintenance/молдова/кишинів https://staleks.com/en/maintenance/moldova/kishinyov
+Redirect 301 /en/maintenance/росія https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/росія/владивосток https://staleks.com/en/maintenance/russia/vladivostok
+Redirect 301 /en/maintenance/росія/володимир https://staleks.com/en/maintenance/russia/vladimir
+Redirect 301 /en/maintenance/росія/казань https://staleks.com/en/maintenance/russia/kazan
+Redirect 301 /en/maintenance/росія/калінінград https://staleks.com/en/maintenance/russia/kaliningrad
+Redirect 301 /en/maintenance/росія/липецьк https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/росія/люберці https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/maintenance/росія/новокузнецьк https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/росія/омськ https://staleks.com/en/maintenance/russia/omsk
+Redirect 301 /en/maintenance/росія/орел https://staleks.com/en/maintenance/russia/oryol
+
+Redirect 301 /en/maintenance/росія/саратов https://staleks.com/en/maintenance/russia/saratov
+Redirect 301 /en/maintenance/росія/сизрань https://staleks.com/en/maintenance/russia/syzran
+Redirect 301 /en/maintenance/росія/хабаровськ https://staleks.com/en/maintenance/russia/habarovsk
+Redirect 301 /en/maintenance/росія/чебоксари https://staleks.com/en/maintenance/russia/cheboksary
+Redirect 301 /en/maintenance/росія?page=2 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/росія?page=3 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/росія?page=4 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия/анапа https://staleks.com/en/maintenance/russia/anapa
+Redirect 301 /en/maintenance/россия/владимир https://staleks.com/en/maintenance/russia/vladimir
+Redirect 301 /en/maintenance/россия/волгоград https://staleks.com/en/maintenance/russia/volgograd
+Redirect 301 /en/maintenance/россия/казань https://staleks.com/en/maintenance/russia/kazan
+Redirect 301 /en/maintenance/россия/липецк https://staleks.com/en/maintenance/russia/lipeck
+Redirect 301 /en/maintenance/россия/люберцы https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/maintenance/россия/новосибирск https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /en/maintenance/россия/орёл https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /en/maintenance/россия/саратов https://staleks.com/en/maintenance/russia/saratov
+Redirect 301 /en/maintenance/россия/симферополь https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия/сызрань https://staleks.com/en/maintenance/russia/syzran
+Redirect 301 /en/maintenance/россия/ульяновск https://staleks.com/en/maintenance/russia/ulyanovsk
+Redirect 301 /en/maintenance/россия?page=2 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/россия?page=4 https://staleks.com/en/maintenance/russia
+Redirect 301 /en/maintenance/украина/луцк https://staleks.com/en/maintenance/ukraine/luck
+Redirect 301 /en/maintenance/украина/мелитополь https://staleks.com/en/maintenance/ukraine/melitopol
+Redirect 301 /en/maintenance/украина?page=2 https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/украина?page=3 https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/україна/дніпро https://staleks.com/en/maintenance/ukraine/dnepr
+Redirect 301 /en/maintenance/україна/харків https://staleks.com/en/maintenance/ukraine/harkov
+Redirect 301 /en/maintenance/україна?page=2 https://staleks.com/en/maintenance/ukraine
+Redirect 301 /en/maintenance/україна?page=3 https://staleks.com/en/maintenance/ukraine
+
+# 1
+
+Redirect 301 /article/25-27-aprelya-v-moskve-sostoitsya-vystavka-intercharm-professional https://staleks.com/blog
+Redirect 301 /article/28-30-marta-staleks-pro-primet-uchastie-v-vystavke-estet-beauty-expo https://staleks.com/blog
+Redirect 301 /article/3mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta https://staleks.com/article/mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta
+Redirect 301 /article/3mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta https://staleks.com/article/mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta
+Redirect 301 /article/besplatnoe-razmeshchenie-reklamy https://staleks.com/blog
+Redirect 301 /article/kak-vybrat-kusachki-nachinayushchemu-masteru-sovet-ot-stalekspro https://staleks.com/article/kak-vybrat-kusachki-nachinayushchemu-masteru
+Redirect 301 /article/katalog-manikyurnyy-za-2011g-uzhe-v-pechati https://staleks.com/catalog
+Redirect 301 /article/kompaniya-staleks-gruppy-i-stranicy-v-socialnyh-setyah https://staleks.com/
+Redirect 301 /article/nemnogo-o-nashem-sayte https://staleks.com/
+Redirect 301 /article/rebrending-staleks https://staleks.com/
+Redirect 301 /article/s-nastupayushchim-novym-godom https://staleks.com/
+Redirect 301 /article/staleks-na-intercharm-2017 https://staleks.com/blog
+Redirect 301 /article/staleks-na-intercharm-ukraina-2010 https://staleks.com/blog
+Redirect 301 /article/svetlana-kolmagorova-yamasterstaleks https://staleks.com/article/svetlana-kolmagorova-master-staleks
+Redirect 301 /article/xiii-mezhdunarodnaya-vystavka-tehnologii-krasoty-vek-hhi https://staleks.com/blog
+Redirect 301 /baf-polirovshchik-goroshek https://staleks.com/
+Redirect 301 /call-back https://staleks.com/
+
+Redirect 301 /catalog/category/53 https://staleks.com/catalog
+Redirect 301 /catalog/category/54 https://staleks.com/catalog
+Redirect 301 /catalog/category/55 https://staleks.com/catalog
+Redirect 301 /catalog/category/56 https://staleks.com/catalog
+Redirect 301 /catalog/category/57 https://staleks.com/catalog
+Redirect 301 /catalog/category/58 https://staleks.com/catalog
+Redirect 301 /catalog/category/59 https://staleks.com/catalog
+Redirect 301 /catalog/category/60 https://staleks.com/catalog
+Redirect 301 /catalog/category/61 https://staleks.com/catalog
+Redirect 301 /catalog/category/63 https://staleks.com/catalog
+Redirect 301 /catalog/category/65 https://staleks.com/catalog
+Redirect 301 /catalog/category/72 https://staleks.com/catalog
+Redirect 301 /catalog/category/73 https://staleks.com/catalog
+Redirect 301 /catalog/die-pinzetten-fur-die-augenbrauen https://staleks.com/catalog
+Redirect 301 /catalog/die-scheren https://staleks.com/catalog
+Redirect 301 /catalog/gabloty https://staleks.com/catalog
+Redirect 301 /catalog/pesety https://staleks.com/catalog
+Redirect 301 /catalog/pilniki-do-szlifowania https://staleks.com/catalog
+Redirect 301 /catalog/zestawy https://staleks.com/catalog
+Redirect 301 /catalog-p https://staleks.com/catalog
+Redirect 301 /catalog-pro/category/36 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/37 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/38 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/39 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/41 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/42 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/43 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/44 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/45 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/46 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/48 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/49 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/50 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/62 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/64 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/66 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/67 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/69 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/70 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/category/71 https://staleks.com/catalog-pro
+Redirect 301 /catalog-pro/exclusive https://staleks.com/catalog-pro/series/exclusive
+Redirect 301 /chekhol-dlya-manikyurnykh-nozhnits-iz-pvkh https://staleks.com/catalog
+Redirect 301 /contact https://staleks.com/contacts
+Redirect 301 /de/kontakte-von-stalex https://staleks.com/contacts
+Redirect 301 /en/article/3mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta https://staleks.com/en/article/mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta
+Redirect 301 /en/article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/en/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /en/article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/en/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /en/blog/for-fun https://staleks.com/en/blog
+Redirect 301 /en/catalog/exclusive- https://staleks.com/en/catalog-pro/series/exclusive
+Redirect 301 /en/en/catalog-pro https://staleks.com/en/catalog-pro
+
+# 20/02/2019
+ 
+
+
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-5-mm https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm12 https://staleks.com
+Redirect 301 /en/product-pro/24443kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com
+Redirect 301 /product-pro/24443kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm12 https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm80 https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm1 https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-9-mm https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80-6-mm https://staleks.com
+Redirect 301 /product-pro/23kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80mm https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-80 https://staleks.com
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert80 https://staleks.com
+Redirect 301 /product-pro/kusachki-dlya-kozhi-expert-80mm https://staleks.com
+Redirect 301 /product-pro/expert-80-9-mm45654 https://staleks.com
+Redirect 301 /product-pro/324expert-80-9-mm https://staleks.com
+Redirect 301 /product-pro/expert-80-9-mm123 https://staleks.com
+Redirect 301 /product-pro/expert-80-9-mm456 https://staleks.com
+Redirect 301 /product-pro/expert-80-9-mm https://staleks.com
+Redirect 301 /product-pro/expert-80mm https://staleks.com
+Redirect 301 /product-pro/fdgvfdgfg https://staleks.com
+Redirect 301 /product-pro/fgfdh https://staleks.com
+Redirect 301 /product-pro/rpr https://staleks.com
+Redirect 301 /workplace/staleks-pro-na-vystavke-intercharm-professional-moskva-rossiya https://staleks.com
+Redirect 301 /article/3mezhdunarodnyy-kongress-po-zatochke-manikyurnogo-instrumenta https://staleks.com
+Redirect 301 /workplace/staleks-na-vystavke-krasota-na-volge-volgograd-rossiya https://staleks.com
+Redirect 301 /workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com
+Redirect 301 /workplace/staleks-na-vystavke-sharm-profi-samara-rossiya https://staleks.com
+Redirect 301 /workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com
+Redirect 301 /catalog/appointment/cosmetology https://staleks.com
+
+
+Redirect 301 /maintenance/украина/киев https://staleks.com/maintenance/ukraine/kiev
+Redirect 301 /setLocale/2 https://staleks.com/
+Redirect 301 /setLocale/3 https://staleks.com/
+
+Redirect 301 /setLocale/1 https://staleks.com/
+# Redirect 301 /ru https://staleks.com/
+
+Redirect 301 /en/maintenance/russia/novokuznetsk https://staleks.com/en/maintenance/russia/novokuzneck
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-nx-20-8 https://staleks.com/en/product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-20-8-mm
+Redirect 301 /maintenance/украина/одесса https://staleks.com/maintenance/ukraine/odessa
+Redirect 301 /maintenance/ukraina/dnepropetrovsk https://staleks.com/en/maintenance/ukraine/dnepr
+Redirect 301 /en/blog/video-training https://staleks.com/en
+Redirect 301 /ua/maintenance/україна/кам'янське https://staleks.com/ua/maintenance/ukraine/kamenskoe
+Redirect 301 /en/maintenance/russia/хабаровськ https://staleks.com/en/maintenance/russia/habarovsk
+Redirect 301 /maintenance/украина/мелитополь https://staleks.com/maintenance/ukraine/melitopol
+Redirect 301 /maintenance/украина/днепр https://staleks.com/en/maintenance/ukraine/dnepr
+Redirect 301 /maintenance/украина/сумы https://staleks.com/maintenance/ukraine/sumy
+Redirect 301 /maintenance/украина/харьков https://staleks.com/maintenance/ukraine/harkov
+Redirect 301 /maintenance/ukraina/sevastopol https://staleks.com/en
+Redirect 301 /blog/articles-and-reviews https://staleks.com/blog
+Redirect 301 /index.php/en/catalog/classic https://staleks.com/catalog/series/classic
+Redirect 301 /maintenance/россия/воронеж https://staleks.com/maintenance/russia/voronezh
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-10-09 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-10-9-mm
+Redirect 301 /ua/catalog-pro/smart https://staleks.com/catalog-pro/series/smart
+Redirect 301 /en/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-5-mm https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /ua/maintenance/україна https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/maintenance/росія/москва https://staleks.com/ua/maintenance/russia/moskva
+Redirect 301 /maintenance/россия/хабаровск https://staleks.com/maintenance/russia/habarovsk
+Redirect 301 /maintenance/украина/чернигов https://staleks.com/maintenance/ukraine/chernigov
+Redirect 301 /maintenance/россия/санкт-петербург https://staleks.com/maintenance/russia/sankt-peterburg
+Redirect 301 /en/article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/en/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /maintenance/россия/чебоксары https://staleks.com/maintenance/russia/cheboksary
+Redirect 301 /product/kusachki-dlya-nogtey-universalnye-classic-nc-65-14 https://staleks.com/product/kusachki-dlya-nogtey-universalnye-classic-65-14-mm
+Redirect 301 /product/nozhnicy-dlya-nogtey-detskie-classic-30-2-sc-30-2 https://staleks.com/product/nozhnicy-dlya-nogtey-detskie-classic-30-type-2-21-mm
+Redirect 301 /product/tyorka-dlya-stop-plastikovaya-classic-10-ac-10-2 https://staleks.com/product/tyorka-dlya-stop-plastikovaya-classic-10-type-2
+Redirect 301 /product/lopatka-manikyurnaya-ploskaya-classic-20-ps-20-1 https://staleks.com/product/lopatka-manikyurnaya-ploskaya-classic-20-type-1
+Redirect 301 /product/nozhnicy-dlya-kutikuly-classic-10-2-sc-10-2 https://staleks.com/product/nozhnicy-dlya-kutikuly-classic-10-type-2-22-mm
+Redirect 301 /product/nozhnicy-dlya-kutikuly-classic-20-2-sc-20-2 https://staleks.com/product/nozhnicy-dlya-kutikuly-classic-20-type-2-24-mm
+Redirect 301 /ua/catalog-pro/expert https://staleks.com/ua/catalog-pro/series/expert
+Redirect 301 /product/nozhnicy-dlya-kutikuly-classic-10-3-sc-10-3 https://staleks.com/product/nozhnicy-dlya-kutikuly-classic-10-type-3-24-mm
+Redirect 301 /product/nozhnicy-dlya-kutikuly-classic-20-1-sc-20-1 https://staleks.com/product/nozhnicy-dlya-kutikuly-classic-20-type-1-21-mm
+Redirect 301 /product/nozhnicy-dlya-nogtey-classic-60-1-sc-60-1 https://staleks.com/product/nozhnicy-dlya-nogtey-classic-60-type-1-22-mm
+Redirect 301 /product/nozhnicy-dlya-nogtey-classic-61-2-sc-61-2 https://staleks.com/product/nozhnicy-dlya-nogtey-classic-61-type-2-24-mm
+Redirect 301 /product/kusachki-dlya-nogtey-classic-ns-60-14 https://staleks.com/product/kusachki-dlya-nogtey-classic-60-14-mm
+Redirect 301 /product/tyorka-dlya-stop-plastikovaya https://staleks.com/product/tyorka-dlya-stop-plastikovaya-classic-10-type-1
+Redirect 301 /en/article/mir-manikyura-kak-delayut-privychnuyu-proceduru-v-drugih-stranah https://staleks.com/en/article/theuniverse-of-manicure
+Redirect 301 /ua/maintenance/молдова https://staleks.com/ua/maintenance/moldova
+Redirect 301 /ua/maintenance/україна/київ https://staleks.com/ua/maintenance/ukraine/kiev
+Redirect 301 /en/article/kak-vybrat-kusachki-nachinayushchemu-masteru-sovet-ot-stalekspro https://staleks.com/en/article/kak-vybrat-kusachki-nachinayushchemu-masteru
+Redirect 301 /catalog/classic https://staleks.com/catalog/series/classic
+Redirect 301 /en/article/kak-vernut-instrumentu-esteticheskiy-vid-sovet-ot-stalekspro https://staleks.com/en/article/kak-vernut-instrumentu-esteticheskiy-vid
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-1 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-1
+Redirect 301 /ua/maintenance/ukraina/chernovcy https://staleks.com/ua/maintenance/ukraine
+
+Redirect 301 /product/pincet-dlya-brovey-classic-10-tc-10-1 https://staleks.com/product/pincet-dlya-brovey-classic-10-type-1
+Redirect 301 /article/anna-popova-yamasterstaleks https://staleks.com/article/anna-popova-master-staleks
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-30-ns-30-5 https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-4-3 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-4-3
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-51-re-51-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-51-type-1
+Redirect 301 /index.php/catalog/classic https://staleks.com/catalog/series/classic
+Redirect 301 /product/nozhnicy-dlya-nogtey-detskie-matovye-beauty-care-10-sbc-10-4 https://staleks.com/product/nozhnicy-dlya-nogtey-detskie-matovye-beauty-care-10-type-4-21-mm
+Redirect 301 /product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-3 https://staleks.com/product/tyorka-dlya-stop-plastikovaya-classic-10-type-3
+Redirect 301 /product/nozhnicy-dlya-nogtey-matovye-beauty-care-10-sbc-10-2 https://staleks.com/product/nozhnicy-dlya-nogtey-matovye-beauty-care-10-type-2-21-mm
+Redirect 301 /product/lopatka-manikyurnaya-beauty-care-10-pbc-10-3 https://staleks.com/product/lopatka-manikyurnaya-beauty-care-10-type-3
+Redirect 301 /product/lopatka-manikyurnaya-beauty-care-10-pbc-10-4 https://staleks.com/product/lopatka-manikyurnaya-beauty-care-10-type-4
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-10-tbc-10-3 https://staleks.com/product/pincet-dlya-brovey-beauty-care-10-type-3
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-10-tbc-10-6 https://staleks.com/product/pincet-dlya-brovey-beauty-care-10-type-6
+Redirect 301 /ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-1 https://staleks.com/ua/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-1
+Redirect 301 /en/catalog/classic https://staleks.com/en/catalog/series/classic
+Redirect 301 /ua/product-pro/lotok-iz-nerzh-stali https://staleks.com/ua/product-pro/lotok-dlya-instrumenta-expert-10-type-1
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-1 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-1
+Redirect 301 /index.php/en/article/evgeniya-bogdan-yamasterstaleks https://staleks.com/en/article/evgeniya-bogdan-master-staleks
+Redirect 301 /en/maintenance/ukraine/kyiv https://staleks.com/en/maintenance/ukraine/kiev
+Redirect 301 /index.php/en/article/kak-vybrat-kusachki-nachinayushchemu-masteru-sovet-ot-stalekspro https://staleks.com/en/article/kak-vybrat-kusachki-nachinayushchemu-masteru
+Redirect 301 /en/maintenance/ukraine/dnipro https://staleks.com/en/maintenance/ukraine/dnepr
+
+Redirect 301 /index.php/en/article/kak-vernut-instrumentu-esteticheskiy-vid-sovet-ot-stalekspro https://staleks.com/en/article/kak-vernut-instrumentu-esteticheskiy-vid
+Redirect 301 /ua/blog/for-fun https://staleks.com/blog/trends
+Redirect 301 /en/article/evgeniya-bogdan-yamasterstaleks https://staleks.com/en/article/evgeniya-bogdan-master-staleks
+
+Redirect 301 /ua/product/lopatka-manikyurnaya-beauty-care-10-pbc-10-4 https://staleks.com/product/lopatka-manikyurnaya-beauty-care-10-type-4
+Redirect 301 /index.php/catalog-pro/smart https://staleks.com/catalog-pro/series/smart
+Redirect 301 /blog/info https://staleks.com/blog
+Redirect 301 /en/maintenance/russia/moscow https://staleks.com/en/maintenance/russia/moskva
+Redirect 301 /en/maintenance/ukraine/lutsk https://staleks.com/en/maintenance/ukraine/luck
+Redirect 301 /maintenance/россия/омск https://staleks.com/maintenance/russia/omsk
+
+Redirect 301 /maintenance/россия/владивосток https://staleks.com/maintenance/russia/vladivostok
+Redirect 301 /maintenance/украина/ивано-франковск https://staleks.com/maintenance/ukraine/ivano-frankovsk
+Redirect 301 /en/maintenance/ukraine/rivne https://staleks.com/en/maintenance/ukraine/rovno
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-ne-61-16 https://staleks.com/product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-16-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-16 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-16-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-ne-21-13 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-13-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-ne-20-8 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-20-8-mm
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-2 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-2
+Redirect 301 /index.php/article/annushka-moroz-yamasterstaleks https://staleks.com/article/annushka-moroz-master-staleks
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-5 https://staleks.com/product-pro/igla-vidalya-izognutaya-expert-10-type-5
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-3 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-3
+Redirect 301 /product-pro/petlya-kosmetologicheskaya-expert-30-ze-30-1 https://staleks.com/product-pro/petlya-kosmetologicheskaya-expert-30-type-1
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-5 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-5
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-1 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-1
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-10-ns-10-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-3-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi https://staleks.com/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-smart
+Redirect 301 /ua/maintenance/україна/львів https://staleks.com/ua/maintenance/ukraine/lvov
+Redirect 301 /ua/maintenance/росія/анапа https://staleks.com/ua/maintenance/russia/anapa
+Redirect 301 /blog/for-fun https://staleks.com/blog
+Redirect 301 /maintenance/украина/хмельницкий https://staleks.com/maintenance/ukraine/hmelnickiy
+Redirect 301 /product-pro/stanok-pedikyurnyy-expert-10-re-10-1 https://staleks.com/product-pro/stanok-pedikyurnyy-expert-10-type-1
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-1 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-1
+Redirect 301 /product-pro/stanok-pedikyurnyy-expert-10-re-10-3 https://staleks.com/product-pro/stanok-pedikyurnyy-expert-10-type-3
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey https://staleks.com/catalog-pro/category/tvizery-dlya-brovey
+Redirect 301 /product-pro/stanok-pedikyurnyy-expert-10-re-10-2 https://staleks.com/product-pro/stanok-pedikyurnyy-expert-10-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-3 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-3
+Redirect 301 /product-pro/pincet-dlya-modelirovaniya-expert-30-te-30-1 https://staleks.com/product-pro/pincet-dlya-modelirovaniya-expert-30-type-1
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-ns-40-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-3-mm
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-1 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-1
+Redirect 301 /product-pro/pincet-universalnyy-dlinnyy-expert-30-te-30-2 https://staleks.com/product-pro/pincet-universalnyy-dlinnyy-expert-30-type-2
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-2 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-expert-10-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-60-re-60-2 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-60-type-2
+Redirect 301 /product-pro/lopatka-pedikyurnaya https://staleks.com/catalog-pro/category/lopatki-dlya-pedikyura
+Redirect 301 /product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-1 https://staleks.com/product-pro/hehol-dlya-professionalnyh-kusachek-ct-30-1
+Redirect 301 /ua/maintenance/росія/новосибірськ https://staleks.com/ua/maintenance/russia/novosibirsk
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-30-tbc-30-3 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-30-type-3
+
+
+Redirect 301 /maintenance/украина/каменское https://staleks.com/maintenance/ukraine/kamenskoe
+Redirect 301 /maintenance/ukraine/каменское https://staleks.com/maintenance/ukraine/kamenskoe
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-20-tbc-20-4 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-20-type-4
+
+
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-5-mm https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-50-5-mm
+
+
+Redirect 301 /index.php/en/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom-sovet-ot-stalekspro https://staleks.com/en/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom
+Redirect 301 /maintenance/россия/москва https://staleks.com/maintenance/russia/moskva
+Redirect 301 /index.php/ua/catalog/beauty-care https://staleks.com/catalog/series/beauty-care
+
+
+Redirect 301 /en/maintenance/russia/orel https://staleks.com/en/maintenance/russia/oryol
+Redirect 301 /maintenance/украина/львов https://staleks.com/maintenance/ukraine/lvov
+Redirect 301 /en/maintenance/ukraina/chernovcy https://staleks.com/en/maintenance/ukraina
+Redirect 301 /en/blog/info https://staleks.com/en/blog
+Redirect 301 /maintenance/казахстан/алмата https://staleks.com/maintenance/kazakhstan/almata
+Redirect 301 /en/maintenance/russia/lyubertsy https://staleks.com/en/maintenance/russia/lyubercy
+Redirect 301 /en/workplace/staleks-na-vystavke-inter-style-2018-minsk-belarus https://staleks.com/en/article/staleks-na-vystavke-inter-style-2018-minsk-belarus
+Redirect 301 /ua/workplace/staleks-na-vystavke-zerkalo-mody-lvov-ukraina https://staleks.com/ua/article/staleks-na-vystavke-zerkalo-mody-lvov-ukraina
+Redirect 301 /index.php/en/blog/video-training https://staleks.com/en/blog
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-ne-61-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-vrosshego-nogtya-expert-61-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-72-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-72-3-mm
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-155 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-155-mm
+Redirect 301 /product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-3 https://staleks.com/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-3
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-6 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-6
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-pe-10-3 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-3
+Redirect 301 /product-pro/lopatka-pedikyurnaya-expert-20-pe-20-2 https://staleks.com/product-pro/lopatka-pedikyurnaya-expert-20-type-2
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-10-re-10-5 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-5
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-1
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-3 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-3
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-4 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-4
+Redirect 301 /product-pro/lopatka-manikyurnaya https://staleks.com/catalog-pro/category/lopatki-dlya-manikyura
+
+Redirect 301 /ua/catalog/appointment/cosmetology https://staleks.com/catalog
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-ne-11-15 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-15-mm
+Redirect 301 /maintenance/украина/синельниково https://staleks.com/maintenance/ukraine/sinelnikovo
+Redirect 301 /index.php/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom-sovet-ot-stalekspro https://staleks.com/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom
+Redirect 301 /index.php/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-5-mm https://staleks.com/ua/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-50-5-mm
+Redirect 301 /en/maintenance/ukraine/lviv https://staleks.com/en/maintenance/ukraine/lvov
+Redirect 301 /ua/product-pro/chehol-lady-bez-napolneniya-cs-02 https://staleks.com
+Redirect 301 /maintenance/россия/калининград https://staleks.com/maintenance/russia/kaliningrad
+
+
+Redirect 301 /en/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom-sovet-ot-stalekspro https://staleks.com/en/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom
+Redirect 301 /en/maintenance/kazahstan/almaty https://staleks.com/en/maintenance/kazakhstan/almata
+Redirect 301 /ua/maintenance/kazahstan/almaty https://staleks.com/ua/maintenance/kazakhstan/almata
+Redirect 301 /ua/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom-sovet-ot-stalekspro https://staleks.com/ua/article/rekomendacii-po-hraneniyu-i-uhodu-za-instrumentom
+Redirect 301 /en/article/annushka-moroz-yamasterstaleks https://staleks.com/en/article/annushka-moroz-master-staleks
+Redirect 301 /ua/product-pro/chehol-basic-bez-napolneniya-cs-01 https://staleks.com
+
+Redirect 301 /maintenance/молдова https://staleks.com/maintenance/moldova
+Redirect 301 /index.php/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-5-mm https://staleks.com/ua/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-12-tc-12-3 https://staleks.com/ua/product/pincet-dlya-brovey-classic-12-type-3
+Redirect 301 /maintenance/украина/полтава https://staleks.com/maintenance/ukraine/poltava
+Redirect 301 /ua/product-pro/lozhka-kosmetologicheskaya-expert-10-ze-10-1 https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-exclusive
+Redirect 301 /catalog/beauty-care https://staleks.com/catalog/series/beauty-care
+Redirect 301 /article/evgeniya-bogdan-yamasterstaleks https://staleks.com/article/evgeniya-bogdan-master-staleks
+Redirect 301 /index.php/blog/video-training https://staleks.com/blog
+Redirect 301 /ua/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-se-92-2 https://staleks.com/ua/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-type-2-15-mm
+Redirect 301 /maintenance/россия?page=3 https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/молдова/кишинёв https://staleks.com/maintenance/moldova/kishinyov
+Redirect 301 /maintenance/украина/запорожье https://staleks.com/maintenance/ukraine/zaporozhe
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-10-09 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-10-9-mm
+Redirect 301 /maintenance/rossiya/tyumen https://staleks.com/maintenance/russia
+Redirect 301 /index.php/blog/articles-and-reviews https://staleks.com/blog
+Redirect 301 /en/catalog-pro/expert https://staleks.com/en/catalog-pro/series/expert
+
+Redirect 301 /ua/product/kusachki-dlya-kozhi-nc-20-7 https://staleks.com/ua/product/kusachki-dlya-kozhi-classic-20-7-mm
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-11-ns-11-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-11-7-mm
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-4 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-4
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-6 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-6
+Redirect 301 /catalog-pro/smart https://staleks.com/en/catalog-pro/series/smart
+Redirect 301 /index.php/article/kak-vernut-instrumentu-esteticheskiy-vid-sovet-ot-stalekspro https://staleks.com/article/kak-vernut-instrumentu-esteticheskiy-vid
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-rozovye-sbc-11-1 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-rozovye-beauty-care-11-type-1-20-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-nx-20 https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-exclusive
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-7 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-7
+Redirect 301 /index.php/ua/article/svetlana-kolmagorova-yamasterstaleks https://staleks.com/ua/article/svetlana-kolmagorova-master-staleks
+Redirect 301 /maintenance/447 https://staleks.com/maintenance
+Redirect 301 /ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-10-sx-10-1 https://staleks.com/ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-10-type-1
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-10-te-10-11 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-10-type-11
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-40-ns-40-5 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-5-mm
+Redirect 301 /ua/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-se-90-2 https://staleks.com/ua/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-type-2-15-mm
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-brovey-te-11-3 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-11-type-3
+Redirect 301 /index.php/en/article/anna-popova-yamasterstaleks https://staleks.com/en/article/anna-popova-master-staleks
+Redirect 301 /catalog-pro/expert https://staleks.com/catalog-pro/series/expert
+Redirect 301 /ua/maintenance/росія/вороніж https://staleks.com/ua/maintenance/russia/voronezh
+Redirect 301 /blog/events-and-exhibitions https://staleks.com/blog
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-ns-40-3 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-3-mm
+Redirect 301 /ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-se-10-1 https://staleks.com/ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-type-1-18-mm
+Redirect 301 /ua/product-pro/lopatka-manikyurnaya-expert-40-re-40-1 https://staleks.com/ua/product-pro/lopatka-manikyurnaya-expert-40-type-1
+Redirect 301 /ua/article/evgeniya-bogdan-yamasterstaleks https://staleks.com/ua/article/evgeniya-bogdan-master-staleks
+Redirect 301 /ua/article/svetlana-kolmagorova-yamasterstaleks https://staleks.com/ua/article/svetlana-kolmagorova-master-staleks
+Redirect 301 /ua/article/kak-vybrat-kusachki-nachinayushchemu-masteru-sovet-ot-stalekspro https://staleks.com/ua/article/kak-vybrat-kusachki-nachinayushchemu-masteru
+Redirect 301 /ua/article/annushka-moroz-yamasterstaleks https://staleks.com/ua/article/annushka-moroz-master-staleks
+Redirect 301 /en/article/svetlana-kolmagorova-yamasterstaleks https://staleks.com/en/article/svetlana-kolmagorova-master-staleks
+Redirect 301 /en/catalog-pro/exclusive https://staleks.com/en/catalog-pro/series/exclusive
+Redirect 301 /index.php/en/catalog/beauty-care?page=1 https://staleks.com/en/catalog/series/beauty-care
+Redirect 301 /index.php/en/blog/events-and-exhibitions https://staleks.com/en/blog
+Redirect 301 /ua/article/kak-vernut-instrumentu-esteticheskiy-vid-sovet-ot-stalekspro https://staleks.com/ua/article/kak-vernut-instrumentu-esteticheskiy-vid
+Redirect 301 /index.php/en/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-5-mm https://staleks.com/en/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-30-5-mm
+Redirect 301 /article/kak-vernut-instrumentu-esteticheskiy-vid-sovet-ot-stalekspro https://staleks.com/article/kak-vernut-instrumentu-esteticheskiy-vid
+Redirect 301 /index.php/ua/article/annushka-moroz-yamasterstaleks https://staleks.com/ua/article/annushka-moroz-master-staleks
+Redirect 301 /en/maintenance/ukraina/poltava https://staleks.com/en/maintenance/ukraine/poltava
+Redirect 301 /index.php/en/catalog/beauty-care https://staleks.com/en/catalog/series/beauty-care
+Redirect 301 /index.php/en/catalog-pro/smart https://staleks.com/en/catalog-pro/series/smart
+Redirect 301 /index.php/en/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-5-mm https://staleks.com/en/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-50-5-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-71-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-71-3-mm
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-20-ns-20-5 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-20-5-mm
+Redirect 301 /index.php/ua/article/kak-vybrat-kusachki-nachinayushchemu-masteru-sovet-ot-stalekspro https://staleks.com/ua/article/kak-vybrat-kusachki-nachinayushchemu-masteru
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-11 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-11
+Redirect 301 /article/kak-dolgo-instrument-staleks-sohranyat-zatochku https://staleks.com/article/kak-dolgo-instrument-staleks-sohranyaet-zatochku
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-10-te-10-3 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-10-type-3
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-classic-10-1-sc-10-1 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-classic-10-type-1-20-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-11 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-11
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-nogtey-universalnye-expert-65-ne-65-12 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-nogtey-universalnye
+Redirect 301 /ua/maintenance/rossiya/tyumen https://staleks.com/ua/maintenance/russia
+Redirect 301 /workplace/revizor-ukraina-harkov https://staleks.com/maintenance/ukraine/harkov
+Redirect 301 /ua/product-pro/lotok-s-kryshkoy-iz-nerzh-stali-dlya-frez-expert https://staleks.com/ua/product-pro/lotok-dlya-instrumenta-expert-10-type-1
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-2 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-2
+Redirect 301 /index.php/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-3-mm https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-3-mm
+Redirect 301 /ua/product/pincet-dlya-brovey-beauty-care-10-tbc-10-6 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-10-type-6
+Redirect 301 /en/catalog/appointment/cosmetology https://staleks.com/en/catalog
+Redirect 301 /ua/product/tyorka-dlya-stop-plastikovaya-classic-10-ac-10-1 https://staleks.com/ua/product/tyorka-dlya-stop-plastikovaya-classic-10-type-1
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-classic-20-1-sc-20-1 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-classic-20-type-1-21-mm
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-10 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-10
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-2 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-2
+Redirect 301 /ua/product-pro/pincet-dlya-brovey-expert-10-te-10-2 https://staleks.com/ua/product-pro/pincet-dlya-brovey-expert-10-type-2
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-50-ne-50-10 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-50-10-mm
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-50-ns-50-3 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-3-mm
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-20-tbc-20-2 https://staleks.com/product/pincet-dlya-brovey-beauty-care-20-type-2
+Redirect 301 /en/maintenance/украина/киев https://staleks.com/maintenance/ukraine/kiev
+Redirect 301 /product/nozhnicy-universalnye-rozovye-sbc-11-3 https://staleks.com/product/nozhnicy-universalnye-rozovye-beauty-care-11-type-3-21-mm
+Redirect 301 /ua/maintenance/ukraina/artemovsk https://staleks.com/ua/maintenance/ukraine
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-ne-21-13 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-21-13-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-10 https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-exclusive
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-12-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-ne-62-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-62-12-mm
+Redirect 301 /product/nozhnicy-dlya-kutikuly-rozovye-sbc-11-1 https://staleks.com/product/nozhnicy-dlya-kutikuly-rozovye-beauty-care-11-type-1-20-mm
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-10-tc-10-5 https://staleks.com/ua/product/pincet-dlya-brovey-classic-10-type-5
+Redirect 301 /product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-1 https://staleks.com/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-1
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-11-fe-11-165 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-11-165-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-16 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-16-mm
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-10-tc-10-3 https://staleks.com/ua/product/pincet-dlya-brovey-classic-10-type-3
+Redirect 301 /workplace/pomoshchnik-ekonomista-ukraina-harkov https://staleks.com
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-165 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-165-mm
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-brovey https://staleks.com/catalog-pro/category/pincety-professionalnye-dlya-brovey-expert
+Redirect 301 /product/lopatka-manikyurnaya-beauty-care-10-pbc-10-2 https://staleks.com/product/lopatka-manikyurnaya-beauty-care-10-type-2
+Redirect 301 /ua/product-pro/lopatka-manikyurnaya-expert-10-pe-10-6 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-10-type-6
+Redirect 301 /ua/product-pro/nozhnicy-professionalnye-dlya-brovey-expert-30-se-30-1 https://staleks.com/ua/product-pro/nozhnicy-professionalnye-dlya-brovey-expert-30-type-1-32-mm
+Redirect 301 /ua/product-pro/petlya-kosmetologicheskaya-expert-30-ze-30-1 https://staleks.com/ua/product-pro/petlya-kosmetologicheskaya-expert-30-type-1
+Redirect 301 /maintenance/ukraina/simferopol https://staleks.com/maintenance/ukraine/simferopol
+Redirect 301 /ua/product-pro/kusachki-dlya-kozhi-smart-30-ns-30-3 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-3-mm
+Redirect 301 /ua/product/nozhnicy-universalnye-pryamye-classic-30-1-sc-30-1 https://staleks.com/ua/product/nozhnicy-universalnye-pryamye-classic-30-type-1-24-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-51-ne-51-8 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-51-8-mm
+Redirect 301 /ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-sx-11-2 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-type-2
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-nx-20-10 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-20-10-mm
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-10-tbc-10-1 https://staleks.com/product/pincet-dlya-brovey-beauty-care-10-type-1
+Redirect 301 /ua/product/pincet-dlya-brovey-tbc-40-4 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-40-type-4
+Redirect 301 /ua/product-pro/lopatka-manikyurnaya-expert-30-re-30-2 https://staleks.com/ua/product-pro/lopatka-manikyurnaya-expert-30-type-2
+Redirect 301 /maintenance/rossiya/moskva https://staleks.com/maintenance/russia/moskva
+
+Redirect 301 /ua/product/pincet-dlya-brovey-classic-10-tc-10-1 https://staleks.com/ua/product/pincet-dlya-brovey-classic-10-type-1
+Redirect 301 /ua/product/nozhnicy-dlya-nogtey-classic-60-1-sc-60-1 https://staleks.com/ua/product/nozhnicy-dlya-nogtey-classic-60-type-1-22-mm
+Redirect 301 /ua/product/pilka-hrustalnaya-beauty-care-12-fbc-12-120 https://staleks.com/ua/product/pilka-hrustalnaya-beauty-care-12-120-mm
+Redirect 301 /ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-2 https://staleks.com/ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-2
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-ne-11-11 https://staleks.com/ua/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-11-mm
+Redirect 301 /ua/product-pro/kusachki-professionalnye-dlya-kozhi https://staleks.com/ua/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-se-11-3 https://staleks.com/ua/product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-type-3-23-mm
+Redirect 301 /product/kusachki-dlya-kozhi-classic-10-nc-10-11 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-11-mm
+Redirect 301 /ua/product-pro/tvizery-dlya-modelirovaniya-brovey https://staleks.com/catalog-pro/category/tvizery-dlya-brovey
+Redirect 301 /ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-1 https://staleks.com/ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-1
+Redirect 301 /ua/product/tyorka-dlya-stop-plastikovaya https://staleks.com/catalog/category/terki-dlya-stop
+Redirect 301 /ua/product/nozhnicy-dlya-kutikuly-classic-10-3-sc-10-3 https://staleks.com/ua/product/nozhnicy-dlya-kutikuly-classic-10-type-3-24-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-ne-63-16 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-63-16-mm
+Redirect 301 /ua/product-pro/nabor-smennyh-faylov-dlya-terki-pedikyurnoy-dfe-10-180 https://staleks.com/ua/product-pro/nabor-smennyh-faylov-dlya-terki-pedikyurnoy-dfe-10-100
+Redirect 301 /ua/product/pincet-dlya-brovey-tbc-41-4 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-41-type-4
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-se-90-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-90-type-2-15-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-8 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-8
+Redirect 301 /ua/product/pincet-dlya-brovey-tbc-11-5 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-11-type-5
+Redirect 301 /ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-170 https://staleks.com/ua/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-170-mm
+Redirect 301 /ua/product/pincet-dlya-brovey-tbc-40-5 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-40-type-5
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-4 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-4
+Redirect 301 /product/pilka-hrustalnaya https://staleks.com/catalog/category/pilki-beauty-care
+Redirect 301 /ua/product/pincet-dlya-brovey-tbc-11-1 https://staleks.com/ua/product/pincet-dlya-brovey-beauty-care-11-type-1
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-4 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-4
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-52-ne-52-9 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-52-9-mm
+Redirect 301 /ua/product/kusachki-dlya-nogtey-universalnye-classic-nc-65-14 https://staleks.com/ua/product/kusachki-dlya-nogtey-universalnye-classic-65-14-mm
+Redirect 301 /product/pilka-hrustalnaya-beauty-care-12-fbc-12-120 https://staleks.com/product/pilka-hrustalnaya-beauty-care-12-120-mm
+Redirect 301 /ua/product/tyorka-dlya-stop-plastikovaya-classic-11-ac-11-1 https://staleks.com/ua/product/tyorka-dlya-stop-plastikovaya-classic-11-type-1
+Redirect 301 /product/lopatka-manikyurnaya-ploskaya-classic-10-ps-10-1 https://staleks.com/product/lopatka-manikyurnaya-ploskaya-classic-10-type-1
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-6 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-6
+Redirect 301 /product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-se-92-2 https://staleks.com/product-pro/tvizery-dlya-modelirovaniya-brovey-expert-92-type-2-15-mm
+Redirect 301 /product/nozhnicy-universalnye-matovye-beauty-care-10-sbc-10-3 https://staleks.com/product/nozhnicy-universalnye-matovye-beauty-care-10-type-3-21-mm
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-9 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-9
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-5 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-5
+Redirect 301 /product/tyorka-dlya-stop-plastikovaya-classic-11-ac-11-1 https://staleks.com/product/tyorka-dlya-stop-plastikovaya-classic-11-type-1
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-3 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-3
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-1 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-1
+Redirect 301 /product/nozhnicy-dlya-kutikuly-classic-10-1-sc-10-1 https://staleks.com/product/nozhnicy-dlya-kutikuly-classic-10-type-1-20-mm
+Redirect 301 /product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-2 https://staleks.com/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-2
+Redirect 301 /ua/product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-1 https://staleks.com/ua/product-pro/hehol-dlya-professionalnyh-kusachek-ct-30-1
+Redirect 301 /ua/product/terka-dlya-stop-abc-12-1 https://staleks.com/ua/product/terka-dlya-stop-beauty-care-12-type-1
+Redirect 301 /ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-abc-10-3 https://staleks.com/ua/product/terka-dlya-stop-derevyannaya-beauty-care-10-type-3
+Redirect 301 /ua/product-pro/chehol-dlya-professionalnyh-kusachek-ct-30-2 https://staleks.com/ua/product-pro/chehol-dlya-professionalnyh-kusachek
+Redirect 301 /ua/product-pro/chehol-dlya-professionalnyh-nozhnic-ct-30-3 https://staleks.com/ua/product-pro/chehol-dlya-professionalnyh-nozhnic
+Redirect 301 /ua/product/terka-dlya-stop-abc-12-3 https://staleks.com/ua/product/terka-dlya-stop-beauty-care-12-type-3
+Redirect 301 /ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-4 https://staleks.com/ua/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-4
+Redirect 301 /product/tyorka-dlya-stop-plastikovaya-classic-10-ac-10-1 https://staleks.com/product/tyorka-dlya-stop-plastikovaya-classic-10-type-1
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-4 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-4
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-se-10-1 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-type-1-18-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi https://staleks.com/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert
+Redirect 301 /product/pincet-dlya-brovey-classic-15-tc-15-3 https://staleks.com/product/pincet-dlya-brovey-classic-15-type-3
+Redirect 301 /product/kusachki-dlya-vrosshego-nogtya-classic-nc-61-14 https://staleks.com/product/kusachki-dlya-vrosshego-nogtya-classic-61-14-mm
+Redirect 301 /product/pincet-dlya-brovey-classic-12-tc-12-3 https://staleks.com/product/pincet-dlya-brovey-classic-12-type-3
+Redirect 301 /product/pincet-dlya-brovey-classic-13-tc-13-3 https://staleks.com/product/pincet-dlya-brovey-classic-13-type-3
+Redirect 301 /product/pilka-steklyannaya-v-plastikovom-futlyare-beauty-care-13-fbc-13-128 https://staleks.com/product/pilka-steklyannaya-v-plastikovom-futlyare-beauty-care-13-128-mm
+Redirect 301 /product/pincet-dlya-brovey-classic-10-tc-10-3 https://staleks.com/product/pincet-dlya-brovey-classic-10-type-3
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-10-nx-10-14 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-10-14-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-exclusive-10 https://staleks.com/catalog-pro/category/kusachki-professionalnye-dlya-kozhi-exclusive
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-te-20-1 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-1
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-12 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-12
+Redirect 301 /product/nozhnicy-universalnye-pryamye-classic-30-1-sc-30-1 https://staleks.com/product/nozhnicy-universalnye-pryamye-classic-30-type-1-24-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-50-ns-50-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-3-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-34-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-51-8-mm
+Redirect 301 /blog/courses-schools https://staleks.com/blog
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-6 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-6
+Redirect 301 /product/pilka-hrustalnaya-beauty-care-12-fbc-12-90 https://staleks.com/product/pilka-hrustalnaya-beauty-care-12-90-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-51-ne-51-8 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-51-8-mm
+Redirect 301 /product-pro/lozhka-kosmetologicheskaya-expert-20-ze-20-4 https://staleks.com/product-pro/lozhka-kosmetologicheskaya-dvustoronnyaya-expert-20-type-4
+Redirect 301 /product/lopatka-manikyurnayaz-beauty-care-pbc-10-1 https://staleks.com/product/lopatka-manikyurnaya-beauty-care-10-type-1
+Redirect 301 /product-pro/lotok-s-kryshkoy-iz-nerzh-stali-dlya-frez-expert https://staleks.com/product-pro/lotok-dlya-instrumenta-expert-10-type-1
+Redirect 301 /product/kusachki-dlya-kozhi-classic-11-nc-11-8 https://staleks.com/product/kusachki-dlya-kozhi-classic-11-8-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-40-re-40-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-40-type-1
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-33-ne-33-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-33-7-mm
+Redirect 301 /product/kusachki-dlya-kozhi-classic-nc-10-8 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-8-mm
+Redirect 301 /product/kusachki-dlya-kozhi-classic-nc-10-6 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-6-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-4-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-4-1
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-sh-11-1 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-type-1
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-50-re-50-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-50-type-2
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-ne-11-11 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-11-11-mm
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-10-tbc-10-2 https://staleks.com/product/pincet-dlya-brovey-beauty-care-10-type-2
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-7 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-7
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-10 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-10
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-40-re-40-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-40-type-2
+Redirect 301 /product/kusachki-dlya-kozhi-classic-11-nc-11-5 https://staleks.com/product/kusachki-dlya-kozhi-classic-11-5-mm
+Redirect 301 /product-pro/tvizery-expert-90-se-90-1 https://staleks.com/product-pro/tvizery-expert-90-type-1-15-mm
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-se-10-3 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-type-3-23-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-7 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-7
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-10-ns-10-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-10-7-mm
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-5 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-5
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-se-11-1 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-type-1-18-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-12 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-12
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-20-ns-20-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-20-7-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-30-re-30-2 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-30-type-2
+Redirect 301 /product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-2 https://staleks.com/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-2
+Redirect 301 /product/kusachki-dlya-kozhi-classic-11-nc-11-3 https://staleks.com/product/kusachki-dlya-kozhi-classic-11-3-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-11-ns-11-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-11-7-mm
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-10-sx-10-1 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-10-type-1
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-32-9 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-32-9-mm
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-te-20-4 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-4
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-2 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-2
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-170 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-170-mm
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-30-tbc-30-3 https://staleks.com/product/pincet-dlya-brovey-beauty-care-30-type-3
+Redirect 301 /product/knipser-dlya-nogtey-beauty-care-10-kbc-10 https://staleks.com/product/knipser-dlya-nogtey-malyy-beauty-care-10
+Redirect 301 /product/pincet-dlya-brovey-classic-10-tc-10-5 https://staleks.com/product/pincet-dlya-brovey-classic-10-type-5
+Redirect 301 /product-pro/pincet-dlya-brovey https://staleks.com/catalog-pro/category/pincety-professionalnye-dlya-brovey-expert
+Redirect 301 /ua//catalog/manikyurni-nozhici https://staleks.com/ua/catalog
+Redirect 301 /product/kusachki-dlya-kozhi-classic-10-nc-10-14 https://staleks.com/product/kusachki-dlya-kozhi-classic-10-14-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-13 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-13
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-9 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-9
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-universalnye-expert-65-ne-65-12 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-universalnye
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-40-ns-40-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-7-mm
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-se-11-2 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-type-2-21-mm
+Redirect 301 /product-pro/lopatka-manikyurnaya-expert-50-re-50-1 https://staleks.com/product-pro/lopatka-manikyurnaya-expert-50-type-1
+Redirect 301 /product-pro/terka-dlya-stop-plastikovaya-expert-10-ae-10-1 https://staleks.com/product-pro/terka-dlya-stop-plastikovaya-expert-10-type-1
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-brovey-expert-30-se-30-1 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-brovey-expert-30-type-1-32-mm
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-se-10-2 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-expert-10-type-2-21-mm
+Redirect 301 /product-pro/lazernaya-pilka-dlya-nogtey-expert-10-fe-10-165 https://staleks.com/product-pro/lazernaya-pilka-dlya-nogtey-expert-10-165-mm
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-11 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-11
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-ne-60-18 https://staleks.com/product-pro/kusachki-professionalnye-dlya-nogtey-expert-60-18-mm
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-3 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-3
+Redirect 301 /product/pincet-dlya-brovey-classic-10-tc-10-7 https://staleks.com/product/pincet-dlya-brovey-classic-10-type-7
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-se-11-3 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-dlya-levshi-expert-11-type-3-23-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-60-ns-60-8 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-60-8-mm
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-10-te-10-6 https://staleks.com/product-pro/pincet-dlya-brovey-expert-10-type-6
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-2 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-2
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-te-20-3 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-3
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-40-ns-40-5 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-40-5-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-30-ns-30-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-7-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-20-ns-20-5 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-20-5-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-50-ns-50-7 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-50-7-mm
+Redirect 301 /product/pilka-hrustalnaya-beauty-care-12-fbc-12-155 https://staleks.com/product/pilka-hrustalnaya-beauty-care-12-155-mm
+Redirect 301 /product/knipser-dlya-nogtey-beauty-care-11-kbc-11 https://staleks.com/product/knipser-dlya-nogtey-bolshoy-beauty-care-11
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-20-tbc-20-4 https://staleks.com/product/pincet-dlya-brovey-beauty-care-20-type-4
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-30-tbc-30-1 https://staleks.com/product/pincet-dlya-brovey-beauty-care-30-type-1
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-5 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-5
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-5 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-5
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-40-te-40-1 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-40-type-1
+Redirect 301 /product-pro/pincet-professionalnyy-dlya-resnic-expert-41-te-41-3 https://staleks.com/product-pro/pincet-professionalnyy-dlya-resnic-expert-41-type-3
+Redirect 301 /product-pro/tvizery-expert-92-se-92-1 https://staleks.com/product-pro/tvizery-expert-92-type-1-15-mm
+Redirect 301 /product-pro/tvizery-expert-91-se-91-1 https://staleks.com/product-pro/tvizery-expert-91-type-1-15-mm
+Redirect 301 /product/pincet-dlya-brovey-beauty-care-10-tbc-10-5 https://staleks.com/product/pincet-dlya-brovey-beauty-care-10-type-5
+Redirect 301 /product-pro/pincet-dlya-brovey-expert-20-te-20-6 https://staleks.com/product-pro/pincet-dlya-brovey-expert-20-type-6
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-50-ns-50-5 https://staleks.com/product-pro/professionalnye-kusachki-dlya-kutikuly-smart-50-5-mm
+Redirect 301 /product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-tc-10-11 https://staleks.com/product/pincet-dlya-sozdaniya-risunka-na-nogte-classic-10-type-11
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-ne-31-9 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-31-9-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-50-ne-50-10 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-50-10-mm
+Redirect 301 /product-pro/kusachki-professionalnye-dlya-kozhi-expert-ne-35-8 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-expert-35-8-mm
+Redirect 301 /product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-sx-11-2 https://staleks.com/product-pro/nozhnicy-professionalnye-dlya-kutikuly-exclusive-11-type-2
+Redirect 301 /product/nozhnicy-dlya-kutikuly-matovye-beauty-care-10-sbc-10-1 https://staleks.com/product/nozhnicy-dlya-kutikuly-matovye-beauty-care-10-type-1-20-mm
+Redirect 301 /product-pro/kusachki-dlya-kozhi-smart-30-ns-30-3 https://staleks.com/product-pro/kusachki-professionalnye-dlya-kozhi-smart-30-3-mm
+Redirect 301 /product-pro/lotok-iz-nerzh-stali-expert https://staleks.com/product-pro/lotok-dlya-instrumenta-expert-10-type-1
+Redirect 301 /article/proverka https://staleks.com
+Redirect 301 /maintenance/украина https://staleks.com/maintenance/ukraine
+Redirect 301 /maintenance/россия https://staleks.com/maintenance/russia
+Redirect 301 /maintenance/казахстан https://staleks.com/maintenance/kazakhstan
+Redirect 301 /ua/maintenance/казахстан https://staleks.com/ua/maintenance/kazakhstan
+Redirect 301 /maintenance/ukraina https://staleks.com/maintenance/ukraine
+Redirect 301 /en/maintenance/росія https://staleks.com/en/maintenance/russia
+
+
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=36$
+RewriteRule ^.*$ /catalog-pro/category/kusachki-professionalnye-dlya-kozhi-expert/?  [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=37$
+RewriteRule ^.*$ /catalog-pro/category/nozhnicy-professionalnye-dlya-kutikuly-exclusive/?  [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=38$
+RewriteRule ^.*$ /catalog-pro/category/kusachki-professionalnye-dlya-kozhi-exclusive/?  [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=39$
+RewriteRule ^.*$ /catalog-pro/category/kusachki-professionalnye-dlya-nogtey-expert/?  [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=40$
+RewriteRule ^.*$ /catalog-pro/category/nozhnicy-professionalnye-dlya-kutikuly-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=41$
+RewriteRule ^.*$ /catalog-pro/category/lazernye-pilki-dlya-nogtey-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=42$
+RewriteRule ^.*$ /catalog-pro/category/lopatki-dlya-manikyura/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=43$
+RewriteRule ^.*$ /catalog-pro/category/stanki-dlya-pedikyura-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=44$
+RewriteRule ^.*$ /catalog-pro/category/lopatki-dlya-pedikyura/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=45$
+RewriteRule ^.*$ catalog-pro/category/nozhnicy-dlya-brovey-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=46$
+RewriteRule ^.*$ /catalog-pro/category/pincety-professionalnye-dlya-brovey-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=48$
+RewriteRule ^.*$ /catalog-pro/category/lozhki-kosmetologicheskie/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=49$
+RewriteRule ^.*$ /catalog-pro/category/lotki-dlya-hraneniya-i-dezinfekciiu-expert/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=50$
+RewriteRule ^.*$ /catalog-pro/category/kusachki-professionalnye-dlya-kozhi-smart/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=51$
+RewriteRule ^.*$ /catalog/category/kusachki-dlya-kozhi-classic/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=52$
+RewriteRule ^.*$ /catalog/category/kusachki-dlya-nogtey-classic/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=53$
+RewriteRule ^.*$ /catalog/category/nozhnicy-dlya-nogtey/? [L,R=301]
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=54$
+RewriteRule ^.*$ /catalog/category/lopatki-dlya-manikyura-classic/? [L,R=301]
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=55$
+RewriteRule ^.*$ /catalog/category/pincet-dlya-brovey-classic/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=56$
+RewriteRule ^.*$ /catalog/category/nozhnicy-dlya-kutikuly-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=57$
+RewriteRule ^.*$ /catalog/category/knipsery-dlya-nogtey-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=58$
+RewriteRule ^.*$ /catalog/category/lopatki-dlya-manikyura-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=59$
+RewriteRule ^.*$ /catalog/category/pilki-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=60$
+RewriteRule ^.*$ /catalog/category/terki-dlya-stop-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=61$
+RewriteRule ^.*$ /catalog/category/pincety-beauty-care/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=62$
+RewriteRule ^.*$ /catalog-pro/category/pincety-professionalnye-dlya-resnic/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=63$
+RewriteRule ^.*$ /catalog/category/nabory-manikyurnye/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=64$
+RewriteRule ^.*$ /catalog-pro/category/chehly-professionalnye/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=65$
+RewriteRule ^.*$ /catalog/category/terki-dlya-stop/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=66$
+RewriteRule ^.*$ /catalog-pro/category/tvizery-dlya-kutikuly/? [L,R=301]
+
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=67$
+RewriteRule ^.*$ /catalog-pro/category/lopatki-dlya-pedikyura/? [L,R=301]
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=68$
+RewriteRule ^.*$ /catalog-pro/category/instrument-so-smennym-abrazivom/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=69$
+RewriteRule ^.*$ /catalog-pro/category/pincety-universalnye/? [L,R=301]
+
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=70$
+RewriteRule ^.*$ /catalog-pro/category/tvizery-dlya-brovey/? [L,R=301]
+
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=72$
+RewriteRule ^.*$ /catalog/category/nozhnicy-dlya-nogtey/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^categories=71$
+RewriteRule ^.*$ /catalog-pro/category/pincety-kosmetologicheskie/? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^categories=73$
+RewriteRule ^.*$ /catalog/category/nozhnicy-dlya-nogtey-beauty-care/? [L,R=301]
+
+RewriteRule (.*?)/pl/*(.*) /en [R=301,L]
+
+RewriteCond %{REQUEST_URI} /catalog$
+RewriteCond %{QUERY_STRING} ^slug*
+RewriteRule ^.*$ /catalog? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /catalog-pro$
+RewriteCond %{QUERY_STRING} ^slug*
+RewriteRule ^.*$ /catalog-pro? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /en$
+RewriteCond %{QUERY_STRING} ^categories*
+RewriteRule ^.*$ /en? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /$
+RewriteCond %{QUERY_STRING} ^categories*
+RewriteRule ^.*$ /? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /ua$
+RewriteCond %{QUERY_STRING} ^categories*
+RewriteRule ^.*$ /ua? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /$
+RewriteCond %{QUERY_STRING} ^page=*
+RewriteRule ^.*$ /? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /en$
+RewriteCond %{QUERY_STRING} ^page=*
+RewriteRule ^.*$ /en? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /ua$
+RewriteCond %{QUERY_STRING} ^page=*
+RewriteRule ^.*$ /ua? [L,R=301]
+
+RewriteCond %{REQUEST_URI} /$
+RewriteCond %{QUERY_STRING} ^destination=*
+RewriteRule ^.*$ /? [L,R=301]
+
+
+
+
+# RewriteCond %{QUERY_STRING} ^categories=42$
+# RewriteRule ^/catalog-pro$ /catalog-pro/category/lopatki-dlya-manikyura/? [R=301,L] 
+
+
+    # Redirects
+    # RewriteRule /ru https://staleks.com [R=301,L]
+
+    # Redirect index.php Requests
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteCond %{THE_REQUEST} !/system/.*
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,L]
+
+    # Standard ExpressionEngine Rewrite
+    RewriteCond $1 !\.(css|js|gif|jpe?g|png) [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect from www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+</IfModule>

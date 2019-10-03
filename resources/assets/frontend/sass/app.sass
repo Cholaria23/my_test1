@@ -1,0 +1,4216 @@
+@import "_reset"
+@import "_fonts"
+@import "_keyframes"
+@import "_mixin"
+@import "_flexboxgrid"
+@import "../../../../node_modules/slick-carousel/slick/slick"
+@import "../../../../node_modules/perfect-scrollbar/css/perfect-scrollbar"
+@import "../../../../node_modules/aos/dist/aos"
+@import "../../../../node_modules/magnific-popup/dist/magnific-popup.css"
+
+// Colors
+$white: white
+$black: #0d0f0f
+$dark: #121a1d
+$grayBorder: rgba($black, .2)
+$whiteBorder: rgba($white, .2)
+$grayBg: #f6f6f6
+$gray: rgba($black, .5)
+$grayLite: #f7f7f7
+$red: #DB2A31
+$animation: .4s ease-in-out
+$pink: #E5159B
+$purple: #623182
+$orange: #FB5228
+$yellow: #E4DA32
+
+body
+    font-family: 'museo_sans'
+    font-size: 14px
+    &.showSidebar
+        overflow: hidden
+
+%fontTitle
+    text-transform: uppercase
+    letter-spacing: 1px
+
+%color
+    .white &
+        color: $black
+    .black &
+        color: $white
+
+%colorReverse
+    .white &
+        color: $white
+    .black &
+        color: $black
+
+%background
+    .white &
+        background: $white
+    .black &
+        background: $black
+
+%backgroundReverse
+    .white &
+        background: $black
+    .black &
+        background: $white
+
+%titleSmall
+    font-weight: 500
+    @extend %fontTitle
+    @include xl()
+        font-size: 20px
+    @include lg()
+        font-size: 18px
+    @include md()
+        font-size: 14px
+    @include xs()
+        font-size: 14px
+
+%titleMiddle
+    font-weight: 700
+    line-height: 1.4
+    @extend %fontTitle
+    @include xl()
+        font-size: 24px
+    @include lg()
+        font-size: 22px
+    @include md()
+        font-size: 20px
+    @include xs()
+        font-size: 18px
+
+%titleBig
+    font-weight: 700
+    line-height: 1.4
+    @extend %fontTitle
+    @include xl()
+        font-size: 36px
+    @include lg()
+        font-size: 36px
+    @include md()
+        font-size: 32px
+    @include xs()
+        font-size: 24px
+
+%marginBottomBig
+    @include xl()
+        margin-bottom: 100px
+    @include lg()
+        margin-bottom: 80px
+    @include md()
+        margin-bottom: 60px
+    @include xs()
+        margin-bottom: 40px
+
+%marginBottomMiddle
+    @include xl()
+        margin-bottom: 50px
+    @include lg()
+        margin-bottom: 40px
+    @include md()
+        margin-bottom: 30px
+    @include xs()
+        margin-bottom: 20px
+
+%marginBottomSmall
+    @media (min-width: $md)
+        margin-bottom: 20px
+    @include xs()
+        margin-bottom: 10px
+
+%paddingTopMiddle
+    @include xl()
+        padding-top: 50px
+    @include lg()
+        padding-top: 40px
+    @include md()
+        padding-top: 30px
+    @include xs()
+        padding-top: 20px
+
+%paddingBottomMiddle
+    @include xl()
+        padding-bottom: 50px
+    @include lg()
+        padding-bottom: 40px
+    @include md()
+        padding-bottom: 30px
+    @include xs()
+        padding-bottom: 20px
+
+%paddingTopBig
+    @include xl()
+        padding-top: 100px
+    @include lg()
+        padding-top: 80px
+    @include md()
+        padding-top: 60px
+    @include xs()
+        padding-top: 40px
+
+%paddingBottomBig
+    @include xl()
+        padding-bottom: 100px
+    @include lg()
+        padding-bottom: 80px
+    @include md()
+        padding-bottom: 60px
+    @include xs()
+        padding-bottom: 40px
+
+.fullLine
+    padding: 0
+    border: 0
+    height: 1px
+    .black &
+        background: $whiteBorder
+    .white &
+        background: $grayBorder
+    @media (min-width: $lg)
+        margin: 0 -50vw 40px
+    @include md()
+        margin: 0 -50vw 30px
+    @include xs()
+        margin: 0 -50vw 20px
+    @include modifier(right)
+        @media (min-width: $lg)
+            margin-left: 0
+
+.line
+    padding: 0
+    border: 0
+    height: 1px
+    margin: 0 0 30px
+    .black &
+        background: $whiteBorder
+    .white &
+        background: $grayBorder
+
+.eBtn
+    @include inline-block()
+    @extend %fontTitle
+    font-weight: 700
+    line-height: 44px
+    text-align: center
+    border: none
+    padding: 0 15px
+    cursor: pointer
+    @include modifier(buy)
+        padding: 0 25px
+        svg
+            @include inline-block()
+            margin-right: 5px
+            height: 44px
+    @include modifier(black)
+        background: $black
+        color: $white
+        &:hover
+            opacity: .7
+    @include modifier(white)
+        background: $white
+        color: $black
+        &:hover
+            opacity: .7
+
+.eLink
+    @include inline-block()
+    font-weight: 500
+    text-align: center
+    border: none
+    line-height: 1.2
+    cursor: pointer
+    @include modifier(black)
+        color: $black
+        border-bottom: 1px solid $black
+        &:hover
+            border-bottom: 1px solid transparent
+    @include modifier(white)
+        color: $white
+        border-bottom: 1px solid $white
+        &:hover
+            border-bottom: 1px solid transparent
+
+.gridRow
+    & > .row
+        @media (min-width: $lg)
+            margin: 0 -20px
+        & > div
+            @media (min-width: $lg)
+                padding: 0 20px 40px
+            @include md()
+                padding-bottom: 20px
+            @include xs()
+                padding-bottom: 20px
+// ----- //
+// Header
+// ----- //
+.header
+    @extend %color
+    transition: border $animation
+    @include position(absolute, null, 0, null, 0, 2000)
+    @media (min-width: $lg)
+        top: 60px
+    @media (max-width: $md-top)
+        top: 20px
+    &::before
+        content: ''
+        @include position(absolute, null, 0, 0, 0)
+        @extend %background
+        opacity: .9
+        height: 200%
+        transition: transform .3s cubic-bezier(0.4, 0, 0.21, 1.43)
+        box-sizing: content-box
+        transform: translateY(-100%)
+    &.is_stuck
+        &::before
+            transform: translateY(0)
+    & > div
+        position: relative
+        z-index: 1
+    @include element(row)
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: space-between
+        align-content: flex-start
+        align-items: center
+    @include element(col)
+        order: 0
+        flex: 0 1 auto
+        align-self: auto
+        @include modifier(logo)
+            @media (min-width: $md)
+                width: 220px
+            @include xs()
+                width: 140px
+        @include modifier(lang)
+            @media (max-width: $md-top)
+                display: none
+        @include modifier(tools)
+            @media (min-width: $lg)
+                padding: 15px 25px
+                & > .row
+                    margin: 0 -25px
+                    & > .col
+                        padding: 0 25px
+                .template-about &,
+                .page-contacts &
+                    transition: background-color .3s ease
+                    background: $white
+                .is_stuck &
+                    background: none
+            @include md()
+                padding: 10px 15px
+                & > .row
+                    margin: 0 -15px
+                    & > .col
+                        padding: 0 15px
+            @include xs()
+                padding: 10px 15px
+                & > .row
+                    margin: 0 -15px
+                    & > .col
+                        padding: 0 15px
+    @include element(logo)
+        @include inline-block()
+        svg
+            display: block
+            @include xs()
+                width: 180px
+                height: auto
+            .white &
+                fill: $red
+                color: $black
+                .pro
+                    display: none
+            .black &
+                fill: $white
+                color: $white
+            @media (max-width: $md-top)
+                .template-about &
+                    color: $white !important
+                .template-about .is_stuck &
+                    color: $black !important
+
+.langSwitcher
+    position: relative
+    @include element(value)
+        width: 35px
+        height: 35px
+        line-height: 32px
+        text-align: center
+        @extend %fontTitle
+        font-size: 12px
+        font-weight: 500
+        border-radius: 50%
+        cursor: pointer
+        transition: opacity .3s ease
+        .white &
+            border: 2px solid $black
+        .black &
+            border: 2px solid $white
+        &:hover
+            opacity: .5
+    @include element(drop)
+        display: none
+        @include position(absolute, 100%, null, null, 50%, 10)
+        margin-left: -50px
+        padding-top: 12px
+        animation: dropDownLang .3s ease
+        .langSwitcher:hover &
+            display: block
+        ul
+            width: 100px
+            padding: 8px 16px
+            list-style: none
+            position: relative
+            &::before,
+            &::after
+                content: ""
+                border-bottom: 8px solid transparent
+                border-left: 8px solid transparent
+                border-right: 8px solid transparent
+                @include position(absolute, -8px, null, null, 50%)
+                transform: translateX(-50%)
+            &::before
+                .white &
+                    border-bottom-color: rgba($black, .5)
+                .black &
+                    border-bottom-color: rgba($white, .5)
+            &::after
+                margin-top: 1px
+                .white &
+                    border-bottom-color: $white
+                .black &
+                    border-bottom-color: $black
+            .white &
+                background: $white
+                color: $black
+                border: 1px solid rgba($black, .5)
+            .black &
+                background: $black
+                color: $white
+                border: 1px solid rgba($white, .5)
+        li
+            padding: 4px 0
+            a
+                display: block
+                font-size: 12px
+                font-weight: 500
+                color: inherit
+                text-transform: uppercase
+                .row
+                    margin: 0 -4px
+                    & > .col
+                        padding: 0 4px
+                img
+                    display: block
+                &:hover
+                    opacity: .7
+
+.searchBtn
+    @extend %color, %fontTitle
+    line-height: 1
+    display: block
+    letter-spacing: 2px
+    &:hover
+        opacity: .5
+    @include element(text)
+        @media (max-width: $md-top)
+            display: none
+    svg
+        display: block
+        transition: stroke $animation
+        @media (max-width: $md-top)
+            .template-about &
+                color: $white !important
+            .template-about .is_stuck &
+                color: $black !important
+    .row
+        margin: 0 -7px
+        .col
+            padding: 0 7px
+
+.menuBtn
+    @extend %color, %fontTitle
+    display: block
+    letter-spacing: 2px
+    &:hover
+        opacity: .5
+        svg
+            .line-1
+                x: 11.5
+            .line-2
+                x: 5
+            .line-4
+                x: 15
+            .line-5
+                x: 17
+    svg
+        display: block
+        transition: stroke $animation
+        color: inherit
+        @include xs()
+            width: 28px
+            height: 32px
+        @media (max-width: $md-top)
+            .template-about &
+                color: $white !important
+            .template-about .is_stuck &
+                color: $black !important
+        rect
+            transition: x $animation
+    .row
+        margin: 0 -7px
+        .col
+            padding: 0 7px
+    @include element(text)
+        @media (max-width: $md-top)
+            display: none
+// ----- //
+// Footer
+// ----- //
+.subscribeForm
+    @include element(row)
+        .footer &
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            justify-content: flex-start
+            align-content: flex-start
+            align-items: center
+            @include md()
+                margin-bottom: 40px
+            @include xs()
+                margin-bottom: 30px
+    @include element(title)
+        line-height: 1.2
+        .footer &
+            @extend %color
+            opacity: .5
+            font-weight: 500
+            order: 0
+            flex: 0 1 auto
+            align-self: auto
+            padding-right: 30px
+            @media (max-width: $lg-top)
+                margin-bottom: 10px
+            @include xs()
+                max-width: 280px
+        .page &
+            opacity: .5
+            font-weight: 500
+            margin-bottom: 20px
+    @include element(box)
+        .footer &
+            position: relative
+            order: 0
+            flex: 0 1 auto
+            align-self: auto
+            @media (max-width: $md-top)
+                @include f-width(100%)
+        .page &
+            position: relative
+    @include element(input)
+        .footer &
+            font-weight: 500
+            max-width: 100%
+            height: 46px
+            background: none
+            color: $white
+            @extend %color
+            @media (min-width: $lg)
+                width: 530px
+            @media (max-width: $md-top)
+                width: 100%
+            @media (min-width: $md)
+                padding: 0 165px 0 15px
+            @include xs()
+                padding: 0 50px 0 15px
+            .white &
+                border: 1px solid $grayBorder
+                @include placeholder($grayBorder)
+                &:focus
+                    border-color: $black
+            .black &
+                border: 1px solid rgba($white, .2)
+                @include placeholder(rgba($white, .3))
+                &:focus
+                    border-color: $white
+        .page &
+            font-weight: 500
+            color: $black
+            border: 1px solid $grayBorder
+            width: 100%
+            height: 46px
+            @include placeholder($grayBorder)
+            background: none
+            padding: 0 15px
+            margin-bottom: 20px
+            &:focus
+                border-color: $black
+    @include element(btn)
+        .footer &
+            @extend %backgroundReverse, %colorReverse
+            font-weight: 500
+            height: 44px
+            line-height: 44px
+            @include position(absolute, 1px, 1px, 1px, null, 10)
+            text-align: center
+            border: none
+            @media (min-width: $md)
+                width: 155px
+            @include xs()
+                width: 44px
+            &:hover
+                .white &
+                    opacity: .7
+                .black &
+                    background: $dark
+                    color: $white
+            .text
+                @include xs()
+                    display: none
+            .icon
+                @media (min-width: $md)
+                    display: none
+                @include xs()
+                    display: block
+                    width: 25px
+                    height: 25px
+                    margin: 0 auto
+                svg
+                    display: block
+                    color: inherit
+        .page &
+            @include inline-block()
+            font-weight: 500
+            background: $black
+            color: $white
+            line-height: 44px
+            text-align: center
+            border: none
+            padding: 0 15px
+            &:hover
+                opacity: .7
+            .icon
+                display: none
+    @include element(error)
+        @include position(absolute, null, null, -25px, 0, 10)
+        animation: show-error $animation
+        color: $red
+        @include xs()
+            font-size: 12px
+        .page &
+            color: $red
+            margin-bottom: -5px
+    @include element(success)
+        @include position(absolute, null, null, -25px, 0, 10)
+        animation: show-error $animation
+        @include xs()
+            font-size: 12px
+        .footer &
+            @extend %color
+        .page &
+            @extend %color
+
+.ourSocial
+    @include element(title)
+        @extend %color
+        opacity: .5
+        font-weight: 500
+        order: 0
+        flex: 0 1 auto
+        align-self: auto
+        padding-right: 10px
+        @include xs()
+            margin-bottom: 10px
+    .col
+        @include xs()
+            &:first-child
+                @include f-width(100%)
+                padding-bottom: 5px
+    a
+        color: inherit
+        display: block
+        width: 25px
+        &:hover
+            opacity: .7
+        svg
+            color: inherit
+            display: block
+            margin: 0 auto
+
+.footer
+    position: relative
+    z-index: 100
+    @extend %background, %color
+    @include xs()
+        .page-home &
+            margin-bottom: 60px
+    @include element(top)
+        position: relative
+        z-index: 10
+        @media (min-width: $md)
+            padding: 35px 0
+        @include xs()
+            padding: 30px 0
+        .black &
+            border-top: 1px solid rgba($white, .2)
+            border-bottom: 1px solid rgba($white, .2)
+        .white &
+            border-top: 1px solid $grayBorder
+            border-bottom: 1px solid $grayBorder
+    @include element(bottom)
+        padding: 45px 0 60px
+        position: relative
+        z-index: 10
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle
+        position: relative
+        @media (min-width: $lg)
+            margin-bottom: 25px
+        @include md()
+            margin-bottom: 20px
+        @media (min-width: $md)
+            .icon
+                display: none
+        @include xs()
+            font-size: 14px
+            padding-right: 30px
+            margin-bottom: 10px
+            .icon
+                @include position(absolute, 50%, 0, null, null, -1)
+                transform: translateY(-50%)
+            &.open
+                .icon
+                    svg
+                        transform: rotate(180deg)
+    @include element(menu)
+        list-style: none
+        @include xs()
+            display: none
+            animation: fade-in $animation
+            margin-bottom: 20px
+            padding-left: 20px
+            &.show
+                display: block
+        li
+            margin-bottom: 10px
+            a
+                color: inherit
+                font-weight: 500
+                @media (max-width: $lg-top)
+                    font-size: 12px
+                &:hover
+                    opacity: .5
+    @include element(links)
+        padding-top: 20px
+        a
+            color: inherit
+            font-size: 12px
+            opacity: .5
+            &:hover
+                opacity: .7
+    @include element(logo)
+        @include inline-block()
+        margin-bottom: 15px
+        svg
+            display: block
+            .white &
+                fill: $red
+                color: $black
+                .pro
+                    display: none
+            .black &
+                fill: $white
+                color: $white
+    @include element(copyright)
+        opacity: .5
+        font-weight: 500
+        @media (max-width: $lg-top)
+            font-size: 12px
+        @media (max-width: $md-top)
+            margin-bottom: 40px
+    @include element(wrap)
+        @include position(absolute, null, 0, 0, 0, 1)
+        @include xs()
+            display: none
+        .container
+            position: relative
+    @include element(box)
+        overflow: hidden
+        @include position(absolute, null, 0, 0, null, 10)
+        @media (min-width: $xl)
+            width: 575px
+            height: 330px
+        @media (max-width: $lg-top)
+            width: 300px
+            height: 172px
+    @include element(bg)
+        position: relative
+        z-index: 2
+        transition: transform 300ms ease
+        @media (min-width: $xl)
+            width: 575px
+            height: 330px
+        @media (max-width: $lg-top)
+            width: 300px
+            height: 172px
+        svg
+            display: block
+            width: inherit
+            height: inherit
+            .black &
+                fill: $black
+            .white &
+                fill: $white
+        &::before,
+        &::after
+            content: ''
+            @extend %background
+            position: absolute
+            top: 0
+            bottom: 0
+            width: 100%
+        &::before
+            left: -100%
+            margin-left: 10px
+        &::after
+            right: -100%
+            margin-right: 10px
+    @include element(img)
+        @include position(absolute, 0, -100px, 0, -100px, 1)
+        transition: transform 300ms ease
+        .white &
+            background: url("../img/footerImg--white.jpg") no-repeat center bottom / cover
+        .black &
+            background: url("../img/footerImg--black.svg") no-repeat center bottom / cover
+
+.content
+    h1, h2, h3
+        @extend %titleMiddle
+        margin-bottom: 20px
+    h3, h4, h5
+        @extend %titleSmall
+        margin-bottom: 15px
+    p
+        margin-bottom: 10px
+        line-height: 1.65
+    ol, ul
+        line-height: 1.5
+        margin-left: 30px
+        margin-bottom: 10px
+    a
+        text-decoration: underline
+        &:hover
+            opacity: 0.8
+            text-decoration: none
+    img
+        &.aligncenter
+            margin: 0 auto 20px
+            display: block
+        &.alignright
+            float: right
+            margin: 0 0 20px 20px
+        &.alignleft
+            float: left
+            margin: 0 20px 20px 0
+    table
+        td
+            border: 1px solid $dark
+            padding: 5px 10px
+            font-size: 12px
+// ----- //
+// Modules
+// ----- //
+.bModule
+    @include element(header)
+        @media (min-width: $md)
+            position: relative
+        @extend %marginBottomMiddle
+    @include element(title)
+        @extend %titleMiddle
+        text-align: center
+        line-height: 1.2
+        @media (min-width: $md)
+            padding: 0 200px
+    @include element(moreLink)
+        font-weight: 300
+        @extend %fontTitle
+        line-height: 1.2
+        opacity: .5
+        @media (min-width: $lg)
+            @include position(absolute, 10px, 0, null, null, 10)
+        @include md()
+            @include position(absolute, 4px, 0, null, null, 10)
+            font-size: 12px
+        @include xs()
+            display: none
+        &:hover
+            opacity: 1
+    @include element(bottomBtnBox)
+        @media (min-width: $md)
+            display: none
+        @include xs()
+            text-align: center
+    @include element(bottomBox)
+        text-align: center
+    @include element(bodyScroll)
+        @media (max-width: $xs)
+            overflow-x: scroll
+            margin: 0 -15px
+            & > div
+                width: 325vw
+                padding: 0 15px
+        @include modifier(middle)
+            @media (max-width: $xs)
+                & > div
+                    width: 242vw
+        @include modifier(small)
+            @media (max-width: $xs)
+                & > div
+                    width: 170vw
+
+.mSidebar
+    @include position(fixed, 0, 0, 0, 0, 9999)
+    display: none
+    .enableSidebar &,
+    .showSidebar &,
+    .hideSidebar &
+        display: block
+    @include element(shadow)
+        @include position(absolute, 0, 0, 0, 0, 1)
+        background: $black
+        cursor: no-drop
+        .showSidebar &
+            animation: showSidebarShadow .3s ease-in-out both
+        .hideSidebar &
+            animation: hideSidebarShadow .3s .3s ease-in-out both
+    @include element(wrap)
+        background: $black
+        color: $white
+        @include position(absolute, 0, 0, 0, null, 10)
+        animation: showSidebarWrap .3s .3s ease-in-out both
+        max-width: 100%
+        @media (min-width: $md)
+            width: 35vw
+            min-width: 500px
+            max-width: 100%
+        @include xs()
+            width: 100%
+        .hideSidebar &
+            animation: hideSidebarWrap .3s ease-in-out both
+    @include element(close)
+        width: 40px
+        height: 40px
+        display: block
+        svg
+            color: inherit
+            display: block
+            .circle
+                display: none
+                animation: closeCircle .3s ease-in-out both
+            .progress
+                display: none
+                animation: closeCircle .3s .2s ease-in-out both
+        &:hover, .showSidebarEffect &
+            svg
+                .circle
+                    display: block
+                .progress
+                    display: block
+    @include element(line)
+        background: $white
+        width: 3px
+        @include position(absolute, null, null, 0, 0)
+        animation: showSidebarLine .6s .5s ease-in-out both
+    @include element(row)
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
+        justify-content: space-between
+        align-content: flex-start
+        align-items: stretch
+        height: 100%
+        @media (min-width: $md)
+            padding: 60px 70px
+        @include xs()
+            padding: 40px
+        @media (max-width: 480px)
+            padding: 30px 20px
+    @include element(col)
+        order: 0
+        flex: 0 1 auto
+        align-self: auto
+        @include modifier(header)
+            order: 0
+            flex: 0 1 auto
+            align-self: auto
+            position: relative
+            z-index: 1
+        @include modifier(body)
+            order: 0
+            flex: 0 1 auto
+            align-self: auto
+        @include modifier(footer)
+            order: 0
+            flex: 0 1 auto
+            align-self: auto
+    @include element(social)
+        & > .row
+            & > .col
+                @for $i from 1 through 10
+                    &:nth-child(#{$i})
+                        animation: showSidebarSocial .3s .6s + ($i / 10) ease-in-out both
+                &.lang
+                    @media (min-width: $lg)
+                        display: none !important
+        .socIcon
+            display: block
+            width: 25px
+            color: inherit
+            &:hover
+                opacity: .7
+            svg
+                display: block
+                margin: 0 auto
+                color: inherit
+    @include element(menu)
+        list-style: none
+        & > li
+            @media (min-width: $md)
+                margin-bottom: 20px
+            @include xs()
+                margin-bottom: 15px
+            @for $i from 1 through 10
+                &:nth-child(#{$i})
+                    animation: showSidebarMenu .3s .7s + ($i / 10) ease-in-out both
+                    & > ul
+                        & > li
+                            @for $j from 1 through 10
+                                &:nth-child(#{$j})
+                                    animation: showSidebarMenu .3s .7s + ($i / 10) + ($j / 10) ease-in-out both
+            & > a, & > span
+                color: inherit
+                @extend %titleMiddle
+                @include inline-block()
+            & > a
+                &:hover
+                    opacity: .5
+            & > ul
+                list-style: none
+                padding-top: 5px
+                & > li
+                    margin-bottom: 5px
+                    & > a
+                        color: inherit
+                        opacity: .5
+                        font-weight: 300
+                        @include inline-block()
+                        padding-left: 40px
+                        position: relative
+                        text-transform: uppercase
+                        @include xl()
+                            font-size: 20px
+                        &::before
+                            content: ''
+                            width: 20px
+                            height: 1px
+                            @include position(absolute, 50%, null, null, 0)
+                            transform: translateY(-50%)
+                            background: $white
+                        &:hover
+                            opacity: 1
+    @include element(switcher)
+        @include inline-block()
+        color: inherit
+        opacity: .5
+        animation: showSidebarSwitcher .3s .8s ease-in-out both
+        &:hover
+            opacity: 1
+
+.mSearch
+    @include position(fixed, 0, 0, 0, 0, 9999)
+    display: none
+    .enableSearch &,
+    .showSearch &,
+    .hideSearch &
+        display: block
+    @include element(shadow)
+        @include position(absolute, 0, 0, 0, 0, 1)
+        background: $black
+        cursor: no-drop
+        .showSearch &
+            animation: showSidebarShadow .3s ease-in-out both
+        .hideSearch &
+            animation: hideSidebarShadow .3s .3s ease-in-out both
+    @include element(wrap)
+        background: $black
+        color: $white
+        @include position(absolute, 0, 0, null, 0, 10)
+        animation: showSearchWrap .3s .3s ease-in-out both
+        .hideSearch &
+            animation: hideSearchWrap .3s ease-in-out both
+    @include element(close)
+        width: 40px
+        height: 40px
+        display: block
+        @include position(absolute, 0, 0, null, null, 10)
+        svg
+            color: inherit
+            display: block
+            .circle
+                display: none
+                animation: closeCircle .3s ease-in-out both
+            .progress
+                display: none
+                animation: closeCircle .3s .2s ease-in-out both
+        &:hover, .showSearchEffect &
+            svg
+                .circle
+                    display: block
+                .progress
+                    display: block
+    @include element(line)
+        background: $white
+        height: 2px
+        @include position(absolute, null, null, 0, 0)
+        animation: showSearchLine .6s .5s ease-in-out both
+    @include element(row)
+        position: relative
+        padding: 50px 0
+    @include element(form)
+        padding-right: 60px
+        position: relative
+    @include element(input)
+        width: 100%
+        border: none
+        background: none
+        border-bottom: 1px solid $whiteBorder
+        @extend %titleMiddle
+        font-weight: 500
+        color: $white
+        height: 40px
+
+.mForm
+    padding-bottom: 40px
+    position: relative
+    .pContacts &
+        padding-bottom: 0
+    @include element(label)
+        display: block
+        span
+            font-size: 10px
+            @include xs()
+                display: block
+                margin-top: -2px
+    @include element(row)
+        margin-bottom: 10px
+        position: relative
+        overflow: hidden
+    @include element(error)
+        color: $red
+        font-weight: 500
+        padding: 0 15px
+        @include position(absolute, 1px, 10px, 1px, 1px, 10)
+        background: $white
+        line-height: 44px
+        animation: show-error $animation
+        span
+            display: block
+            animation: show-error $animation
+    @include element(title)
+        @extend %titleMiddle
+        &::after
+            content: ''
+            display: block
+            background: $red
+            width: 30px
+            height: 2px
+            margin-top: 10px
+            margin-bottom: 20px
+        @include modifier(center)
+            text-align: center
+            &::after
+                margin-left: auto
+                margin-right: auto
+    @include element(input)
+        font-weight: 500
+        color: $black
+        border: 1px solid $grayBorder
+        width: 100%
+        height: 44px
+        @include placeholder($grayBorder)
+        background: $white
+        padding: 0 15px
+        &:focus
+            border-color: $black
+        .pContacts &
+            border: none !important
+    @include element(select)
+        display: block
+        font-weight: 500
+        color: $grayBorder
+        border: 1px solid $grayBorder
+        width: 100%
+        height: 46px
+        @include placeholder($grayBorder)
+        background: $white
+        padding: 0 15px
+        @include modifier(multi)
+            height: 102px
+            padding: 8px 15px
+            option
+                padding: 3px 0
+        &:focus
+            border-color: $black
+        &.active
+            color: $black
+        .pContacts &
+            border: none !important
+        option
+            color: $black
+    @include element(textarea)
+        font-weight: 500
+        color: $black
+        border: 1px solid $grayBorder
+        width: 100%
+        height: 102px
+        @include placeholder($grayBorder)
+        background: $white
+        padding: 10px 15px
+        display: block
+        resize: vertical
+        &:focus
+            border-color: $black
+        .pContacts &
+            border: none !important
+    @include element(btn)
+        width: 100%
+        @include modifier(right)
+            text-align: right
+    @include element(uploadFile)
+        font-weight: 500
+        text-align: center
+        position: relative
+        cursor: pointer
+        transition: opacity .3s ease
+        &:hover
+            opacity: .5
+        input
+            @include position(absolute, 0, 0, 0, 0)
+            opacity: 0
+    @include element(uploadFileDesc)
+        opacity: .5
+        text-align: center
+        display: block
+        max-width: 170px
+        margin: 0 auto 20px
+        cursor: pointer
+    @include element(success)
+        color: $black
+        text-align: center
+        animation: show-error $animation
+        @include position(absolute, null, 0, 0, 0, 10)
+        @include modifier(top)
+            bottom: 15px
+        .pContacts &
+            position: relative
+            color: $white
+    @include element(rating)
+        margin: 0 3px 10px
+        width: 180px
+        .star
+            cursor: pointer
+            padding: 0 3px
+            svg
+                color: $grayBorder
+                fill: $grayLite
+            &:hover ~ .star svg
+                color: $grayBorder !important
+                fill: $grayLite !important
+        &[data-stars]
+            .star svg
+                color: $black
+                fill: $black
+            &:hover
+                .star svg
+                    color: $black
+                    fill: $black
+        &[data-stars="0"]
+            .star svg
+                color: $grayBorder
+                fill: $grayLite
+        &[data-stars="1"]
+            .star:nth-child(1) ~ .star svg
+                color: $grayBorder
+                fill: $grayLite
+        &[data-stars="2"]
+            .star:nth-child(2) ~ .star svg
+                color: $grayBorder
+                fill: $grayLite
+        &[data-stars="3"]
+            .star:nth-child(3) ~ .star svg
+                color: $grayBorder
+                fill: $grayLite
+        &[data-stars="4"]
+            .star:nth-child(4) ~ .star svg
+                color: $grayBorder
+                fill: $grayLite
+        &[data-stars="5"]
+            .star:nth-child(5) ~ .star svg
+                color: $grayBorder
+                fill: $grayLite
+// ----- //
+// Pages
+// ----- //
+.page
+    position: relative
+    @include modifier(topForHeader)
+        @media (min-width: $lg)
+            padding-top: 180px
+        @media (max-width: $md-top)
+            padding-top: 110px
+    @include element(title)
+        @extend %titleBig, %marginBottomMiddle
+        text-align: center
+    @include element(wrap)
+        .page-article &,
+        .page-school &
+            max-width: 1175px
+            margin: 0 auto
+        & > .row
+            margin: 0 -20px
+            & > div
+                padding: 0 20px 40px
+
+.pageLogin
+    @extend %marginBottomBig
+    @include element(form)
+        max-width: 400px
+        margin: 0 auto
+    .formLabel
+        display: block
+        margin-bottom: 10px
+    .inputText
+        font-weight: 500
+        color: $black
+        border: 1px solid $grayBorder
+        width: 100%
+        height: 46px
+        @include placeholder($grayBorder)
+        background: none
+        padding: 0 15px
+        margin-bottom: 20px
+        &:focus, &:hover
+            border-color: $black
+
+.pStart
+    @include position(fixed, 0, 0, 0, 0, 9999)
+    min-height: 100vh
+    background: $white
+    animation: fade-in $animation
+    @include element(bg)
+        position: absolute
+        @include modifier(left)
+            @media (min-width: $lg)
+                top: 0
+                bottom: 0
+                left: 0
+                background: url('../img/startBg1.jpg') no-repeat top right / cover
+                width: 70vw
+        @include modifier(right)
+            right: 0
+            background: url('../img/startBg2.jpg') no-repeat top right / cover
+            width: 254px
+            height: 538px
+            @media (min-width: $lg)
+                top: 10px
+            @media (max-width: $md-top)
+                bottom: 10px
+    @include element(wrap)
+        position: relative
+        z-index: 10
+        min-height: 100vh
+        @media (min-width: $lg)
+            display: flex
+            flex-direction: column
+            flex-wrap: wrap
+            justify-content: flex-end
+            align-content: stretch
+            align-items: stretch
+            padding-bottom: 150px
+            padding-left: 50%
+        @media (max-width: $md-top)
+            display: flex
+            flex-direction: column
+            flex-wrap: wrap
+            justify-content: flex-start
+            align-content: stretch
+            align-items: stretch
+    @include element(logo)
+        fill: $red
+        @media (min-width: $md)
+            margin-bottom: 40px
+        @include xs()
+            margin-bottom: 20px
+    @include element(form)
+        padding: 40px 0
+        width: 100%
+        max-width: 375px
+        order: 0
+        flex: 0 1 auto
+        align-self: auto
+        label
+            display: block
+            margin-bottom: 10px
+            color: rgba($black, .5)
+            line-height: 1.2
+        select
+            font-weight: 500
+            color: $black
+            border: 1px solid $grayBorder
+            width: 100%
+            height: 46px
+            @include placeholder($grayBorder)
+            background: $white
+            padding: 0 15px
+            margin-bottom: 20px
+            &:focus
+                border-color: $black
+        .eBtn--black
+            padding: 0 40px
+
+.pNot
+
+.pNotHeader
+    position: relative
+    @media (min-width: $md)
+        height: 700px
+    @media (min-width: 375px) and (max-width: $xs)
+        height: 550px
+    @media (max-width: 374px)
+        height: 520px
+    @include element(wrap)
+        position: relative
+        min-width: 100%
+        @media (min-width: $lg)
+            @include position(absolute, 0, null, 0, 375px, 1)
+        @media (max-width: $md-top)
+            @include position(absolute, 0, -250px, 0, -250px, 1)
+        &::before
+            @extend %backgroundReverse
+            @media (max-width: $md-top)
+                content: ''
+                @include position(absolute, 0, 0, 0, 0, 30)
+                background: $black
+                opacity: .5
+    @include element(bg)
+        background: url('../img/404.jpg') no-repeat left center / auto 100%
+        @include position(absolute, 0, 0, 0, 0, 20)
+    @include element(box)
+        position: relative
+        z-index: 10
+        @media (min-width: $lg)
+            @include position(absolute, 0, null, null, 0, 100)
+            height: inherit
+            background: $white
+            border-right: 1px solid $grayBorder
+            padding-right: 40px
+            padding-top: 200px
+            width: 375px
+        @include md()
+            padding: 40px 0
+            @include position(absolute, 160px, 0, 0, 0, 100)
+        @include xs()
+            padding: 20px 0
+            @include position(absolute, 160px, 0, 0, 0, 100)
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle
+        font-size: 165px
+        line-height: 1
+        @media (max-width: $md-top)
+            color: $white
+            font-size: 100px
+        &::after
+            content: ''
+            background: $red
+            width: 25px
+            height: 2px
+            display: block
+            margin: 30px 0 35px
+    @include element(desc)
+        margin-bottom: 20px
+        font-size: 24px
+        font-weight: 500
+        text-transform: uppercase
+        @media (max-width: $md-top)
+            color: $white
+            font-size: 16px
+
+.pText
+    padding-bottom: 50px
+    @include element(title)
+        @extend %fontTitle, %titleMiddle
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+    @include element(content)
+        position: relative
+// Home
+.pHome
+    @include element(wrap)
+        @extend %paddingBottomBig
+        position: relative
+    @include element(banner)
+        @extend %marginBottomBig
+        svg, img
+            display: block
+        a
+            display: block
+            &:hover
+                opacity: .7
+    @include element(bg)
+        @media (min-width: $md)
+            @include position(absolute, 50px, null, null, 0, 1)
+            .img
+                display: block
+                width: 465px
+                height: 1035px
+                background: url('../img/bgLeft.jpg') no-repeat left center / contain
+                opacity: .5
+            &.headroom--not-bottom.headroom--not-top,
+            &.headroom--bottom
+                position: fixed
+        @include xs()
+            display: none !important
+    @include element(news)
+        @extend %paddingTopBig, %paddingBottomMiddle, %backgroundReverse, %colorReverse
+    @include element(content)
+        @extend %paddingTopMiddle
+        h3
+            @extend %titleMiddle
+            @media (min-width: $lg)
+                margin-bottom: 40px
+            @media (max-width: $md-top)
+                text-align: center
+                margin-bottom: 20px
+        .text
+            font-weight: 300
+            opacity: .4
+            @media (min-width: $lg)
+                padding-left: 20px
+            p
+                margin-bottom: 20px
+    .container
+        position: relative
+        z-index: 10
+
+%sliderHeight
+    height: 100vh
+    @include xl()
+        max-height: 1000px
+    @include lg()
+        max-height: 800px
+    @include md()
+        max-height: 700px
+    @media (min-width: 375px) and (max-width: $xs)
+        max-height: 550px
+    @media (max-width: 374px)
+        max-height: 520px
+
+.mainSlider
+    overflow: hidden
+    position: relative
+    border-bottom: 1px solid $grayBorder
+    @extend %background
+    transition: background $animation
+    @include element(wrap)
+        position: relative
+        &::before
+            @extend %backgroundReverse
+            @media (min-width: $lg)
+                content: ''
+                margin-left: -1px
+                width: 1px
+                opacity: .2
+                @include position(absolute, 0, null, 0, 375px, 25)
+    @include element(box)
+        position: relative
+        @media (min-width: $lg)
+            padding-left: 375px
+            margin-right: -50px
+        &::before
+            transition: background $animation
+            @media (min-width: $lg)
+                content: ''
+                width: 374px
+                @include position(absolute, 0, auto, 0, 0, 50)
+                .white &
+                    background: $white
+                .black &
+                    background: $black
+            @media (max-width: $md-top)
+                content: ''
+                margin-left: -1px
+                height: 1px
+                opacity: .2
+                @include position(absolute, null, -100vw, 0, -100vw, 25)
+                .white &
+                    background: $black
+                .black &
+                    background: $white
+    @include element(bg)
+        transition: transform 300ms ease
+        @include xl()
+            @include position(absolute, -100px, -250px, -100px, -375px, 20)
+        @include lg()
+            @include position(absolute, -100px, -250px, -100px, -375px, 20)
+        @include md()
+            @include position(absolute, -50px, -200px, -100px, -150px, 20)
+        @include xs()
+            @include position(absolute, -20px, -150px, -100px, -70px, 20)
+        @media (max-width: $md-top)
+            @include position(absolute, 0, 0, 0, 0)
+            .white &
+                background: rgba($white, .5)
+            .black &
+                background: rgba($black, .5)
+        span
+            @include position(absolute, 50%, 0, null, 0, 30)
+            transform: translateY(-50%)
+            @media (max-width: $md-top)
+                display: none
+        svg
+            display: block
+            width: 100%
+            height: auto
+            transition: color $animation
+            .white &
+                color: $white
+            .black &
+                color: $black
+    @include element(list)
+        list-style: none
+        position: relative
+        z-index: 10
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        @extend %sliderHeight
+        &::before
+            @extend %background
+            @media (min-width: $lg)
+                content: ''
+                @include position(absolute, 0, null, 0, -375px, 20)
+                width: 375px
+                transition: background $animation
+    @include element(item)
+        position: relative
+        overflow: hidden
+        @extend %sliderHeight
+        @include xl()
+            margin: 0 -100px
+        @include lg()
+            margin: 0 -100px
+        @include md()
+            margin: 0 -250px
+        @include xs()
+            margin: 0 -250px
+    @include element(slider)
+        transition: transform 300ms ease
+        @include position(absolute, 0, 0, 0, 0)
+    @include element(imageBox)
+        overflow: hidden
+        @include position(absolute, 0, 0, 0, 0)
+        opacity: 0
+        transition: opacity $animation
+        @extend %sliderHeight
+        &.active
+            opacity: 1
+    @include element(image)
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center
+        @include position(absolute, 0, -100px, 0, -100px, 10)
+    @include element(menu)
+        overflow: hidden
+        @media (min-width: $lg)
+            @media (min-height: 760px)
+                @include position(absolute, 260px, null, 0, 0, 50)
+            @media (max-height: 759px)
+                @include position(absolute, 160px, null, 0, 0, 50)
+        @include md()
+            padding: 40px 0
+            @include position(absolute, 160px, 0, 0, 0, 50)
+        @include xs()
+            padding: 20px 0
+            @include position(absolute, 160px, 0, 0, 0, 50)
+        @media (max-width: 374px)
+            top: 130px
+    @include element(btn)
+        @media (min-width: $lg)
+            @include position(absolute, null, null, 0, 0, 50)
+            @media (min-height: 760px)
+                height: 100px
+            @media (max-height: 759px)
+                height: 80px
+            a
+                padding: 0 25px
+        @include md()
+            padding: 0 0 50px
+            @include position(absolute, null, null, 0, 0, 50)
+        @include xs()
+            padding: 0 0 60px
+            @include position(absolute, null, null, 0, 0, 50)
+    @include element(dots)
+        @include position(absolute, null, null, null, null, 50)
+        @include xl()
+            left: 99px
+            bottom: 0
+        @include lg()
+            left: 99px
+            bottom: 0
+        @include md()
+            top: 110px
+            right: 0
+        @include xs()
+            top: 110px
+            right: 0
+        ul
+            list-style: none
+            height: 0
+            li
+                @include position(absolute, 0, null, null, 40px)
+                @extend %color, %fontTitle
+                font-weight: 700
+                background: none
+                border: none
+                width: 20px
+                height: 0
+                text-align: right
+                span
+                    @include inline-block()
+                    width: 145px
+                    height: 20px
+                    transform: rotate(-90deg)
+                    transform-origin: 0 0
+                    text-align: right
+    @include element(arrow)
+        font-size: 12px
+        font-weight: 500
+        cursor: pointer
+        transition: all $animation
+        height: 60px
+        line-height: 60px
+        @extend %colorReverse, %backgroundReverse, %fontTitle
+        @media (min-width: $md)
+            margin-top: -30px
+            padding: 0 40px 0 60px
+            @include position(absolute, 50%, 0, null, null, 1000)
+        @include xs()
+            padding: 0 30px 0 50px
+            @include position(fixed, null, 0, 0, 0, 1000)
+            .white &
+                border-top: $grayLite
+        .logo
+            @include position(absolute, 50%, null, null, 15px)
+            transform: translateY(-50%)
+            svg
+                display: block
+                transition: color $animation
+                @include xs()
+                    width: 20px
+                    height: 25px
+                .black &
+                    color: $red
+        .arrow
+            @include position(absolute, 50%, 0, null, null)
+            transform: translateY(-50%)
+            svg
+                display: block
+                transition: color $animation
+                .black &
+                    color: $red
+        .box
+            position: relative
+            padding-right: 50px
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            justify-content: flex-start
+            align-content: flex-start
+            align-items: center
+            height: 60px
+        .text
+            @include inline-block()
+            line-height: 1.4
+            max-width: 160px
+            .pro
+                @include inline-block()
+                width: 0
+                transition: width .2s ease
+                overflow: hidden
+                .white &
+                    width: 30px
+        &::after
+            content: ''
+            width: 20px
+            height: 2px
+            .white &
+                background: $white
+            .black &
+                background: $white
+    @include element(element)
+        width: 2px
+        height: 145px
+        @include position(absolute, null, null, 0, 0)
+        @extend %backgroundReverse
+
+.eTooltip
+    @include element(drop)
+        @include position(absolute, 40px, 0, null, null, 10)
+        font-size: 14px
+        padding: 20px
+        width: 350px
+        white-space: normal
+        text-transform: none
+        font-weight: 300
+        display: none
+        animation: dropDownLang .3s ease
+        .eTooltip:hover &
+            display: block
+        &::before
+            content: ""
+            border-bottom: 8px solid transparent
+            border-left: 8px solid transparent
+            border-right: 8px solid transparent
+            @include position(absolute, -8px, 6px, null, null)
+        &::before
+            .white &
+                border-bottom-color: $black
+            .black &
+                border-bottom-color: $white
+        .black &
+            background: $white
+            color: $black
+        .white &
+            background: $black
+            color: $white
+
+.mainMenu
+    letter-spacing: 2px
+    @include element(label)
+        @extend %color, %fontTitle, %fontTitle
+        opacity: .5
+        font-weight: 300
+        transition: color $animation
+        @media (min-width: $md)
+            margin-bottom: 40px
+        @include xs()
+            margin-bottom: 20px
+    @include element(link)
+        @include inline-block()
+        @extend %fontTitle
+        cursor: pointer
+        font-weight: 700
+        white-space: nowrap
+        transition: opacity $animation
+        @media (min-width: $md)
+            font-size: 36px
+            margin-bottom: 10px
+        @include xs()
+            margin-bottom: 5px
+            font-size: 24px
+        .white &
+            color: $black
+        .black &
+            color: $white
+        &:hover
+            span
+                opacity: .5
+        &.active
+            span
+                opacity: 1
+            .eTooltip
+                opacity: 1
+                right: 0
+        span
+            opacity: .5
+            transition: opacity $animation
+            &:hover
+                opacity: 1
+        .eTooltip
+            color: inherit
+            @include position(absolute, 40%, 20px, null, null, 100)
+            transform: translateY(-50%)
+            opacity: 0
+            transition: opacity .35s cubic-bezier(0.17, 0.77, 0.5, 1.4), right .35s cubic-bezier(0, 0, 0.93, 0.4)
+            svg
+                transition: width $animation
+                display: block
+                color: inherit
+    hr
+        @extend %backgroundReverse
+        display: block
+        width: 15px
+        height: 2px
+        padding: 0
+        border: none
+        @media (min-width: $md)
+            margin: 0 0 10px
+        @include xs()
+            margin: 0 0 5px
+    @include element(box)
+        position: relative
+        max-width: 100%
+        @media (min-width: $md)
+            min-height: 300px
+            width: 350px
+        @include xs()
+            min-height: 250px
+    @include element(item)
+        position: absolute !important
+        @include position(absolute, 0, 0, null, 0)
+        transition: transform .35s cubic-bezier(0.17, 0.77, 0.5, 1.4)
+        &.move-left
+            transform: translateX(-100%)
+        p
+            position: relative
+
+.infoSlider
+    @extend %paddingTopBig, %paddingBottomBig
+    @include element(label)
+        @extend %fontTitle
+        text-transform: uppercase
+        margin-bottom: 5px
+        font-weight: 700
+        @media (min-width: $lg)
+            padding-top: 40px
+    @include element(title)
+        @extend %fontTitle, %titleBig
+        margin-bottom: 20px
+    @include element(content)
+        list-style: none
+        margin-bottom: 20px
+        @media (min-width: $lg)
+            min-height: 240px
+        @media (max-width: $md-top)
+            min-height: 160px
+        li
+            position: relative
+            @media (min-width: $lg)
+                padding-left: 135px
+            @media (max-width: $md-top)
+                padding-left: 100px
+            p
+                opacity: .4
+                max-width: 400px
+                @media (min-width: $lg)
+                    font-size: 18px
+                @media (max-width: $md-top)
+                    font-size: 14px
+    @include element(num)
+        font-weight: 300
+        opacity: .05
+        line-height: 1
+        @include position(absolute, 20px, null, null, 0)
+        @media (min-width: $lg)
+            font-size: 220px
+        @media (max-width: $md-top)
+            font-size: 160px
+    @include element(wrap)
+        position: relative
+        @media (max-width: $md-top)
+            margin-bottom: 60px
+    @include element(images)
+        list-style: none
+        background: $black
+        position: relative
+        @extend %marginBottomMiddle
+        li
+            &.bg
+                @include position(absolute, 50%, null, null, 50%, 1)
+                transform: translate(-50%, -50%)
+                svg
+                    display: block
+                    color: $white
+            &.img
+                position: relative
+                z-index: 2
+            img
+                display: block
+    @include element(dots)
+        @include position(absolute, null, 0, -60px, 0)
+        list-style: none
+        text-align: center
+        li
+            @include inline-block
+            position: relative
+            cursor: pointer
+            &::before
+                content: ''
+                width: 1px
+                height: 15px
+                background: rgba($black, .4)
+                @include position(absolute, 0, null, 0, 50%)
+                transform: translateX(-50%)
+            svg
+                display: block
+                opacity: 0
+                transform: translateY(10px)
+                transition: opacity .4s ease, transform .4s ease
+            &.active
+                svg
+                    opacity: 1
+                    transform: translateX(0)
+    @include element(arrows)
+        a
+            display: block
+            box-sizing: border-box
+            cursor: pointer
+            @media (min-width: $lg)
+                width: 90px
+                height: 90px
+                padding: 38px 0
+            @media (max-width: $md-top)
+                width: 50px
+                height: 50px
+                padding: 18px 0
+            svg
+                display: block
+                margin: 0 auto
+    @include element(prev)
+        background: $white
+        @media (min-width: $lg)
+            @include position(absolute, null, 0, 0, null, 10)
+        @media (max-width: $md-top)
+            @include position(absolute, null, null, 0, 0, 10)
+        svg
+            color: $black
+        &:hover
+            background: rgba($white, .8)
+    @include element(next)
+        background: $black
+        @media (min-width: $lg)
+            @include position(absolute, null, -90px, 0, null, 10)
+        @media (max-width: $md-top)
+            @include position(absolute, null, 0, 0, null, 10)
+        svg
+            color: $white
+        &:hover
+            background: rgba($black, .8)
+
+.productsSlider
+    @extend %paddingTopMiddle, %paddingBottomMiddle, %background, %color
+    @include modifier(pro)
+        @include xs()
+            padding-top: 30px
+        .white &
+            display: none
+        .bModule__moreLink
+            color: $white
+    @include modifier(standart)
+        .black &
+            display: none
+
+// ----- //
+// Blog
+// ----- //
+.pBlog
+    @include element(menu)
+        @media (min-width: $lg)
+            margin-bottom: 40px
+        @include md()
+            margin-bottom: 30px
+        @include xs()
+            margin-bottom: 15px
+
+.pArticle
+    padding-bottom: 50px
+    @include element(menu)
+        padding-bottom: 30px
+        margin-bottom: 30px
+        border-bottom: 1px solid $grayBorder
+    @include element(subscribe)
+        margin-bottom: 60px
+    @include element(articles)
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            opacity: .1
+            color: $black
+        .gridRow
+            & > .row
+                & > div
+                    padding-bottom: 0
+    @include element(box)
+        position: relative
+    @include element(img)
+        @include xl()
+            margin-bottom: 40px
+        @include lg()
+            margin-bottom: 30px
+        @include md()
+            margin-bottom: 25px
+        @include xs()
+            margin-bottom: 20px
+        img
+            display: block
+            width: 100%
+    @include element(date)
+        @include position(absolute, 20px, 20px, null, null, 10)
+        background: $red
+        color: $white
+        text-align: center
+        padding: 5px
+        line-height: 1.2
+        strong
+            display: block
+            font-size: 28px
+    @include element(title)
+        @extend %fontTitle, %titleMiddle
+        @media (min-width: $lg)
+            margin-left: 40px
+            margin-right: 40px
+        @media (max-width: $md-top)
+            margin-left: 20px
+            margin-right: 20px
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+    @include element(cat)
+        color: $gray
+        @extend %fontTitle
+        padding-left: 40px
+        position: relative
+        @media (min-width: $lg)
+            margin-left: 40px
+            margin-right: 40px
+        @media (max-width: $md-top)
+            margin-left: 20px
+            margin-right: 20px
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+        &::before
+            content: ''
+            background: $red
+            width: 25px
+            height: 2px
+            display: block
+            @include position(absolute, 50%, null, null, 0)
+            transform: translateY(-50%)
+        a
+            opacity: .5
+            &:hover
+                opacity: 1
+    @include element(short)
+        background: $black
+        color: $white
+        @media (min-width: $lg)
+            padding: 40px
+            font-size: 16px
+            margin-right: 40px
+            margin-top: -70px
+            position: relative
+            z-index: 1
+            margin-bottom: 40px
+        @media (max-width: $md-top)
+            padding: 20px
+            font-size: 14px
+            margin-bottom: 20px
+            margin-top: 10px
+        p
+            margin-bottom: 5px
+    @include element(content)
+        @media (min-width: $lg)
+            margin-left: 40px
+            margin-right: 40px
+        @media (max-width: $md-top)
+            margin-left: 20px
+            margin-right: 20px
+
+.eArticle
+    padding-bottom: 20px
+    position: relative
+    .pArticle &
+        margin-bottom: 20px
+    @include element(image)
+        display: block
+        margin-bottom: 20px
+        img
+            display: block
+        &:hover
+            opacity: .7
+    @include element(date)
+        @include position(absolute, 10px, 10px, null, null, 10)
+        background: $black
+        color: $white
+        font-size: 10px
+        text-align: center
+        padding: 5px
+        line-height: 1.2
+        strong
+            display: block
+            font-size: 20px
+    @include element(title)
+        padding: 0 20px
+        a
+            display: block
+            margin-bottom: 10px
+            @extend %fontTitle
+            color: inherit
+            &:hover
+                opacity: .7
+        &::after
+            content: ''
+            background: $red
+            width: 25px
+            height: 2px
+            display: block
+            margin-bottom: 15px
+    @include element(cat)
+        padding: 0 20px
+        font-size: 12px
+        @extend %fontTitle
+        a
+            opacity: .5
+            color: inherit
+            &:hover
+                opacity: 1
+
+.mHorMenu
+    list-style: none
+    .pBlog__menu &,
+    .pAbout &
+        @media (min-width: $md)
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+            justify-content: center
+            align-content: flex-start
+            align-items: flex-start
+            margin: 0 -25px
+        @include xs()
+            overflow-x: scroll
+            white-space: nowrap
+            &::-webkit-scrollbar
+                display: none
+    li
+        .pBlog__menu &,
+        .pAbout &
+            @media (min-width: $lg)
+                padding: 0 25px
+            @media (min-width: $md)
+                order: 0
+                flex: 0 1 auto
+                align-self: auto
+                padding: 0 10px
+            @include xs()
+                margin-bottom: 10px
+                padding: 0 10px
+                @include inline-block()
+        .pArticle__menu &
+            margin-bottom: 10px
+        a
+            @extend %titleSmall
+            position: relative
+            border-bottom: 1px solid transparent
+            opacity: .5
+            @media (min-width: $md)
+                padding: 0 5px
+            &.active
+                opacity: 1
+                border-bottom-color: $black
+                .count
+                    color: $red
+            .pBlog__menu &,
+            .pAbout &
+                display: block
+            .pArticle__menu &
+                @include inline-block()
+            .count
+                @include position(absolute, 0, -35px, null, null)
+                font-size: 10px
+                width: 35px
+                line-height: 1
+
+.pagination
+    list-style: none
+    @extend .row, .center-xs
+    margin-bottom: 40px
+    .bFilter &
+        @extend .end-xs
+        margin-bottom: 0
+    li
+        @extend .col
+        a, span
+            display: block
+            line-height: 1.2
+            border-bottom: 1px solid transparent
+            color: inherit
+        a
+            &:hover
+                border-bottom-color: $black
+        span
+            opacity: .5
+
+.mBreadcrumbs
+    margin-bottom: 20px
+    position: relative
+    z-index: 100
+    list-style: none
+    @include xs()
+        margin-bottom: 10px
+    li
+        @include inline-block()
+        @include xs()
+            font-size: 12px
+        &.sep
+            padding: 0 5px
+    a, span
+        display: block
+    a
+        color: inherit
+        opacity: .5
+        &:hover
+            opacity: 1
+
+.rightSidebarModule
+    @include element(title)
+        @extend %titleMiddle
+        margin-bottom: 20px
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+            br
+                display: none
+// ----- //
+// About
+// ----- //
+.pAbout
+    @include element(wrap)
+        position: relative
+        .container
+            position: relative
+            z-index: 10
+    @include element(menu)
+        @media (min-width: $lg)
+            margin-bottom: 80px
+        @include md()
+            margin-bottom: 40px
+        @include xs()
+            margin-bottom: 20px
+    @include element(pageTitle)
+        @extend %titleBig, %marginBottomMiddle
+        text-align: center
+        @include xs()
+            padding-top: 20px
+    @include element(content)
+        @extend %marginBottomBig
+        position: relative
+        @media (min-width: 1700px)
+            min-height: 420px
+        @include modifier(left)
+            @media (min-width: $lg)
+                padding-right: 50%
+        @include modifier(right)
+            @media (min-width: $lg)
+                text-align: right
+                padding-left: 50%
+        @include md()
+            padding-left: 190px
+            min-height: 140px
+    @include element(title)
+        @extend %titleMiddle, %fontTitle
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+            br
+                display: none
+    @include element(titleBig)
+        @extend %titleBig, %marginBottomMiddle, %fontTitle
+        text-align: center
+    @include element(count)
+        display: block
+        line-height: 1
+        font-weight: 100
+        opacity: .2
+        @media (min-width: $lg)
+            font-size: 196px
+        @include md()
+            font-size: 140px
+            @include position(absolute, 0, null, null, 0)
+            .pAbout__history &
+                position: static
+        @include xs()
+            font-size: 100px
+        .pAbout__content--left &,
+        .pAbout__history &
+            margin-left: -10px
+        .pAbout__content--right &
+            @media (min-width: $lg)
+                margin-right: -10px
+            @media (max-width: $md-top)
+                margin-left: -10px
+    @include element(text)
+        color: rgba($black, .5)
+        @media (min-width: $lg)
+            .pAbout__content--left &
+                padding-right: 50px
+            .pAbout__content--right &
+                padding-left: 50px
+        p
+            margin-bottom: 20px
+        .row
+            margin: 0 -20px 30px
+            & > .col
+                padding: 0 20px
+    @include element(image)
+        @media (min-width: 1901px)
+            width: 65%
+        @media (min-width: $lg) and (max-width: 1900px)
+            width: 50vw
+        @media (max-width: $md-top)
+            padding-top: 20px
+        .pAbout__content--left &,
+        .pAbout__descBox--left &
+            @media (min-width: $lg)
+                @include position(absolute, 0, null, null, 50%)
+                text-align: right
+                padding-left: 50px
+        .pAbout__content--right &,
+        .pAbout__descBox--right &
+            @media (min-width: $lg)
+                @include position(absolute, 0, 50%, null, null)
+                text-align: left
+                padding-right: 50px
+        img
+            position: relative
+            @include inline-block()
+    @include element(bg)
+        @include position(absolute, null, null, 50px, 0, 1)
+        transition: transform 300ms ease
+        @include xl()
+            bottom: 300px
+        @include lg()
+            bottom: 350px
+        .img
+            display: block
+            background: url('../img/bgLeft.jpg') no-repeat left center / contain
+            @media (min-width: 1700px)
+                width: 650px
+                height: 1500px
+            @media (min-width: 1500px) and (max-width: 1699px)
+                width: 500px
+                height: 1300px
+            @include lg()
+                width: 450px
+                height: 1100px
+    @include element(history)
+        @extend %marginBottomBig
+        @media (min-width: $lg)
+            padding-top: 300px
+    @include element(descBox)
+        @extend %marginBottomBig
+        position: relative
+        @include xl()
+            min-height: 420px
+        @include modifier(left)
+            @media (min-width: $lg)
+                padding-right: 50%
+        @include modifier(right)
+            text-align: right
+            padding-left: 50%
+    @include element(articles)
+        @extend %marginBottomMiddle
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            opacity: .1
+            color: $black
+
+.pAboutHistorySlider
+    white-space: nowrap
+    overflow-x: scroll
+    position: relative
+    @media (min-width: $lg)
+        padding-bottom: 60px
+    @media (max-width: $md-top)
+        padding-top: 10px
+        padding-bottom: 20px
+    @include element(wrap)
+        margin: 0 -20px
+    @include element(item)
+        @include inline-block()
+        width: 590px
+        max-width: 80vw
+        padding: 0 20px 20px
+    @include element(year)
+        font-weight: 100
+        line-height: 1
+        margin-bottom: 20px
+        @media (min-width: $lg)
+            font-size: 40px
+        @media (max-width: $md-top)
+            font-size: 30px
+        .pAboutHistorySlider__lastYear &
+            color: $white
+    @include element(text)
+        opacity: .5
+        white-space: normal
+        p
+            margin-bottom: 10px
+        strong
+            white-space: nowrap
+        .pAboutHistorySlider__lastYear &
+            color: $white
+            opacity: 1
+            p
+                margin-bottom: 10px
+                font-size: 14px
+                font-weight: 300
+                @include xs()
+                    font-size: 12px
+            strong
+                display: block
+                font-size: 40px
+                font-weight: 900
+                white-space: nowrap
+                line-height: 1.3
+                @include xs()
+                    font-size: 30px
+            & > .row
+                padding-top: 20px
+                & > div
+                    padding-bottom: 30px
+    @include element(content)
+        @media (min-width: $xl)
+            max-width: 540px
+        @include lg()
+            max-width: 40vw
+        @include md()
+            max-width: 718px
+            margin: 0 auto
+            padding: 0 10px
+        @include xs()
+            max-width: 767px
+            margin: 0 auto
+            padding: 0 15px
+    @include element(lastYear)
+        background: $black
+        @extend %marginBottomBig
+        @media (max-width: $md-top)
+            margin: 0
+        & > .row
+            @media (min-width: $xl)
+                margin: 0 -50px
+            @include lg()
+                margin: 0 -40px
+            @media (max-width: $md-top)
+                margin: 0 -10px
+            & > div
+                @media (min-width: $xl)
+                    padding: 70px 50px
+                @include lg()
+                    padding: 40px
+                @media (max-width: $md-top)
+                    padding: 40px 10px
+        .image
+            background-size: cover
+            background-repeat: no-repeat
+            background-position: center
+            position: relative
+            a
+                @include position(absolute, 0, 0, 0, null)
+                @media (min-width: $xl)
+                    left: 50px
+                @include lg()
+                    left: 40px
+                @media (max-width: $md-top)
+                    left: 10px
+                svg
+                    @include position(absolute, 50%, null, null, 50%)
+                    transform: translate(-50%, -50%)
+                    fill: $white
+                    @include xs()
+                        width: 80px
+                        height: 80px
+            @media (max-width: $md-top)
+                height: 300px
+    .ps__rail-x
+        height: 12px
+        opacity: 1 !important
+        background: none !important
+        &::before
+            content: ''
+            @include position(absolute, 50%, 0, null, 0, 1)
+            transform: translateY(-50%)
+            background: $grayBorder !important
+            height: 1px
+    .ps__thumb-x
+        background: $red
+        height: 12px
+        border-radius: 6px
+        margin-top: -8px
+        cursor: ew-resize
+        z-index: 10
+        bottom: 0
+        opacity: 1 !important
+        &:hover, &:focus
+            background: darken($red, 10%)
+            height: 12px
+            background: $red
+
+.pAboutHeader
+    position: relative
+    @media (min-width: $md)
+        height: 700px
+    @media (min-width: 375px) and (max-width: $xs)
+        height: 550px
+    @media (max-width: 374px)
+        height: 520px
+    @include element(wrap)
+        position: relative
+        min-width: 100%
+        @media (min-width: $lg)
+            @include position(absolute, 0, null, 0, 375px, 1)
+        @media (max-width: $md-top)
+            @include position(absolute, 0, -250px, 0, -250px, 1)
+        &::before
+            @extend %backgroundReverse
+            @media (max-width: $md-top)
+                content: ''
+                @include position(absolute, 0, 0, 0, 0, 30)
+                background: $black
+                opacity: .5
+    @include element(bg)
+        background-size: cover
+        background-repeat: no-repeat
+        background-position: center
+        @include position(absolute, 0, 0, 0, 0, 20)
+    @include element(box)
+        position: relative
+        z-index: 10
+        @media (min-width: $lg)
+            @include position(absolute, 0, null, null, 0, 100)
+            height: inherit
+            background: $white
+            border-right: 1px solid $grayBorder
+            padding-right: 40px
+            padding-top: 200px
+            width: 375px
+        @include md()
+            padding: 40px 0
+            @include position(absolute, 160px, 0, 0, 0, 100)
+        @include xs()
+            padding: 20px 0
+            @include position(absolute, 160px, 0, 0, 0, 100)
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle, %titleMiddle
+        @media (max-width: $md-top)
+            color: $white
+            font-size: 24px
+        &::after
+            content: ''
+            background: $red
+            width: 25px
+            height: 2px
+            display: block
+            margin: 30px 0 35px
+    @include element(desc)
+        opacity: .5
+        @media (min-width: $lg)
+            margin-bottom: 20px
+    @include element(menu)
+        list-style: none
+        @media (min-width: $lg)
+            margin-bottom: 20px
+        li
+            margin-bottom: 15px
+            a
+                font-weight: 700
+                text-transform: uppercase
+                opacity: .5
+                letter-spacing: 1px
+                &.active,
+                &:hover
+                    opacity: 1
+                @media (max-width: $md-top)
+                    color: $white
+
+.bMarketing
+    @extend %paddingBottomBig, %paddingTopMiddle
+
+.bDocs
+    @include element(more)
+        padding-top: 20px
+        text-align: center
+
+.eDoc
+    display: block
+    padding-bottom: 20px
+    cursor: pointer
+    &:hover
+        opacity: .7
+    @include element(body)
+        display: block
+        @include modifier(image)
+            position: relative
+            .eDoc__icon
+                @include position(absolute, 20px, null, null, 20px)
+                svg
+                    width: 65px
+                    height: auto
+        @include modifier(empty)
+            position: relative
+            .eDoc__icon
+                @include position(absolute, 50%, null, null, 50%)
+                transform: translate(-50%, -50%)
+    @include element(img)
+        display: block
+        margin-bottom: 20px
+        img, svg
+            display: block
+            width: 100%
+            height: auto
+    @include element(title)
+        display: block
+        font-weight: 500
+    @include element(icon)
+        svg
+            @include xs()
+                width: 30px !important
+                height: 34px !important
+
+.bPeoples
+    @extend %paddingBottomBig
+    @include element(box)
+        background: $black
+        color: $white
+        @media (min-width: $md)
+            padding: 40px
+        @include xs()
+            padding: 20px
+        @include modifier(marginBottom)
+            @media (min-width: $lg)
+                margin-bottom: 40px
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            opacity: .1
+            color: inherit
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle, %titleMiddle
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+    @include element(desc)
+        @media (min-width: $md)
+            margin-bottom: 40px
+        @include xs()
+            margin-bottom: 20px
+    @include element(more)
+        text-align: center
+
+.eRepresentative
+    text-align: center
+    padding: 20px
+    height: 100%
+    @include modifier(black)
+        padding-top: 75px
+        background: url('../img/elementBgTop.png') no-repeat top center / contain $black
+        color: $white
+    @include modifier(gray)
+        padding: 30px 0 0 0
+    @include element(img)
+        display: block
+        max-width: 140px
+        margin: 0 auto 20px
+        &:hover
+            opacity: .7
+        img
+            display: block
+            border-radius: 50%
+            .eRepresentative--gray &
+                border: 3px solid $white
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle
+        margin-bottom: 10px
+        a
+            display: block
+            color: inherit
+            &:hover
+                opacity: .7
+    @include element(text)
+        font-size: 12px
+        opacity: .5
+        margin-bottom: 20px
+    @include element(location)
+        font-size: 12px
+        opacity: .5
+        margin-bottom: 20px
+    @include element(soc)
+        margin: 20px -2px 0
+        .col
+            padding: 2px
+        a
+            display: block
+            height: 34px
+            width: 34px
+            border: 1px solid $black
+            padding: 7px
+            box-sizing: border-box
+            color: inherit
+            &:hover
+                color: $red
+                border-color: $red
+            svg
+                display: block
+                height: 18px
+                width: 18px
+                color: inherit
+    @include element(cat)
+        margin-bottom: 10px
+        font-size: 12px
+        .row
+            margin: 0 -5px
+            .col
+                padding: 0 5px
+        svg
+            display: block
+            &.pink
+                fill: $pink
+            &.purple
+                fill: $purple
+            &.orange
+                fill: $orange
+            &.yellow
+                fill: $yellow
+
+.serviceCenters
+    @extend %marginBottomBig
+
+.eServiceCentre
+    background: $grayBg
+    padding: 30px 35px
+    height: 100%
+    @include element(title)
+        font-weight: 700
+        margin-bottom: 20px
+    @include element(label)
+        font-size: 12px
+        opacity: .5
+    @include element(text)
+        margin-bottom: 20px
+
+.workplaces
+    @extend %marginBottomBig
+
+.bSharpeners
+    @extend %marginBottomBig
+    @include element(box)
+        background: $black
+        padding: 40px
+        color: $white
+        height: 100%
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            opacity: .1
+            color: inherit
+    @include element(form)
+        p
+            &:first-child
+                margin-bottom: 20px
+        select
+            font-weight: 500
+            color: $black
+            border: 1px solid $grayBorder
+            width: 100%
+            height: 46px
+            @include placeholder($grayBorder)
+            background: $white
+            padding: 0 15px
+            //margin-bottom: 20px
+            &:focus
+                border-color: $black
+    @include element(item)
+        background: $grayBg
+        padding: 40px
+        height: 100%
+        transition: box-shadow $animation
+        &:hover
+            box-shadow: 3px 3px 3px rgba($black, .1)
+    @include element(more)
+        text-align: center
+
+.bSchools
+    @extend %marginBottomBig
+    @include element(box)
+        background: $black
+        padding: 40px
+        color: $white
+        height: 100%
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            opacity: .1
+            color: inherit
+    @include element(form)
+        p
+            margin-bottom: 20px
+            &:last-child
+                margin-bottom: 0
+        select
+            font-weight: 500
+            color: $black
+            border: 1px solid $grayBorder
+            width: 100%
+            height: 46px
+            @include placeholder($grayBorder)
+            background: $white
+            padding: 0 15px
+            //margin-bottom: 20px
+            &:focus
+                border-color: $black
+    @include element(item)
+        background: $grayBg
+        padding: 40px
+        height: 100%
+        transition: box-shadow $animation
+        position: relative
+        &:hover
+            box-shadow: 3px 3px 3px rgba($black, .1)
+    @include element(more)
+        text-align: center
+
+.eSharpener
+    position: relative
+    padding-bottom: 100px
+    height: 100%
+    @include element(title)
+        font-weight: 700
+        @extend %fontTitle
+        margin-bottom: 20px
+    @include element(location)
+        color: $gray
+        margin-bottom: 20px
+        a
+    @include element(text)
+        margin-bottom: 20px
+        font-size: 12px
+        max-height: 190px
+        overflow-y: scroll
+        position: relative
+        padding-right: 20px
+        margin-right: -10px
+        .ps__rail-y
+            opacity: 1
+            background: none !important
+            width: 8px
+            &::before
+                content: ''
+                background: rgba($black, .5)
+                width: 1px
+                height: 100%
+                @include position(absolute, 0, null, 0, 50%, 1)
+                transform: translateX(-50%)
+            .ps__thumb-y
+                z-index: 2
+                width: 8px
+                background: $black
+                border-radius: 4px
+                right: 0
+            &:hover
+                .ps__thumb-y
+                    width: 8px
+    @include element(authorized)
+        @include position(absolute, null, 0, 45px, 0)
+        line-height: 26px
+        padding-left: 40px
+        svg
+            @include position(absolute, 0, null, null, 0)
+            color: $red
+    @include element(reviews)
+        padding: 0 110px 0 0
+        @include position(absolute, null, 0, 0, 0)
+    @include element(stars)
+        svg
+            display: block
+            fill: $grayLite
+            color: $grayBorder
+            &.active
+                color: $black
+                fill: $black
+        .row
+            margin: 0 -3px
+            & > div
+                padding: 0 3px
+    @include element(reviewsLink)
+        @include position(absolute, 2px, 0, null, null)
+
+.eWorkplace
+    background: $grayBg
+    padding: 30px 35px
+    @include element(title)
+        font-weight: 700
+        margin-bottom: 20px
+        a
+            &:hover
+                opacity: .7
+    @include element(date)
+        font-size: 12px
+        opacity: .5
+        margin-bottom: 40px
+// School
+.pSchool
+    padding-bottom: 50px
+    @include element(header)
+        position: relative
+        margin-bottom: 40px
+        @media (min-width: $md)
+            padding-left: 250px
+            min-height: 200px
+        @include xs()
+            padding-left: 70px
+    @include element(img)
+        @include position(absolute, 0, null, null, 0)
+        @media (min-width: $md)
+            max-width: 200px
+        @include xs()
+            max-width: 50px
+        img
+            display: block
+            border-radius: 50%
+    @include element(name)
+        @include xs()
+            .col
+                @include f-width(100%)
+    @include element(title)
+        @extend %fontTitle, %titleMiddle
+        padding-right: 10px
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 5px
+    @include element(cats)
+        font-size: 12px
+        @media (min-width: $md)
+            margin-bottom: 20px
+        @include xs()
+            margin-bottom: 10px
+            margin-left: -70px
+        p.row
+            margin: 0 -5px
+            .col
+                padding: 0 5px
+        svg
+            display: block
+            &.pink
+                fill: $pink
+            &.purple
+                fill: $purple
+            &.orange
+                fill: $orange
+            &.yellow
+                fill: $yellow
+    @include element(description)
+        @include xs()
+            margin-left: -70px
+            font-size: 12px
+        p
+            margin-bottom: 5px
+    @include element(content)
+        @include xs()
+            font-size: 12px
+    @include element(location)
+        font-size: 12px
+        opacity: .5
+        @media (min-width: $md)
+            margin-bottom: 20px
+            height: 30px
+            line-height: 36px
+        @include xs()
+            margin-bottom: 10px
+    @include element(website)
+        font-size: 12px
+        margin-bottom: 20px
+        a
+            color: $red
+            text-decoration: underline
+            &:hover
+                text-decoration: none
+                color: $black
+    @include element(soc)
+        margin: 0 -2px 20px
+        @include xs()
+            margin-left: -72px
+        .col
+            padding: 2px
+        a
+            display: block
+            height: 34px
+            width: 34px
+            border: 1px solid $black
+            padding: 7px
+            box-sizing: border-box
+            color: inherit
+            &:hover
+                color: $red
+                border-color: $red
+            svg
+                display: block
+                height: 18px
+                width: 18px
+                color: inherit
+    @include element(courses)
+
+.coursesTable
+    border: 1px solid $grayBorder
+    margin-bottom: 40px
+    @include element(row)
+        margin: 0
+        position: relative
+        & > .col
+            padding: 15px
+            @media (min-width: $lg)
+                border-left: 1px solid $grayBorder
+            &:first-child
+                border-left: none
+    @include element(header)
+        @media (min-width: $lg)
+            position: relative
+            border-bottom: 1px solid $grayBorder
+            font-size: 16px
+            font-weight: 700
+            background-color: $grayBg
+        @media (max-width: $md-top)
+            display: none
+    @include element(date)
+        @media (min-width: $lg)
+            @include f-width(10%)
+        @media (max-width: $md-top)
+            @include f-width(100%)
+            padding-bottom: 0
+    @include element(course)
+        @media (min-width: $lg)
+            @include f-width(55%)
+        @media (max-width: $md-top)
+            @include f-width(100%)
+            padding-top: 5px !important
+            padding-bottom: 5px !important
+    @include element(title)
+        @extend %titleMiddle
+    @include element(content)
+        font-size: 12px
+    @include element(duration)
+        font-size: 16px
+        @media (min-width: $lg)
+            @include f-width(15%)
+        @media (max-width: $md-top)
+            @include position(absolute, 0, 0, null, null)
+    @include element(price)
+        @media (min-width: $lg)
+            @include f-width(20%)
+            p
+                margin-bottom: 10px
+        @media (max-width: $md-top)
+            @include f-width(100%)
+            div
+                display: flex
+                flex-direction: row
+                flex-wrap: wrap
+                justify-content: space-between
+                align-content: flex-start
+                align-items: center
+                p
+                    order: 0
+                    flex: 0 1 auto
+                    align-self: auto
+        p
+            strong
+                @extend %titleMiddle
+    @include element(body)
+        .coursesTable__row
+            border-top: 1px solid $grayBorder
+            @media (min-width: $lg)
+                &:first-child
+                    border-top: none
+// Workplaces
+.pWorkplace
+    @extend %marginBottomBig
+    @include element(title)
+        @extend %titleBig, %marginBottomMiddle
+        text-align: center
+    @include element(date)
+        color: $gray
+        @extend %fontTitle
+        position: relative
+        &::after
+            content: ''
+            display: block
+            background: $red
+            width: 25px
+            height: 2px
+            margin: 20px 0
+    @include element(content)
+        padding-bottom: 40px
+// FAQ
+.pFaq
+    @extend %marginBottomBig
+    @include element(title)
+        @extend %titleBig, %marginBottomMiddle
+        text-align: center
+
+.eFaq
+    transition: background $animation
+    margin-bottom: 20px
+    @media (min-width: $lg)
+        padding: 40px
+    @media (max-width: $md-top)
+        padding: 20px 40px 20px 20px
+    @include modifier(close)
+        background: $grayBg
+    @include modifier(open)
+        background: $black
+        color: $white
+    @include element(question)
+        font-weight: 700
+        @extend %fontTitle
+        position: relative
+        padding-right: 40px
+    @include element(icon)
+        @include position(absolute, 7px, 0, null, null)
+        width: 16px
+        height: 16px
+        svg
+            display: block
+            transition: opacity .3s ease-in-out, transform .4s .1s ease-in-out
+        .arrow
+            @include position(absolute, 3px, null, null, 0)
+            .eFaq--open &
+                opacity: 0
+                transform: rotate(0deg)
+            .eFaq--close &
+                opacity: 1
+                transform: rotate(360deg)
+        .close
+            @include position(absolute, 0, null, null, 0)
+            .eFaq--open &
+                opacity: 1
+                transform: rotate(360deg)
+            .eFaq--close &
+                opacity: 0
+                transform: rotate(0deg)
+    @include element(answer)
+        padding-top: 20px
+        color: rgba($white, .5)
+        animation: show-answer $animation
+        .eFaq--close &
+            display: none
+        .eFaq--open &
+            display: block
+// Contacts
+.pContacts
+    padding-bottom: 40px
+    position: relative
+    @media (min-width: $lg)
+        min-height: 100vh
+    @include xs()
+        padding-bottom: 83px
+    @include element(box)
+        background: $black
+        color: $white
+        margin-bottom: 20px
+        position: relative
+        z-index: 10
+        @media (min-width: $lg)
+            padding: 40px
+        @media (max-width: $md-top)
+            padding: 20px
+    @include element(title)
+        @extend %fontTitle
+        font-weight: 700
+        font-size: 14px
+        margin-bottom: 30px
+    @include element(label)
+        opacity: .5
+    @include element(text)
+        @extend %marginBottomSmall
+        a
+            color: inherit
+            text-decoration: none
+            &:hover
+                opacity: .7
+    @include element(link)
+        color: inherit
+        @extend %fontTitle
+        border-bottom: 1px solid $white
+        &:hover
+            opacity: .7
+    @include element(form)
+        width: 100%
+        order: 0
+        flex: 0 1 auto
+        align-self: auto
+        label
+            display: block
+            margin-bottom: 10px
+            color: rgba($black, .5)
+            line-height: 1.2
+        .eBtn--black
+            padding: 0 40px
+        .row
+            margin: 0 -5px
+            & > div
+                padding: 0 5px
+
+.countriesMap
+    @media (min-width: $lg)
+        @include position(absolute, 0, -400px, 0, 0, 1)
+    @media (max-width: $md-top)
+        position: relative
+        height: 300px
+        margin-bottom: 20px
+    .vue-map-container
+        @include position(absolute, 0, 0, 0, 0, 1)
+
+// Filter
+.bFilterGroup
+    @include element(btn)
+        @media (min-width: $lg)
+            display: none
+        @media (max-width: $md-top)
+            display: block
+            font-size: 16px
+            letter-spacing: 1px
+            text-align: center
+            text-transform: uppercase
+            height: 60px
+            line-height: 60px
+            box-shadow: 2px 2px 10px rgba($black, .1)
+            .white &
+                background: $grayLite
+            .black &
+                color: $white
+                background: $dark
+    @include element(box)
+        @media (min-width: $lg)
+            display: block
+        @media (max-width: $md-top)
+            display: none
+            padding-top: 40px
+            margin-bottom: -20px
+
+.bFilter
+    @media (min-width: $lg)
+        margin-bottom: 60px
+    @media (max-width: $md-top)
+        margin-bottom: 30px
+    @include modifier(top)
+        margin-bottom: 30px
+        padding: 20px 30px
+        @media (max-width: $md-top)
+            display: none
+        .black &
+            background: $black
+            border: 1px solid $whiteBorder
+        .white &
+            background: $white
+            box-shadow: 2px 2px 8px rgba($black, .2)
+    @include element(header)
+        position: relative
+    @include element(aboutLink)
+        @include position(absolute, 6px, 0, null, null)
+        .white &
+            color: rgba($black, .5)
+            &:hover
+                color: $black
+        .black &
+            color: rgba($white, .5)
+            &:hover
+                color: $white
+    @include element(title)
+        @extend %titleMiddle
+        padding-bottom: 20px
+        margin-bottom: 30px
+        color: inherit
+        .black &
+            border-bottom: 1px solid $whiteBorder
+        .white &
+            border-bottom: 1px solid $grayBorder
+    @include element(filterItem)
+        position: relative
+        padding-left: 20px
+        margin-bottom: 10px
+        display: block
+        &:hover
+            label
+                .black &
+                    color: $white
+                .white &
+                    color: $black
+        a
+            @include position(absolute, 0, 0, 0, 0, 5)
+        .col &
+            margin-bottom: 0
+            margin-right: 20px
+        label
+            display: block
+            transition: color $animation
+            padding-right: 20px
+            position: relative
+            line-height: 1.4
+            .black &
+                color: rgba($white, .5)
+                &:hover
+                    color: $white
+            .white &
+                color: rgba($black, .5)
+                &:hover
+                    color: $black
+            svg
+                @include position(absolute, 50%, 0, null, null)
+                transform: translateY(-50%)
+                &.pink
+                    fill: $pink
+                &.purple
+                    fill: $purple
+                &.orange
+                    fill: $orange
+                &.yellow
+                    fill: $yellow
+        .eCheckBox
+            @include position(absolute, 2px, null, null, 0, 1)
+    @include element(btn)
+        @media (min-width: $lg)
+            display: none
+    @include element(box)
+        @media (max-width: $md-top)
+            display: none
+            padding-top: 30px
+    @include element(apply)
+        padding: 20px 0
+
+.eCheckBoxRow
+    position: relative
+    padding-left: 20px
+    &.error
+        label
+            color: $red !important
+            .pContacts &
+                color: $red !important
+    label
+        display: block
+        transition: color $animation
+        padding-right: 20px
+        position: relative
+        line-height: 1.4
+        .black &
+            color: rgba($white, .5)
+            &:hover
+                color: $white
+        .white &
+            color: rgba($black, .5)
+            &:hover
+                color: $black
+        .pContacts &
+            color: rgba($white, .5) !important
+            &:hover
+                color: $white !important
+        svg
+            @include position(absolute, 50%, 0, null, null)
+            transform: translateY(-50%)
+            &.pink
+                fill: $pink
+            &.purple
+                fill: $purple
+            &.orange
+                fill: $orange
+            &.yellow
+                fill: $yellow
+    .eCheckBox
+        @include position(absolute, 2px, null, null, 0, 1)
+
+.eCheckBox
+    position: relative
+    width: 12px
+    height: 12px
+    transition: border $animation
+    &:hover
+        border-color: $black
+    input
+        opacity: 0
+        width: 12px
+        height: 12px
+        position: relative
+        z-index: 2
+        display: block
+        cursor: pointer
+    @include element(el)
+        @include position(absolute, 0, 0, 0, 0, 1)
+        @extend %backgroundReverse
+        opacity: .15
+        transition: background $animation
+        .pContacts &
+            @extend %background
+    [type="checkbox"]:checked + .eCheckBox__el
+        opacity: .85
+
+// Catalog
+.pCatalog
+    position: relative
+    .black &
+        background: $black
+        color: $white
+    & > .container
+        position: relative
+        z-index: 100
+    .mBreadcrumbs
+        padding: 16px 0
+        margin-bottom: 0
+    @include element(wrap)
+        @include position(absolute, 0, 0, null, 0, 1)
+        @include xs()
+            display: none
+        .container
+            position: relative
+    @include element(box)
+        overflow: hidden
+        @include position(absolute, 0, 30%, null, null, 10)
+        @media (min-width: $lg)
+            width: 575px
+            height: 330px
+        @media (max-width: $md-top)
+            width: 300px
+            height: 172px
+    @include element(bg)
+        position: relative
+        transition: transform 300ms ease
+        z-index: 2
+        @media (min-width: $lg)
+            width: 575px
+            height: 330px
+        @media (max-width: $md-top)
+            width: 300px
+            height: 172px
+        svg
+            display: block
+            width: inherit
+            height: inherit
+            .black &
+                fill: $black
+            .white &
+                fill: $white
+        &::before,
+        &::after
+            content: ''
+            @extend %background
+            position: absolute
+            top: 0
+            bottom: 0
+            width: 100%
+        &::before
+            left: -100%
+            margin-left: 10px
+        &::after
+            right: -100%
+            margin-right: 10px
+    @include element(img)
+        @include position(absolute, 0, -100px, 0, -100px, 1)
+        transition: transform 300ms ease
+        .white &
+            background: url("../img/catalogImg--white.jpg") no-repeat center top / cover
+        .black &
+            background: url("../img/catalogImg--black.svg") no-repeat center top / cover
+    @include element(serial)
+        @media (min-width: $lg)
+            padding: 40px
+            margin-bottom: 40px
+        @media (max-width: $md-top)
+            padding: 20px
+            margin-bottom: 20px
+        .white &
+            background: $grayBg
+            color: $black
+        .black &
+            background: $dark
+            color: $white
+        ul
+            margin-left: 20px
+    @include element(breadcrumbs)
+        @media (min-width: $lg)
+            padding: 0 40px
+            margin-bottom: 40px
+        @media (max-width: $md-top)
+            padding: 0 20px
+            margin-bottom: 20px
+            margin-top: -20px
+        .white &
+            background: $grayBg
+            color: $black
+        .black &
+            background: $dark
+            color: $white
+
+.pProduct
+    @extend %paddingBottomBig
+    .page__wrap
+        & > .row
+            position: relative
+            z-index: 2
+    .black &
+        background: $black
+        color: $white
+    @include element(wrap)
+        padding-top: 10px
+        position: relative
+        @extend %marginBottomMiddle
+    @include element(info)
+        @media (min-width: $lg)
+            padding-right: 40px
+            padding-top: 100px
+        @include md()
+            max-width: 718px
+            padding-left: 10px
+            padding-right: 10px
+            margin: 0 auto
+        @include xs()
+            max-width: 767px
+            padding-left: 15px
+            padding-right: 15px
+            margin: 0 auto
+    @include element(articles)
+        @extend %marginBottomMiddle
+        .iconLogos
+            margin-bottom: 20px
+            display: block
+            color: inherit
+            .white &
+                opacity: .1
+            .black &
+                opacity: .5
+    @include element(gallery)
+        //background: $grayBg
+        position: relative
+        z-index: 1
+    @include element(images)
+        @media (min-width: $lg)
+            height: 100vh
+        @media (max-width: $md-top)
+            height: 70vh
+            min-height: 300px
+        .slick-slide
+            @media (min-width: $lg)
+                height: 100vh
+            @media (max-width: $md-top)
+                height: 70vh
+                min-height: 300px
+        .image
+            background-position: center
+            background-repeat: no-repeat
+            background-size: cover
+            @media (min-width: $lg)
+                height: 100vh
+            @media (max-width: $md-top)
+                height: 70vh
+                min-height: 300px
+        img
+            display: block
+            margin: 0 auto
+    @include element(nav)
+        @include position(absolute, null, null, 30px, 50%)
+        width: 204px
+        transform: translateX(-50%)
+        @include xs()
+            width: 175px
+            bottom: 15px
+        .slick-slide
+            transition: opacity .3 $animation
+            cursor: pointer
+            padding: 2px
+        .slick-current
+            opacity: .5
+        .image
+            //width: 55px
+            //height: 55px
+            //background-position: center
+            //background-repeat: no-repeat
+            //background-size: cover
+            img
+                display: block
+                border: 1px solid $grayBorder
+    @include element(lineBig)
+        @include position(absolute, -85px, 0, null, 0, 1)
+        text-align: center
+        font-size: 190px
+        font-weight: 700
+        line-height: 1
+        white-space: nowrap
+        overflow: hidden
+        text-transform: uppercase
+        @media (max-width: $md-top)
+            font-size: 100px
+            top: -60px
+        p
+            animation: lineBig $animation
+            &.hide
+                display: none
+        .white &
+            opacity: .04
+        .black &
+            opacity: .07
+    @include element(titleBox)
+        margin-bottom: 12px
+        .col
+            max-width: 100%
+    @include element(title)
+        @extend %fontTitle, %titleMiddle
+        font-weight: 700
+        margin-right: 40px
+    @include element(type)
+        margin-bottom: 5px
+        a
+            margin-right: 5px
+            @include inline-block()
+            svg
+                display: block
+                &.pink
+                    fill: $pink
+                &.purple
+                    fill: $purple
+                &.orange
+                    fill: $orange
+                &.yellow
+                    fill: $yellow
+    @include element(line)
+        @extend %fontTitle
+    @include element(sku)
+        @extend %fontTitle
+        opacity: .5
+    @include element(comparison)
+        a
+            @extend %fontTitle
+            opacity: .5
+            color: inherit
+            &:hover
+                opacity: 1
+    @include element(hr)
+        padding: 0
+        border: 0
+        height: 1px
+        margin: 25px 0
+        .white &
+            background: $grayBorder
+        .black &
+            background: $whiteBorder
+    @include element(features)
+        margin-bottom: -20px
+        & > p
+            padding-bottom: 15px
+        .title
+            font-weight: 700
+            @extend %fontTitle
+            padding-right: 5px
+        .value
+            opacity: .5
+        .text
+            line-height: 2.05
+            padding-bottom: 10px
+            p
+                a
+                    color: inherit
+        .row
+            margin: 0 -5px
+            overflow: hidden
+            transition: height .3s ease
+            & > div
+                padding: 0 5px
+    @include element(feature)
+        display: block
+        margin-bottom: 10px
+        min-width: 34px
+        @include modifier(text)
+            height: 34px
+            line-height: 34px
+            text-align: center
+            padding: 0 10px
+            box-sizing: border-box
+            .white &
+                border: 1px solid $black
+                color: $black
+            .black &
+                border: 1px solid $white
+                color: $white
+            &.active,
+            &:hover
+                .white &
+                    background: $black
+                    color: $white
+                .black &
+                    background: $white
+                    color: $black
+        @include modifier(image)
+            max-width: 60px
+            margin: 0 auto
+            transition: border $animation
+            &.rectangular
+                max-width: 180px
+            .white &
+                border: 1px solid $grayBorder
+            .black &
+                border: 1px solid $whiteBorder
+            img
+                display: block
+            &.active,
+            &:hover
+                .white &
+                    border: 1px solid $black
+                .black &
+                    border: 1px solid $white
+        @include modifier(link)
+            display: block
+            text-align: center
+            position: relative
+            .pProduct__feature--image
+                margin-bottom: 5px
+            .pProduct__feature--tooltip
+                @include position(absolute, null, null, 0, 50%)
+                opacity: 0
+                transition: opacity .3s ease
+                transform: translateX(-50%)
+                white-space: nowrap
+                line-height: 15px
+            &:hover
+                .pProduct__feature--tooltip
+                    opacity: 1
+    @include element(featuresLink)
+        padding-top: 10px
+        a
+            color: inherit
+            text-decoration: underline
+            &:hover
+                text-decoration: none
+    @include element(label)
+        font-size: 12px
+        font-weight: 500
+        padding-top: 2px
+        @include modifier(red)
+            color: $red
+        @include modifier(purple)
+            color: $purple
+
+.eProduct
+    transition: background $animation
+    height: 100%
+    .white &
+        background: $grayBg
+    .black &
+        background: $dark
+    @include element(header)
+        padding: 10px 20px
+        .row
+            margin: 0 -5px
+            & > div
+                padding: 0 5px
+    @include element(line)
+        font-size: 12px
+        @extend %fontTitle
+        color: inherit
+        &:hover
+            opacity: .5
+    @include element(type)
+        cursor: pointer
+        svg
+            display: block
+            &.pink
+                fill: $pink
+            &.purple
+                fill: $purple
+            &.orange
+                fill: $orange
+            &.yellow
+                fill: $yellow
+    @include element(image)
+        display: block
+        overflow: hidden
+        position: relative
+        .image1
+            display: block
+            position: relative
+            z-index: 2
+            transition: opacity .2s ease
+        .image2
+            display: block
+            @include position(absolute, 0, 0, 0, 0, 1)
+        &:hover
+            .image1
+                opacity: 0
+            .image2
+                img
+                    transform: scale(1.1)
+        img
+            display: block
+            width: 100%
+            transition: transform .2s ease
+    @include element(title)
+        a
+            display: block
+            padding: 20px
+            @extend %fontTitle
+            color: inherit
+            &:hover
+                opacity: .7
+    @include element(sku)
+        font-size: 12px
+        @extend %fontTitle
+        opacity: .5
+        color: inherit
+    @include element(footer)
+        padding: 0 20px 20px
+
+.iframeBox
+    position: relative
+    height: 0
+    overflow: hidden
+    @include modifier(big)
+        padding-bottom: 56.25%
+    @include modifier(full)
+        padding-bottom: 75%
+    iframe
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+.pSearch
+    @extend %marginBottomBig
+
+.blockPro
+    @include xl()
+        font-size: 20px
+    @include lg()
+        font-size: 20px
+    @include md()
+        font-size: 18px
+    @include xs()
+        font-size: 16px
+    @extend %paddingBottomBig
+    @include element(content)
+        max-width: 450px
+        text-align: center
+        margin: 0 auto 20px
+        padding: 30px 0
+        p
+            margin-bottom: 20px
+        .iconLogos
+            margin: 10px auto 20px
+    @include element(name)
+        padding-top: 10px
+        white-space: nowrap
+        max-width: 280px
+        text-align: left
+    @include element(signature)
+        display: block
+    @include element(picture)
+        img
+            display: block
+    @include element(title)
+        font-weight: 100
+        text-align: center
+        text-transform: uppercase
+        opacity: .07
+        @extend %paddingBottomBig, %paddingTopBig
+        width: 100vw
+        line-height: 1.2
+        @include xl()
+            font-size: 120px
+        @include lg()
+            font-size: 80px
+        @include md()
+            font-size: 100px
+        @include xs()
+            font-size: 60px
+        strong
+            font-weight: 700
+    @include element(text)
+        font-size: 20px
+        max-width: 370px
+        padding-top: 20px
+        @media (max-width: $md-top)
+            margin: 0 auto
+            text-align: center
+    @include element(person)
+        padding: 10px
+        max-width: 544px
+        position: relative
+        border-radius: 50%
+        @media (max-width: $md-top)
+            margin: 30px auto
+        @include xs()
+            max-width: 80%
+        svg
+            @include position(absolute, 0, null, null, 0, 1)
+            width: 100%
+            height: 100%
+        img
+            display: block
+            border-radius: 50%
+    @include element(titleSmall)
+        font-weight: 700
+        text-align: left
+        text-transform: uppercase
+        margin-bottom: 20px
+        padding-top: 20px
+        position: relative
+        @include xl()
+            white-space: nowrap
+            font-size: 24px
+        @include lg()
+            max-width: 340px
+            font-size: 24px
+        @media (max-width: $md-top)
+            max-width: 544px
+            margin-left: auto
+            margin-right: auto
+            font-size: 20px
+    @include element(list)
+        list-style: none
+        text-align: left
+        position: relative
+        @include lg()
+            max-width: 340px
+            font-size: 16px
+        @media (max-width: $md-top)
+            max-width: 544px
+            margin: 0 auto
+        li
+            cursor: pointer
+            opacity: .5
+            padding-bottom: 10px
+            padding-left: 20px
+            transition: opacity .3s $animation
+            &.active,
+            &:hover
+                opacity: 1
+    @include element(col)
+        @media(max-width: $md-top)
+            @include f-width(100%)
+    @include element(listCursor)
+        @include position(absolute, null, null, null, 0)
+        cursor: default !important
+        padding: 0 !important
+        @include xl()
+            top: 10px
+        @include lg()
+            top: 6px
+        @include md()
+            top: 8px
+        @include xs()
+            top: 6px
+        svg
+            display: block
+            fill: $white
+
+.buySelect
+    position: relative
+    @include element(btn)
+        min-width: 160px
+        box-sizing: border-box
+    @include element(drop)
+        @include position(absolute, 100%, null, null, 0, 100)
+        min-width: 100%
+        display: none
+        animation: dropDownLang .3s ease
+        .buySelect.open &
+            display: block
+        @include modifier(white)
+            a
+                color: $black
+                background: $white
+        @include modifier(black)
+            a
+                color: $white
+                background: $black
+        a
+            text-align: center
+            display: block
+            padding: 4px 2px
+            font-size: 12px
+            &:hover
+                opacity: .7
+
+// Reviews
+.mReviews
+    @media (min-width: $md)
+        padding: 20px
+    @include element(title)
+        @extend %titleMiddle
+        margin-bottom: 20px
+    @include element(list)
+    @include element(item)
+        padding: 20px 0
+        border-top: 1px solid $grayBorder
+
+.eReview
+    @include element(name)
+        font-size: 16px
+        font-weight: 700
+    @include element(stars)
+        padding-top: 5px
+        svg
+            display: block
+            fill: $grayLite
+            color: $grayBorder
+            &.active
+                color: $black
+                fill: $black
+        .row
+            margin: 0 -3px
+            & > div
+                padding: 0 3px
+    @include element(service)
+        color: $red
+        @extend %fontTitle
+        padding-left: 40px
+        position: relative
+        @media (min-width: $md)
+            margin: 10px 0 15px
+        @include xs()
+            margin: 5px 0 10px
+        &::before
+            content: ''
+            background: $red
+            width: 25px
+            height: 2px
+            display: block
+            @include position(absolute, 50%, null, null, 0)
+            transform: translateY(-50%)
+    @include element(content)
+        color: rgba($black, .5)
+
+// Magnific
+.mfp-fade
+    &.mfp-bg
+        opacity: 0
+        transition: all 0.15s ease-out
+        &.mfp-ready
+            opacity: 0.8
+        &.mfp-removing
+            opacity: 0
+    &.mfp-wrap
+        .mfp-content
+            opacity: 0
+            transition: all 0.15s ease-out
+        &.mfp-ready
+            .mfp-content
+                opacity: 1
+        &.mfp-removing
+            .mfp-content
+                opacity: 0
+
+.mfp-bg,
+.mfp-wrap
+    z-index: 8000
+
+.mfp-close
+    color: $white !important
+    background: $red !important
+    top: 0 !important
+    text-align: center
+    padding: 0 !important
+    opacity: 1
+    text-align: center !important
+    @media (min-width: $lg)
+        right: -40px !important
+        width: 40px !important
+        height: 40px !important
+        line-height: 40px !important
+    @media (max-width: $md-top)
+        right: 0 !important
+        width: 30px !important
+        height: 30px !important
+        line-height: 30px !important
+    &:hover
+        opacity: .8
+
+.mfp-iframe-holder
+    .mfp-content
+        background: $black
+        line-height: 0
+        width: 100%
+        max-width: 1100px
+
+.mfp-iframe-scaler
+    iframe
+        box-shadow: none
+
+.white-popup
+    position: relative
+    background: #FFF
+    padding: 20px
+    width: auto
+    max-width: 1100px
+    margin: 20px auto
+    @include modifier(small)
+        max-width: 600px
+        .mForm
+            padding: 20px 20px 40px
+    .content
+        a
+            text-decoration: underline
+            &:hover
+                text-decoration: none
+
+.bottom-popup
+    @include position(fixed, null, 0, 0, 0)
+    background: #FFF
+    padding: 20px 80px 20px 40px
+    width: auto
+    margin: auto auto 0
+    @include modifier(small)
+        max-width: 600px
+        .mForm
+            padding: 20px 20px 40px
+    .content
+        p
+            font-size: 12px
+            line-height: 1
+            @media (min-width: $lg)
+                text-align: center
+            &:last-child
+                margin-bottom: 0
+        a
+            text-decoration: underline
+            &:hover
+                text-decoration: none
+    .mfp-close
+        color: $red !important
+        background: transparent !important
+        right: 0 !important
+
+.emptyMessage
+    @extend %fontTitle, %titleBig
+    text-align: center
+
+iframe
+    border: none

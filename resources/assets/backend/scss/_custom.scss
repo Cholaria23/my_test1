@@ -1,0 +1,198 @@
+// Here you can add other styles
+.item-actions-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  height: 14px;
+  li {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 7px;
+    height: 14px;
+    a {
+      display: block;
+      i {
+        display: block;
+      }
+    }
+  }
+}
+table.table {
+  td {
+    &.date {
+      width: 150px;
+    }
+    &.title {
+      a {
+        .fa {
+          margin-left: 10px;
+          opacity: 0;
+          transition: opacity .3s ease;
+        }
+        &:hover {
+          .fa {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    p {
+      margin-bottom: 0;
+      &.status {
+        font-size: 14px;
+      }
+      &.date {
+        font-size: 12px;
+        opacity: .5;
+      }
+    }
+  }
+}
+a, button {
+  cursor: pointer;
+}
+.form {
+  position: relative;
+  &__update {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 1.5rem;
+    left: 0;
+    background: rgba(white, .7);
+    z-index: 1000;
+    .sk-three-bounce {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -12px;
+      margin-left: -40px;
+    }
+  }
+}
+.images-container {
+  position: relative;
+}
+.images-container::after {
+  content: "";
+  display: table;
+  clear: both; }
+.images-container .image-container {
+  float: left;
+  padding: 3px;
+  position: relative;
+  border: 1px solid #e6eaee;
+  overflow: hidden; }
+.images-container .image-container.active {
+  border-color: #207E5F; }
+.images-container .image-container:hover .controls {
+  bottom: 0;
+  opacity: 1; }
+.images-container .controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 100;
+  bottom: -35px;
+  text-align: center;
+  height: 35px;
+  font-size: 24px;
+  transition: bottom 0.2s ease, opacity 0.2s ease;
+  background-color: #fff; }
+.images-container .controls::after {
+  content: "";
+  display: table;
+  clear: both; }
+.images-container .controls .control-btn {
+  display: inline-block;
+  color: #4f5f6f;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  opacity: 0.5;
+  transition: opacity 0.3s ease; }
+.images-container .controls .control-btn:hover {
+  opacity: 1; }
+.images-container .controls .control-btn.move {
+  cursor: move; }
+.images-container .controls .control-btn.star {
+  color: #FFB300; }
+.images-container .controls .control-btn.star i:before {
+  content: "\f006"; }
+.images-container .controls .control-btn.star.active i:before {
+  content: "\f005"; }
+.images-container .controls .control-btn.remove {
+  color: #FF4856; }
+.images-container .image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 135px;
+  position: relative;
+  text-align: center; }
+.images-container .image svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.images-container .image .fa-plus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.images-container .image-container.main {
+  border-color: #FFB300; }
+.images-container .image-container.new {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  border-style: dashed;
+  border: 1px #207E5F solid;
+  color: #207E5F; }
+.images-container .image-container.new .image {
+  font-size: 2.5rem; }
+.images-container .image-container.new:hover {
+  opacity: 1; }
+.card-header {
+  .btn-group-right {
+    @media (min-width: 992px) {
+      text-align: right;
+      height: 20px;
+      margin-top: -2.5px;
+    }
+    @media (max-width: 991px) {
+      padding-top: 10px;
+    }
+    .btn {
+      margin-top: 0;
+    }
+  }
+  .nav-tabs {
+    @media (min-width: 768px) {
+      float: right;
+      margin-right: -21px;
+    }
+    @media (max-width: 767px) {
+      margin-left: -21px;
+    }
+    .nav-link {
+      min-width: 46px;
+      text-align: center;
+    }
+  }
+}
+.form {
+  .tab-pane {
+    padding: 0;
+  }
+}
+select[multiple="multiple"] {
+  height: 150px;
+}
+
+.ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+  margin-bottom: 10px !important;
+}

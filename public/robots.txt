@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: *search*
+Disallow: */workplace/*
+Disallow: /es/agreement
+Disallow: /es/privacy-policy
+Disallow: /es/about-cookie
+Disallow: /pt/agreement
+Disallow: /pt/privacy-policy
+Disallow: /pt/about-cookie
+Sitemap: https://staleks.com/sitemap.xml
+

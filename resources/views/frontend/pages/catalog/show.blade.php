@@ -1,0 +1,450 @@
+@extends('frontend.layouts.app')
+
+@php($seo_title = $product->translate(App::getLocale())->seo_title ? $product->translate(App::getLocale())->seo_title : $product->translate(App::getLocale())->title)
+
+@if($product->is_pro === 'pro')
+    @php($seo_desc = $product->translate(App::getLocale())->seo_description ? $product->translate(App::getLocale())->seo_description : $product->translate(App::getLocale())->title . ' ' . trans('main.seo_desc_prod_pro'))
+@else
+    @php($seo_desc = $product->translate(App::getLocale())->seo_description ? $product->translate(App::getLocale())->seo_description : $product->translate(App::getLocale())->title . ' ' . trans('main.seo_desc_prod'))
+@endif
+
+@section('title', $seo_title)
+@section('description', $seo_desc)
+@section('keywords', $product->translate(App::getLocale())->seo_keywords)
+
+@section('image', $product->originalPreviewImage1Url)
+
+@section('color', $product->is_pro === 'pro' ? 'black' : 'white')
+@php($catalog_route = $product->is_pro === 'pro' ? 'catalog-pro' : 'catalog')
+
+@section('content')
+    <section class="page--topForHeader pProduct">
+        <div class="container">
+            <ul class="mBreadcrumbs" itemscope itemtype="http://data-vocabulary.org/#">
+                <li typeof="v:Breadcrumb">
+                    <a href="{{ route($product->is_pro === 'pro' ? 'catalog-pro' : 'catalog') }}" rel="v:url" property="v:title">
+                        {{ $product->is_pro === 'pro' ? trans('main.catalog') . ' PRO' : trans('main.catalog') }}
+                    </a>
+                </li>
+                <li class="sep">-</li>
+                <li typeof="v:Breadcrumb">
+                    <a href="{{ route($product->is_pro === 'pro' ? 'catalog-pro-category' : 'catalog-category', ['slug' => $product->category->slug]) }}"
+                       rel="v:url" property="v:title">
+                        {{ $product->category->translate(App::getLocale())->title }}
+                    </a>
+                </li>
+                <li class="sep">-</li>
+                <li typeof="v:Breadcrumb">
+                    <span property="v:title">
+                        {{ $product->translate(App::getLocale())->title }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="pProduct__wrap page__wrap" data-sticky_parent data-pro="{{ $product->is_pro }}">
+            <div class="pProduct__lineBig">
+                <p id="pProduct__lineBig" class="hide">
+                    {{ $product->model }}
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-6">
+                    <div class="pProduct__gallery stickInParentBox" data-sticky_column>
+                        <div class="pProduct__gallery">
+                            <ul class="pProduct__images" id="pProduct__images">
+                                @foreach($product->pictures as $picture)
+                                    <li>
+                                        <div class="image"
+                                             style="background-image: url({{ $picture->thumbImageUrl }})"></div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="pProduct__nav">
+                                <ul id="pProduct__nav">
+                                    @foreach($product->pictures as $picture)
+                                        <li>
+                                            <div class="image">
+                                                <img src="{{ $picture->thumbImageUrl }}" alt="">
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                    <div class="pProduct__info" data-sticky_column>
+                        <div class="pProduct__titleBox">
+                            <div class="row middle-xs">
+                                <div class="col">
+                                    <h1 class="pProduct__title">
+                                        {{ $product->translate(App::getLocale())->title }}
+                                    </h1>
+                                </div>
+                                <div class="col">
+                                    @if($product->is_new)
+                                        <p class="pProduct__label--purple">
+                                            @lang('main.is_new')
+                                        </p>
+                                    @elseif($product->is_old)
+                                        <p class="pProduct__label--red">
+                                            @lang('main.is_old')
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pProduct__type">
+                            @foreach($product->appointments as $appointment)
+                                <a href="{{ route($product->is_pro === 'pro' ? 'catalog-pro-appointment' : 'catalog-appointment', ['slug' => $appointment->slug]) }}"
+                                   title="{{ $appointment->translate(App::getLocale())->title }}">
+                                    <svg width="10px" height="15px" class="{{ $appointment->icon_color }}">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#icon-logo-small"></use>
+                                    </svg>
+                                </a>
+                            @endforeach
+                        </div>
+                        <div class="row between-xs">
+                            <div class="col">
+                                <p class="pProduct__line">
+                                    {{ $product->model }}
+                                </p>
+                                <p class="pProduct__sku">
+                                    {{ $product->sku }}
+                                </p>
+                            </div>
+                            @if(($product->buy_link_ru || $product->buy_link_ua) && (app()->getLocale() === 'ru' || app()->getLocale() === 'ua'))
+                                <div class="col">
+                                    <div class="pProduct__buy">
+                                        @if(($product->buy_link_ru && !$product->buy_link_ua) || (!$product->buy_link_ru && $product->buy_link_ua))
+                                            <a href="{{ $product->buy_link_ru ? : $product->buy_link_ua }}"
+                                               class="@if($product->is_pro === 'pro') eBtn--white @else eBtn--black @endif eBtn--buy"
+                                               target="_blank" rel="nofollow">
+                                                <svg width="16px" height="16px" class="iconLogos">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                         xlink:href="#icon-buy"></use>
+                                                </svg>
+                                                @lang('main.buy')
+                                            </a>
+                                        @else
+                                            <div class="buySelect">
+                                                <a href="#"
+                                                   class="@if($product->is_pro === 'pro') eBtn--white @else eBtn--black @endif eBtn--buy buySelect__btn">
+                                                    <svg width="16px" height="16px" class="iconLogos">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                             xlink:href="#icon-buy"></use>
+                                                    </svg>
+                                                    @lang('main.buy')
+                                                </a>
+                                                <div
+                                                    class="buySelect__drop @if($product->is_pro === 'pro') buySelect__drop--white @else buySelect__drop--black @endif">
+                                                    <p>
+                                                        <a href="{{ $product->buy_link_ru }}" target="_blank" rel="nofollow">
+                                                            {{ app()->getLocale() === 'ru'? 'Интернет-магазин RU' : 'Інтернет магазин RU' }}
+                                                        </a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="{{ $product->buy_link_ua }}" target="_blank" rel="nofollow">
+                                                            {{ app()->getLocale() === 'ru'? 'Интернет-магазин UA' : 'Інтернет магазин UA' }}
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        @foreach($product->category->attributeCategories as $attribute_category)
+                            <hr class="pProduct__hr">
+                            <div class="pProduct__features pProduct__features--forSorting">
+                                <p>
+                                    <strong class="title">
+                                        {{ $attribute_category->translate(App::getLocale())->title }}
+                                    </strong>
+                                    <span class="value">
+                                        @foreach($attribute_category->attrs as $attr)
+                                            @if(in_array($attr->id, $product->attributes_ids))
+                                                {{ $attr->translate(App::getLocale())->title }}
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </p>
+                                <div class="row">
+                                    @foreach($attribute_category->attrs as $key => $attr)
+                                        @php($url = null)
+                                        @if($attribute_category->is_linked)
+                                            @foreach($attr->products as $attr_product)
+                                                @if (str_replace(' ', '', $product->model) === str_replace(' ', '', $attr_product->model) && $product->category->id === $attr_product->category->id)
+                                                    <div class="col"
+                                                         data-title="{{ $attr->translate(App::getLocale())->title }}">
+                                                        @if($attribute_category->type == 'full')
+                                                            <a href="{{ $attr_product->slug }}"
+                                                               title="{{ $attr->translate(App::getLocale())->title }}"
+                                                               class="pProduct__feature--link">
+                                                                <span
+                                                                    class="pProduct__feature--image @if($attr->thumb_size === 'rectangular') rectangular @endif @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                                    <img
+                                                                        src="{{ $attr->thumb_size === 'rectangular' ? $attr->thumb2ImageUrl : $attr->thumbImageUrl }}"
+                                                                        alt="{{ $attr->translate(App::getLocale())->title }}">
+                                                                </span>
+                                                            </a>
+                                                        @elseif ($attribute_category->type == 'image')
+                                                            <a href="{{ $attr_product->slug }}"
+                                                               title="{{ $attr->translate(App::getLocale())->title }}"
+                                                               class="pProduct__feature--image @if($attr->thumb_size === 'rectangular') rectangular @endif @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                                <img
+                                                                    src="{{ $attr->thumb_size === 'rectangular' ? $attr->thumb2ImageUrl : $attr->thumbImageUrl }}"
+                                                                    alt="{{ $attr->translate(App::getLocale())->title }}">
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ $attr_product->slug }}"
+                                                               class="pProduct__feature--text @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                                {{ $attr->translate(App::getLocale())->title }}
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <div class="col"
+                                                 data-title="{{ $attr->translate(App::getLocale())->title }}">
+                                                @if($attribute_category->type === 'full')
+                                                    <a title="{{ $attr->translate(App::getLocale())->title }}"
+                                                       class="pProduct__feature--link">
+                                                        <span
+                                                            class="pProduct__feature--image @if($attr->thumb_size === 'rectangular') rectangular @endif @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                            <img
+                                                                src="{{ $attr->thumb_size === 'rectangular' ? $attr->thumb2ImageUrl : $attr->thumbImageUrl }}"
+                                                                alt="{{ $attr->translate(App::getLocale())->title }}">
+                                                        </span>
+                                                        {{--<span class="pProduct__feature--tooltip">--}}
+                                                        {{--{{ $attr->translate(App::getLocale())->title }}--}}
+                                                        {{--</span>--}}
+                                                    </a>
+                                                @elseif ($attribute_category->type === 'image')
+                                                    <a title="{{ $attr->translate(App::getLocale())->title }}"
+                                                       class="pProduct__feature--image @if($attr->thumb_size === 'rectangular') rectangular @endif @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                        <img
+                                                            src="{{ $attr->thumb_size === 'rectangular' ? $attr->thumb2ImageUrl : $attr->thumbImageUrl }}"
+                                                            alt="{{ $attr->translate(App::getLocale())->title }}">
+                                                    </a>
+                                                @else
+                                                    <a class="pProduct__feature--text @if(in_array($attr->id, $product->attributes_ids)) active @endif">
+                                                        {{ $attr->translate(App::getLocale())->title }}
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+	 {{--  start Подробное описание --}}
+             @if(isset($product->translate(App::getLocale())->short_text_html))
+                 <hr class="pProduct__hr">
+                    <div class="text_short">
+                        {!! html_entity_decode($product->translate(App::getLocale())->short_text_html)  !!}
+                    </div>
+              {{--  <hr class="pProduct__hr"> --}}
+            @endif
+         {{--  END Подробное описание --}}
+
+                        @if ($product->is_set)
+                            <hr class="pProduct__hr">
+                            <div class="pProduct__features">
+                                <p>
+                                    <strong class="title">
+                                        @lang('main.the_set')
+                                    </strong>
+                                </p>
+                                <div class="text">
+                                    @foreach($product->products as $child)
+                                        <p>
+                                            <a href="{{ route($child->is_pro === 'pro' ? 'product-pro' : 'product', ['slug' => $child->slug]) }}">
+                                                {{ $child->translate(App::getLocale())->title }}
+                                            </a>
+                                        </p>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                        @if ($product->translate(App::getLocale())->short_text)
+                            <hr class="pProduct__hr">
+                            <div class="pProduct__features">
+                                <p>
+                                    <strong class="title">
+                                        @lang('main.key_features')
+                                    </strong>
+                                </p>
+                                <div class="text">
+                                    {!! $product->translate(App::getLocale())->short_text  !!}
+                                </div>
+                            </div>
+                        @endif
+                        @if ($product->translate(App::getLocale())->video || $product->translate('ru')->video)
+                            <hr class="pProduct__hr">
+                            <div class="pProduct__features">
+                                <p>
+                                    <strong class="title">
+                                        @lang('main.video_review_model')
+                                    </strong>
+                                </p>
+                                <div class="iframeBox--big">
+                                    <iframe width="560" height="315" src="{{ $product->translate(App::getLocale())->video ? : $product->translate('ru')->video }}"
+                                            allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if ($product->is_pro && $is_exclusive)
+            <div class="blockPro">
+                <div class="container">
+                    <div class="page__wrap">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="blockPro__content">
+                                    <svg width="85px" height="55px" class="iconLogos">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logos"></use>
+                                    </svg>
+                                    @if($product->category->id == 38)
+                                        @lang('main.product_pro_text_1')
+                                    @else
+                                        @lang('main.product_pro_text_2')
+                                    @endif
+                                    <svg width="85px" height="55px" class="iconLogos">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logos"></use>
+                                    </svg>
+                                </div>
+                                <div class="row center-xs">
+                                    <div class="col">
+                                        <p class="blockPro__name">
+                                            @lang('main.for_staleks'),<br>
+                                            @if($product->category->id == 38)
+                                                @lang('main.product_pro_name_1')
+                                            @else
+                                                @lang('main.product_pro_name_2')
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="col">
+                                        <svg version="1.1" class="blockPro__signature"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             x="0px" y="0px" width="180.4px" height="138.4px" viewBox="0 0 180.4 138.4"
+                                             style="enable-background:new 0 0 180.4 138.4;"
+                                             xml:space="preserve">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M148.1,82.8l2.8-10.2c-3.3-2-25,12-29.6,8.4c-2.2-4.1,25.4-20.5,31.9-23.6c2.1-1,8.6-4.3,9.5-2.4
+                                            c1.2,2.8-0.8,9.8-1.7,12.1C159.3,71.2,152.1,81.2,148.1,82.8L148.1,82.8z M147,75.1c-2.8,1.2-39.6,16.6-24.6,1.1
+                                            c11-11.4,24.2-16.5,27.5-19.5c-5.5,0.6-17.8,5.1-23.4,6.8c-13.8,4.3-10.9,1.5-18.2,12c-2.4,3.4-24.4,34.7-24.5,35.8
+                                            c5.2-3.5,6-8.9,13.7-11.1c3.6-1,8,0.3,12.3-0.3c3.2-0.4,5.9-1.8,10.1-2.3c6.4-0.8,12-5,17.4-7.5C143.9,87,146.9,84.2,147,75.1
+                                            L147,75.1z M116.4,64.6l45.5-13.2c-2-12.2-12.7-16-22.7-19.4L116.4,64.6L116.4,64.6z M137.1,31.4c-26.2-4.7-62.5,9.4-81.4,20.5
+                                            c-11.2,6.6-21.8,12.7-31.6,20.7C21.2,74.9-3.4,96,2.5,101.4c7.5,7,33-5.7,39.5-8.5c12.1-5.2,24.5-10.3,37-15.3
+                                            c6.3-2.5,13-4.6,19.1-7c7.8-3.2,13.4-2.1,17.7-8.4C118.3,58.5,136.9,32.8,137.1,31.4L137.1,31.4z M111.3,68.2l-31.6,46.3l0.8,0.5
+                                            c2.6,0.4,9.5-8.1,12-10.4c5.6-5.1,11.3-1.4,18.5-3.2c6.2-1.5,12-1.8,17.7-4.7c2.7-1.4,13.1-7.3,15-7.8l1.1,0.7l-30.9,48.8
+                                            c2.1-1.3,25.5-35.4,27.8-39.8c2-3.8,4.2-8.2,5.5-11.2c1.4-3.1,6.2-6.2,8.5-8.7c7.7-8.8,7.7-11.7,8.5-25.4l16.3-5.9l-0.6-1.7
+                                            l-16.3,5.1c-3.3-7-2.7-8.5-8.5-13.2c-6.1-5-8.1-3.9-14.4-7.1c0.7-2.6,14.7-20,17.7-25.5c3.2-5.6,1.9-7.5-1.9-0.2
+                                            c-2.2,4.3-9,12.8-12.1,16.9c-9.2,12.5-2.7,6.5-19.9,7.4c-34.9,1.7-61.3,15.6-85.5,31C27.6,67.2,15.6,76.3,7.2,86.3
+                                            c-18.3,22,1.9,22,20.5,14.3C51.3,90.9,85.6,74,111.3,68.2z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="blockPro__picture">
+                                    <img src="{{ asset('frontend/img/picture.jpg') }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="blockPro__title">
+                    Your <strong>Exclusive</strong> Partner
+                </h2>
+                @if($product->category->id == 38)
+                    <person-slider :variation="1"></person-slider>
+                @else
+                    <person-slider :variation="2"></person-slider>
+                @endif
+            </div>
+        @endif
+        <div class="container">
+          
+            <div class="bModule">
+                <div class="bModule__header">
+                    <h3 class="bModule__title">
+                        @lang('main.see_more')
+                    </h3>
+                    <a href="{{ route($catalog_route) }}" class="bModule__moreLink">
+                        @lang('main.show_more')
+                    </a>
+                </div>
+                <div class="bModule__body">
+                    <div class="bModule__bodyScroll">
+                        <div>
+                            <div class="gridRow">
+                                <div class="row">
+
+                                    @foreach($popular_products as $popular_product)
+                                        <div class="col-xs-3 col-md-6 col-lg-3">
+                                            @include('frontend.pages.catalog.parts.preview', ['product' => $popular_product])
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--<p class="bModule__bottomBtnBox">--}}
+                    {{--<a href="#" class=" @if($product->is_pro == 'pro') eBtn--white @else eBtn--black @endif ">--}}
+                    {{--@lang('main.show_more')--}}
+                    {{--</a>--}}
+                    {{--</p>--}}
+                </div>
+            </div>
+          
+	  <!--  <hr class="fullLine--right">  -->
+
+           @if($articles && $articles->count())
+                <div class="pProduct__articles gridRow">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-3">
+                            <svg width="85px" height="55px" class="iconLogos">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-logos"></use>
+                            </svg>
+                            <h3 class="rightSidebarModule__title">
+                                @lang('main.materials_with_product')
+                            </h3>
+                            <p class="rightSidebarModule__btn">
+                                <a href="{{ route('blog') }}" class="eLink--black">
+                                    @lang('main.all_articles')
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-lg-9">
+                            <div class="bModule__bodyScroll--middle">
+                                <div>
+                                    <div class="gridRow">
+                                        <div class="row">
+                                            @foreach($articles as $key => $article)
+                                                <div class="col-xs-4">
+                                                    @include('frontend.pages.blog.parts.preview')
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+	 </div>
+    </section>
+@endsection

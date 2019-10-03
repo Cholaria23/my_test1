@@ -1,0 +1,164 @@
+@section('header')
+    <header class="header" data-sticky_column>
+        <div class="container">
+            <div class="header__row">
+                <div class="header__col--logo">
+                    <a href="{{ route('home') }}" class="header__logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="244px"
+                             height="40px" viewBox="0 0 244.02 40.54">
+                            <defs>
+                                <clipPath id="clippath1">
+                                    <path
+                                        d="M16.19,32.76h0Zm0-18.84a2.19,2.19,0,0,0,1.2,2l6.85,3.46A1.13,1.13,0,0,1,24.65,21L16.19,32.76v7.78l14.43-7.28a3.2,3.2,0,0,0,1.76-2.86V17.61a3.2,3.2,0,0,0-1.76-2.86L16.19,7.47ZM15.58,0,1.76,7A3.2,3.2,0,0,0,0,9.83V22.62a3.2,3.2,0,0,0,1.76,2.86l14.43,7.28V26.32a2.19,2.19,0,0,0-1.2-2L8.13,20.91a1.13,1.13,0,0,1-.41-1.67L16.19,7.48V0Z"
+                                        fill="currentColor"/>
+                                </clipPath>
+                            </defs>
+                            <title>logo</title>
+                            <g>
+                                <path
+                                    d="M60,19.49a10.12,10.12,0,0,0-3.25-.82l-4.67-.54a7.5,7.5,0,0,1-1.56-.31,1.72,1.72,0,0,1-1-.74,1.77,1.77,0,0,1-.11-1.25,1.89,1.89,0,0,1,1.06-1.15A7.05,7.05,0,0,1,53,14.16a13.73,13.73,0,0,1,5,.56A11.21,11.21,0,0,1,60.57,16q.74-1.12,1.46-2.24a11.79,11.79,0,0,0-4.3-1.91,17.07,17.07,0,0,0-3.36-.37h-.71a12.41,12.41,0,0,0-3.82.64,5.52,5.52,0,0,0-2.8,2,4.48,4.48,0,0,0-.56,3.44,3.62,3.62,0,0,0,1.08,1.92,5.34,5.34,0,0,0,2.11,1.13,13.25,13.25,0,0,0,2.47.45l4.62.51a6.32,6.32,0,0,1,1.76.36,1.79,1.79,0,0,1,1,.87,2,2,0,0,1-.22,2,3.46,3.46,0,0,1-1.76,1,12.74,12.74,0,0,1-4.6.25,12.06,12.06,0,0,1-5.65-2.12c-.48.79-1,1.57-1.44,2.37a12.73,12.73,0,0,0,4.33,2,16.46,16.46,0,0,0,3.8.47h.6A12.6,12.6,0,0,0,60,27.65a4.59,4.59,0,0,0,2.4-2.76A4.84,4.84,0,0,0,62,21.23a4.5,4.5,0,0,0-2-1.75"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M173.28,21.35a4.34,4.34,0,0,0-1.88-1.76,9.77,9.77,0,0,0-3.45-.91l-4.67-.54a5.86,5.86,0,0,1-1.94-.47,1.39,1.39,0,0,1-.74-.86,1.78,1.78,0,0,1,.12-1.25,2.12,2.12,0,0,1,1.11-.93,7.79,7.79,0,0,1,2.56-.47,14.49,14.49,0,0,1,4.11.36A10.91,10.91,0,0,1,171.76,16l1.46-2.24a11.89,11.89,0,0,0-3.34-1.65,15.56,15.56,0,0,0-4.32-.62h-.71a11.81,11.81,0,0,0-4.26.8,5.19,5.19,0,0,0-2.41,1.9,4.55,4.55,0,0,0-.44,3.66,3.67,3.67,0,0,0,1.69,2.14,8.77,8.77,0,0,0,3.46,1l5.26.58A4.83,4.83,0,0,1,170,22a1.62,1.62,0,0,1,.75.86,2,2,0,0,1-.2,1.77,3,3,0,0,1-1.44,1,9.35,9.35,0,0,1-3,.47,13.68,13.68,0,0,1-4.39-.6,12.72,12.72,0,0,1-3.24-1.61c-.48.79-1,1.57-1.44,2.37A13.14,13.14,0,0,0,160.37,28a15.29,15.29,0,0,0,4.78.76h.6a13.4,13.4,0,0,0,5.07-1,5.07,5.07,0,0,0,2.46-2.14,4.66,4.66,0,0,0,.52-2.35,4.41,4.41,0,0,0-.51-2"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M106.37,11.86l0,0c-1,0-2,0-3,0,0,.33,0,.66,0,1q0,7.78,0,15.56h15q0-1.38,0-2.75H106.37q0-6.88,0-13.75"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M150.42,19.36c1.72-2.51,3.46-5,5.17-7.53h-3.46c-.16.11-.23.31-.35.46-1.35,2-2.71,4-4.05,5.94H142c0-2.14,0-4.27,0-6.41-1,0-2,0-3,0q0,8.27,0,16.55h3V21h5.87l4.61,7.39H156l-5.65-8.83c-.06-.06,0-.12.05-.18"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M81.51,14.58V11.83H64.4c0,.92,0,1.84,0,2.75,2.34,0,4.68,0,7,0q0,6.89,0,13.78h3.05c0-4.6,0-9.2,0-13.8,2.35,0,4.69,0,7,0"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M123.79,25.6c0-1.44,0-3.52,0-3.52l10.6-3.27H123.79c0-1.33,0-2.91,0-4.23h11.76c0-.92,0-1.84,0-2.75H120.74c0,5.52,0,11,0,16.55H136c0-.93,0-1.85,0-2.78q-6.1,0-12.21,0"
+                                    fill="currentColor"/>
+                                <path
+                                    d="M88,11.82q-3.63,8.27-7.24,16.55H84l1.21-2.81,9.8-3H86.46c.86-2.06,2.49-6,3.34-8,.63,0,1.26,0,1.9,0,1.16,2.84,5.45,12.95,5.83,13.82,1.07,0,2.14,0,3.21,0q-3.52-8.28-7-16.55-2.87,0-5.73,0"
+                                    fill="currentColor"/>
+                                <g>
+                                    <path
+                                        d="M16.19,32.76h0Zm0-18.84a2.19,2.19,0,0,0,1.2,2l6.85,3.46A1.13,1.13,0,0,1,24.65,21L16.19,32.76v7.78l14.43-7.28a3.2,3.2,0,0,0,1.76-2.86V17.61a3.2,3.2,0,0,0-1.76-2.86L16.19,7.47ZM15.58,0,1.76,7A3.2,3.2,0,0,0,0,9.83V22.62a3.2,3.2,0,0,0,1.76,2.86l14.43,7.28V26.32a2.19,2.19,0,0,0-1.2-2L8.13,20.91a1.13,1.13,0,0,1-.41-1.67L16.19,7.48V0Z"/>
+                                    <g clip-path="url(#clippath1)">
+                                        <rect width="32.37" height="40.54"/>
+                                    </g>
+                                </g>
+                                <g class="pro">
+                                    <path
+                                        d="M201.21,16.53c0,1.73-1.09,2.57-3.34,2.57H190V13.89H198c2.06,0,3.24,1,3.24,2.64M198,11.82h-10.4V28.37H190V21.21h8.27c3.25,0,5.43-2,5.43-4.86s-2.14-4.53-5.73-4.53"
+                                        fill="currentColor"/>
+                                    <path
+                                        d="M220.3,16.53c0,1.73-1.09,2.57-3.34,2.57h-7.84V13.89h7.94c2.06,0,3.24,1,3.24,2.64m2.53-.06c0-3-2.09-4.65-5.73-4.65H206.7V28.37h2.43V21.21h6.82l4.5,7.16h2.69l-4.52-7.22a4.75,4.75,0,0,0,4.21-4.68"
+                                        fill="currentColor"/>
+                                    <path
+                                        d="M241.49,20.14c0,3.8-2.9,6.55-6.91,6.55s-6.91-2.75-6.91-6.55,2.9-6.58,6.91-6.58,6.91,2.77,6.91,6.58m-6.91-8.68c-5.45,0-9.4,3.65-9.4,8.68s4,8.65,9.4,8.65S244,25.15,244,20.14s-4-8.68-9.43-8.68"
+                                        fill="currentColor"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div class="header__col--tools">
+                    <div class="row middle-xs">
+                        <div class="col header__col--search">
+                            <a href="#" class="searchBtn" id="searchBtn">
+                            <span class="row middle-xs">
+                                <span class="col searchBtn__text">
+                                    @lang('main.search')
+                                </span>
+                                <span class="col">
+                                    <svg width="18px" height="19px">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use>
+                                    </svg>
+                                </span>
+                            </span>
+                            </a>
+                        </div>
+                        <div class="col header__col--lang">
+                            <div class="langSwitcher">
+                                <div class="langSwitcher__value">
+                                    {{ App::getLocale() }}
+                                </div>
+                                @if (request()->route())
+                                    <div class="langSwitcher__drop">
+                                        <ul>
+                                            @foreach($total_languages as $lang)
+                                                @if(App::getLocale() != $lang->code)
+                                                    <li>
+                                                        @if ($lang->code === 'ru')
+                                                            @php($url = str_replace(request()->root() . request()->route()->getPrefix(), request()->root(), request()->url()))
+                                                        @else
+                                                            @php($url = str_replace(request()->root() . request()->route()->getPrefix(), request()->root() . '/' . $lang->code, request()->url()))
+                                                        @endif
+                                                        @php($url = request()->getQueryString() ? $url . '?' . request()->getQueryString() : $url)
+                                                        <a href="{{ $url }}">
+                                                            <span class="row middle-xs center-xs">
+                                                                <span class="col">
+                                                                    <img
+                                                                        src="{{ asset('frontend/img/flags/' . $lang->code . '.jpg') }}"
+                                                                        alt="">
+                                                                </span>
+                                                                <span class="col">
+                                                                    {{ $lang->code }}
+                                                                </span>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="menuBtn" id="menuBtn">
+                            <span class="row middle-xs">
+                                <span class="col menuBtn__text">
+                                    @lang('main.menu')
+                                </span>
+                                <span class="col">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 36" width="34px"
+                                         height="36px">
+                                        <rect fill="currentColor" class="line-1" x="17" width="6.5" height="2"/>
+                                        <rect fill="currentColor" class="line-2" x="15" y="8" width="14" height="2"/>
+                                        <rect fill="currentColor" class="line-3" y="17" width="34" height="2"/>
+                                        <rect fill="currentColor" class="line-4" x="5" y="26" width="14" height="2"/>
+                                        <rect fill="currentColor" class="line-5" x="10.5" y="34" width="6.5"
+                                              height="2"/>
+                                    </svg>
+                                </span>
+                            </span>
+                            </a>
+                        </div>
+                    </div>
+
+		  @if( strstr($_SERVER['REQUEST_URI'], '/product-pro/')
+			 || strstr($_SERVER['REQUEST_URI'], '/catalog-pro/')
+			 || strstr($_SERVER['REQUEST_URI'], '/catalog-pro')
+			 || strstr($_SERVER['REQUEST_URI'], '/product-pro'))
+
+			<div class="col header__col--search">
+			  <a href= "{{ route('contacts') }}">
+			    <span class="col searchBtn__text" style="color:white;"><br> @lang('main.be_partner') 
+			    </span>
+			  </a>
+			</div>
+		
+	            @elseif(strstr($_SERVER['REQUEST_URI'], '/about') 
+			|| strstr($_SERVER['REQUEST_URI'], '/catalog/') 
+			|| strstr($_SERVER['REQUEST_URI'], '/catalog')
+			|| strstr($_SERVER['REQUEST_URI'], '/product/')) 
+			 
+			<div class="col header__col--search">
+			   <a href= "{{ route('contacts') }}">
+                             <span class="col searchBtn__text" style="color:black;"><br> @lang('main.be_partner') 
+			     </span>
+			   </a>
+			</div>	
+		   @endif
+                </div>
+            </div>
+        </div>
+    </header>
+@endsection

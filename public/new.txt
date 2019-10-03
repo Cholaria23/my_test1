@@ -1,0 +1,10 @@
+
+Redirect 301 /article/ https://blog.staleks.com/
+Redirect 301 /blog/news https://blog.staleks.com/category/news/
+Redirect 301 /blog/events https://blog.staleks.com/category/events/
+Redirect 301 /blog/trends https://blog.staleks.com/category/trends/
+Redirect 301 /blog/staleks-star https://blog.staleks.com/category/staleks-star/
+Redirect 301 /blog/advice https://blog.staleks.com/category/advice/
+Redirect 301 /blog https://blog.staleks.com/
+
+PBC-20/1  Лопатка маникюрная Beauty&Care 20 type 1

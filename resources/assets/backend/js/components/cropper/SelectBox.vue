@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/legeneek/vue-image-clip/master/src/components/SelectBox.vue
